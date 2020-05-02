@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
 import p5 from 'p5';
 
-let playButton;
-let grid = [
-  [0, 1, 1, 0],
-  [0, 1, 0, 1],
-  [1, 0, 0, 1],
-];
-let cols = 4;
-let rows = 3;
-let framerate = 1;
-let resolution = 20;
-let playing = false;
-// let cols;
-// let grid;
-// let rows;
-
 class CellularAutomaton extends Component {
   componentDidMount() {
+    const { cols, rows, framerate, resolution } = this.props;
+    let { grid } = this.props;
+    let playButton;
+    let playing = false;
+
     this.sketch = new p5((p) => {
       p.setup = () => {
         let width = cols * resolution;
@@ -58,7 +48,6 @@ class CellularAutomaton extends Component {
       p.draw = () => {
         p.background(0);
 
-        // console.log(grid);
         for (let i = 0; i < rows; i++) {
           for (let j = 0; j < cols; j++) {
             let x = j * resolution;
@@ -73,13 +62,10 @@ class CellularAutomaton extends Component {
 
         let next = this.createGrid(cols, rows);
 
-        // Compute next based on grid
         for (let i = 0; i < rows; i++) {
           for (let j = 0; j < cols; j++) {
             let state = grid[i][j];
-            // Count live neighbors!
-            // let sum = 0;
-            let neighbors = this.countNeighbors(grid, i, j);
+            let neighbors = this.countNeighbors(grid, i, j, rows, cols);
 
             if (state === 0 && neighbors === 3) {
               next[i][j] = 1;
@@ -90,7 +76,6 @@ class CellularAutomaton extends Component {
             }
           }
         }
-
         grid = next;
       };
     });
@@ -104,11 +89,11 @@ class CellularAutomaton extends Component {
     return grid;
   };
 
-  countNeighbors = (g, r, c) => {
+  countNeighbors = (g, r, c, maxR, maxC) => {
     let sum = 0;
     for (let i = r - 1; i < r + 2; i++) {
       for (let j = c - 1; j < c + 2; j++) {
-        if (i >= 0 && i < rows && j >= 0 && j < cols) {
+        if (i >= 0 && i < maxR && j >= 0 && j < maxC) {
           sum += g[i][j];
         }
       }
