@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
 import p5 from 'p5';
-import { render } from '@testing-library/react';
 
 let playButton;
-let grid;
-let cols;
-let rows;
-let framerate = 5;
-let width = 800;
-let height = 400;
-let resolution = 5;
+let grid = [
+  [0, 1, 1, 0],
+  [0, 1, 0, 1],
+  [1, 0, 0, 1],
+];
+let cols = 4;
+let rows = 3;
+let framerate = 1;
+let resolution = 20;
 let playing = false;
+// let cols;
+// let grid;
+// let rows;
 
 class CellularAutomaton extends Component {
   componentDidMount() {
     this.sketch = new p5((p) => {
       p.setup = () => {
+        let width = cols * resolution;
+        let height = rows * resolution;
+
         p.createCanvas(width, height).parent(this.props.refLoc.current);
-        cols = Math.floor(width / resolution);
-        rows = Math.floor(height / resolution);
 
         p.frameRate(framerate);
 
@@ -26,11 +31,13 @@ class CellularAutomaton extends Component {
         playButton.mousePressed(togglePlay);
         playButton.position();
 
-        grid = this.make2DArray(cols, rows);
+        if (!(Array.isArray(grid) && grid.length)) {
+          grid = this.createGrid(cols, rows);
 
-        for (let i = 0; i < cols; i++) {
-          for (let j = 0; j < rows; j++) {
-            grid[i][j] = Math.floor(Math.random() * Math.floor(2));
+          for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+              grid[i][j] = Math.floor(Math.random() * Math.floor(2));
+            }
           }
         }
 
@@ -52,24 +59,23 @@ class CellularAutomaton extends Component {
         p.background(0);
 
         // console.log(grid);
-        for (let i = 0; i < cols; i++) {
-          for (let j = 0; j < rows; j++) {
-            let x = i * resolution;
-            let y = j * resolution;
+        for (let i = 0; i < rows; i++) {
+          for (let j = 0; j < cols; j++) {
+            let x = j * resolution;
+            let y = i * resolution;
             if (grid[i][j] === 1) {
               p.fill(255);
-              //   console.log('getting here');
               p.stroke(0);
               p.rect(x, y, resolution - 1, resolution - 1);
             }
           }
         }
 
-        let next = this.make2DArray(cols, rows);
+        let next = this.createGrid(cols, rows);
 
         // Compute next based on grid
-        for (let i = 0; i < cols; i++) {
-          for (let j = 0; j < rows; j++) {
+        for (let i = 0; i < rows; i++) {
+          for (let j = 0; j < cols; j++) {
             let state = grid[i][j];
             // Count live neighbors!
             // let sum = 0;
@@ -90,24 +96,24 @@ class CellularAutomaton extends Component {
     });
   }
 
-  make2DArray = (cols, rows) => {
-    let arr = new Array(cols);
-    for (let i = 0; i < arr.length; i++) {
-      arr[i] = new Array(rows);
+  createGrid = (cols, rows) => {
+    let grid = new Array(rows);
+    for (let i = 0; i < grid.length; i++) {
+      grid[i] = new Array(cols);
     }
-    return arr;
+    return grid;
   };
 
-  countNeighbors = (grid, x, y) => {
+  countNeighbors = (g, r, c) => {
     let sum = 0;
-    for (let i = -1; i < 2; i++) {
-      for (let j = -1; j < 2; j++) {
-        let col = (x + i + cols) % cols;
-        let row = (y + j + rows) % rows;
-        sum += grid[col][row];
+    for (let i = r - 1; i < r + 2; i++) {
+      for (let j = c - 1; j < c + 2; j++) {
+        if (i >= 0 && i < rows && j >= 0 && j < cols) {
+          sum += g[i][j];
+        }
       }
     }
-    sum -= grid[x][y];
+    sum -= g[r][c];
     return sum;
   };
 

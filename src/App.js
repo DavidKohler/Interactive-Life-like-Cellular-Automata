@@ -1,8 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import p5 from 'p5';
-import CellularAutomaton from './CA';
+import CellularAutomaton from './CellularAutomaton';
 
 class App extends React.Component {
   constructor() {
@@ -17,6 +15,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <CellularAutomaton refLoc={this.renderRef} />
+        Hello World
       </div>
     );
   }
