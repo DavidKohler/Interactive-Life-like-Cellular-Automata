@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import GridCustomization from './GridCustomization';
 
 class HomePage extends Component {
   render() {
-    return <div>Home Page!</div>;
+    return (
+      <div>
+        Home Page!
+        <GridCustomization />
+      </div>
+    );
   }
 }
 
