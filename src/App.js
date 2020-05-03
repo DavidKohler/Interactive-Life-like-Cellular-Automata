@@ -1,76 +1,52 @@
 import React from 'react';
 import './App.css';
-import Button from 'react-bootstrap/Button';
-import CellularAutomatonSketch from './CellularAutomatonSketch';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import HomePage from './HomePage';
+import DrawGridPage from './DrawGridPage';
+import LoadRLEPage from './LoadRLEPage';
+import RandomGridPage from './RandomGridPage';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      refreshVal: 0,
-      cols: 10,
-      rows: 10,
-      framerate: 5,
-      resolution: 20,
-      myGrid: [],
+      refreshTabVal: 0,
     };
-    this.renderRef = React.createRef();
-    this.resetAutomata = this.resetAutomata.bind(this);
-    this.generateGrid = this.generateGrid.bind(this);
+    this.resetTab = this.resetTab.bind(this);
   }
 
-  resetAutomata() {
+  resetTab() {
     let elem = document.querySelector('body > button');
-    elem.parentNode.removeChild(elem);
-    this.setState((state) => ({
-      refreshVal: state.refreshVal + 1,
-    }));
-  }
-
-  createGrid = (cols, rows) => {
-    let grid = new Array(rows);
-    for (let i = 0; i < grid.length; i++) {
-      grid[i] = new Array(cols);
+    if (elem !== null) {
+      elem.parentNode.removeChild(elem);
+      this.setState((state) => ({
+        refreshTabVal: state.refreshTabVal + 1,
+      }));
     }
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
-        grid[i][j] = Math.floor(Math.random() * Math.floor(2));
-      }
-    }
-    return grid;
-  };
-
-  generateGrid() {
-    let { cols, rows } = this.state;
-    let newGrid = this.createGrid(cols, rows);
-    if (this.state.myGrid.length > 0) {
-      this.resetAutomata();
-    }
-    this.setState({ myGrid: newGrid });
   }
 
   render() {
-    let { cols, rows, framerate, resolution, myGrid } = this.state;
-
-    let displayResetButton = myGrid.length > 0;
-
     return (
       <div className="App">
-        <Button onClick={this.generateGrid}>Create Random Grid</Button>
-        {myGrid.length > 0 && (
-          <CellularAutomatonSketch
-            refLoc={this.renderRef}
-            rows={rows}
-            cols={cols}
-            grid={myGrid}
-            framerate={framerate}
-            resolution={resolution}
-            key={this.state.refreshVal}
-          />
-        )}
-        {displayResetButton && (
-          <Button onClick={this.resetAutomata}>Reset</Button>
-        )}
+        <Tabs
+          defaultActiveKey="home"
+          id="main-tab-group"
+          onSelect={() => this.resetTab()}
+        >
+          <Tab eventKey="home" title="Home">
+            <HomePage />
+          </Tab>
+          <Tab eventKey="draw" title="Draw Grid">
+            <DrawGridPage />
+          </Tab>
+          <Tab eventKey="loadrle" title="Load RLE">
+            <LoadRLEPage />
+          </Tab>
+          <Tab eventKey="random" title="Random Grid">
+            <RandomGridPage key={this.state.refreshTabVal} />
+          </Tab>
+        </Tabs>
       </div>
     );
   }
