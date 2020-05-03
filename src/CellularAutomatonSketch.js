@@ -19,7 +19,17 @@ class CellularAutomatonSketch extends Component {
 
         playButton = p.createButton('Play');
         playButton.mousePressed(togglePlay);
-        playButton.position();
+        playButton.style('color', '#fff');
+        playButton.style('background-color', '#007bff');
+        playButton.style('border-color', '#007bff');
+        playButton.style('font-weight', '400');
+        playButton.style('border', '1px solid transparent');
+        playButton.style('padding', '.375rem .75rem');
+        playButton.style('font-size', '1rem');
+        playButton.style('line-height', '1.5');
+        playButton.style('border-radius', '.25rem');
+
+        playButton.position(50, 50);
 
         p.noLoop();
       };

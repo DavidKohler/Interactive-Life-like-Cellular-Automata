@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Button from 'react-bootstrap/Button';
 import CellularAutomatonSketch from './CellularAutomatonSketch';
 
 class App extends React.Component {
@@ -55,7 +56,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <button onClick={this.generateGrid}>Create Random Grid</button>
+        <Button onClick={this.generateGrid}>Create Random Grid</Button>
         {myGrid.length > 0 && (
           <CellularAutomatonSketch
             refLoc={this.renderRef}
@@ -68,7 +69,7 @@ class App extends React.Component {
           />
         )}
         {displayResetButton && (
-          <button onClick={this.resetAutomata}>Reset</button>
+          <Button onClick={this.resetAutomata}>Reset</Button>
         )}
       </div>
     );
