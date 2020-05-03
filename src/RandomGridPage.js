@@ -35,11 +35,12 @@ class RandomGridPage extends Component {
       cellColor: newParams.cellColor,
       backgroundColor: newParams.backgroundColor,
     });
+    this.resetAutomata();
   };
 
   resetAutomata() {
     let elem = document.querySelector('body > button');
-    elem.parentNode.removeChild(elem);
+    if (elem !== null) elem.parentNode.removeChild(elem);
     this.setState((state) => ({
       refreshVal: state.refreshVal + 1,
     }));
