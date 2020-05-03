@@ -3,7 +3,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { SliderHandle } from './SliderHandle';
 import { dimensionMarks, framerateMarks, resolutionMarks } from './SliderMarks';
-import { CompactPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import './GridCustomization.css';
 
 const wrapperStyle = { width: 800, margin: 50 };
@@ -110,18 +110,18 @@ class GridCustomization extends Component {
           />
         </div>
         <div className={'cell-color-picker'}>
-          Cell Color
-          <CompactPicker
+          {`Cell Color: ${this.state.cellColor}`}
+          <ChromePicker
             color={this.state.cellColor}
-            onChangeComplete={this.handleCellColorUpdate}
+            onChange={this.handleCellColorUpdate}
           />
           ;
         </div>
         <div className={'cell-background-picker'}>
-          Background Color
-          <CompactPicker
+          {`Background Color: ${this.state.backgroundColor}`}
+          <ChromePicker
             color={this.state.backgroundColor}
-            onChangeComplete={this.handleBackgroundColorUpdate}
+            onChange={this.handleBackgroundColorUpdate}
           />
           ;
         </div>
