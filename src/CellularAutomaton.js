@@ -21,15 +21,15 @@ class CellularAutomaton extends Component {
         playButton.mousePressed(togglePlay);
         playButton.position();
 
-        if (!(Array.isArray(grid) && grid.length)) {
-          grid = this.createGrid(cols, rows);
+        // if (!(Array.isArray(grid) && grid.length)) {
+        //   grid = this.createGrid(cols, rows);
 
-          for (let i = 0; i < rows; i++) {
-            for (let j = 0; j < cols; j++) {
-              grid[i][j] = Math.floor(Math.random() * Math.floor(2));
-            }
-          }
-        }
+        //   for (let i = 0; i < rows; i++) {
+        //     for (let j = 0; j < cols; j++) {
+        //       grid[i][j] = Math.floor(Math.random() * Math.floor(2));
+        //     }
+        //   }
+        // }
 
         p.noLoop();
       };
@@ -81,14 +81,6 @@ class CellularAutomaton extends Component {
     });
   }
 
-  createGrid = (cols, rows) => {
-    let grid = new Array(rows);
-    for (let i = 0; i < grid.length; i++) {
-      grid[i] = new Array(cols);
-    }
-    return grid;
-  };
-
   countNeighbors = (g, r, c, maxR, maxC) => {
     let sum = 0;
     for (let i = r - 1; i < r + 2; i++) {
@@ -100,6 +92,14 @@ class CellularAutomaton extends Component {
     }
     sum -= g[r][c];
     return sum;
+  };
+
+  createGrid = (rows, cols) => {
+    let grid = new Array(rows);
+    for (let i = 0; i < grid.length; i++) {
+      grid[i] = new Array(cols);
+    }
+    return grid;
   };
 
   render() {
