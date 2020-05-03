@@ -75,3 +75,10 @@ class RandomGridPage extends Component {
 }
 
 export default RandomGridPage;
+
+// TODO
+// save grid to RLE
+// UI for changing parameters
+// find meaningful boundaries for saved RLE grids
+// styling
+// allow for different rulesets

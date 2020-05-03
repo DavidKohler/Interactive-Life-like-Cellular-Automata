@@ -7,3 +7,7 @@ class HomePage extends Component {
 }
 
 export default HomePage;
+
+//TODO
+//add homepage text and fluff
+//styling

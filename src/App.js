@@ -62,3 +62,5 @@ export default App;
 // allow user to draw grid
 // add padding for RLE input grids
 // find meaningful boundaries for saved RLE grids
+// styling
+// homepage

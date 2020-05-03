@@ -112,3 +112,6 @@ class CellularAutomatonSketch extends Component {
 }
 
 export default CellularAutomatonSketch;
+
+//TODO
+// allow for different rulesets
