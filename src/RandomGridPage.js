@@ -8,15 +8,16 @@ class RandomGridPage extends Component {
     super();
     this.state = {
       refreshVal: 0,
-      cols: 5,
-      rows: 5,
-      framerate: 1,
+      cols: 10,
+      rows: 10,
+      framerate: 5,
       resolution: 20,
       cellColor: '#000000',
       backgroundColor: '#FFFFFF',
       myGrid: [],
       birthRule: [3],
       surviveRule: [2, 3],
+      alivePercentage: 50,
     };
     this.renderRef = React.createRef();
     this.resetAutomata = this.resetAutomata.bind(this);
@@ -34,6 +35,7 @@ class RandomGridPage extends Component {
       surviveRule: newParams.surviveRule,
       cellColor: newParams.cellColor,
       backgroundColor: newParams.backgroundColor,
+      alivePercentage: newParams.alivePercentage,
     });
     this.resetAutomata();
   };
@@ -46,22 +48,23 @@ class RandomGridPage extends Component {
     }));
   }
 
-  createGrid = (cols, rows) => {
+  createGrid = (cols, rows, aliveP) => {
     let grid = new Array(rows);
     for (let i = 0; i < grid.length; i++) {
       grid[i] = new Array(cols);
     }
+    let modifiedProbRandom = Array(100).fill(1).fill(0, aliveP);
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
-        grid[i][j] = Math.floor(Math.random() * Math.floor(2));
+        grid[i][j] = modifiedProbRandom[Math.floor(Math.random() * 100)];
       }
     }
     return grid;
   };
 
   generateGrid() {
-    let { cols, rows } = this.state;
-    let newGrid = this.createGrid(cols, rows);
+    const { cols, rows, alivePercentage } = this.state;
+    let newGrid = this.createGrid(cols, rows, alivePercentage);
     if (this.state.myGrid.length > 0) {
       this.resetAutomata();
     }

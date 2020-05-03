@@ -3,7 +3,12 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { SliderHandle } from './SliderHandle';
 import Drawer from '@material-ui/core/Drawer';
-import { dimensionMarks, framerateMarks, resolutionMarks } from './SliderMarks';
+import {
+  dimensionMarks,
+  framerateMarks,
+  resolutionMarks,
+  cellRatioMarks,
+} from './SliderMarks';
 import { ChromePicker } from 'react-color';
 import './GridCustomization.css';
 import Button from 'react-bootstrap/Button';
@@ -49,6 +54,7 @@ class GridCustomization extends Component {
       ],
       birthRule: [3],
       surviveRule: [2, 3],
+      alivePercentage: 50,
     };
     this.updateColumns = this.updateColumns.bind(this);
     this.updateRows = this.updateRows.bind(this);
@@ -61,6 +67,7 @@ class GridCustomization extends Component {
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.toggleBornButton = this.toggleBornButton.bind(this);
     this.toggleSurviveButton = this.toggleSurviveButton.bind(this);
+    this.updateCellRatio = this.updateCellRatio.bind(this);
   }
 
   handleSubmit = () => {
@@ -108,6 +115,12 @@ class GridCustomization extends Component {
   updateResolution = (val) => {
     this.setState({
       resolution: val,
+    });
+  };
+
+  updateCellRatio = (val) => {
+    this.setState({
+      alivePercentage: val,
     });
   };
 
@@ -208,6 +221,18 @@ class GridCustomization extends Component {
                 handle={SliderHandle}
               />
             </div>
+            <div className={'random-probabilities-slider'} style={wrapperStyle}>
+              {'Alive/Dead Cell Ratio'}
+              <Slider
+                onChange={(v) => this.updateCellRatio(v)}
+                min={0}
+                max={100}
+                marks={cellRatioMarks}
+                defaultValue={50}
+                handle={SliderHandle}
+              />
+            </div>
+
             <div className={'framerate-slider'} style={wrapperStyle}>
               {`Framerate: ${this.state.framerate}`}
               <Slider

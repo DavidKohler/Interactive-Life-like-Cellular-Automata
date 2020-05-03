@@ -32,4 +32,14 @@ const resolutionMarks = {
   40: '40',
 };
 
-export { dimensionMarks, framerateMarks, resolutionMarks };
+const cellRatioMarks = {
+  0: '0/100',
+  20: '20/80',
+  40: '40/60',
+  50: '50/50',
+  60: '60/40',
+  80: '80/20',
+  100: '100/0',
+};
+
+export { dimensionMarks, framerateMarks, resolutionMarks, cellRatioMarks };
