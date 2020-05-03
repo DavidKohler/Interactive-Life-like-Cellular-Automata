@@ -17,3 +17,4 @@ export default HomePage;
 //TODO
 //add homepage text and fluff
 //styling
+// add user-select: none to text stuff
