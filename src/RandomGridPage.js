@@ -86,7 +86,10 @@ class RandomGridPage extends Component {
     return (
       <div>
         Random Grid Page!
-        <GridCustomization submitFunction={this.updateParameters} />
+        <GridCustomization
+          submitFunction={this.updateParameters}
+          parentTab={'RANDOM'}
+        />
         <Button onClick={this.generateGrid}>Create Random Grid</Button>
         {myGrid.length > 0 && (
           <CellularAutomatonSketch

@@ -6,7 +6,7 @@ class HomePage extends Component {
     return (
       <div>
         Home Page!
-        <GridCustomization />
+        <GridCustomization parentTab="HOME" />
       </div>
     );
   }

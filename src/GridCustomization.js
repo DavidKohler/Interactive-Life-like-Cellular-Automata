@@ -221,18 +221,22 @@ class GridCustomization extends Component {
                 handle={SliderHandle}
               />
             </div>
-            <div className={'random-probabilities-slider'} style={wrapperStyle}>
-              {'Alive/Dead Cell Ratio'}
-              <Slider
-                onChange={(v) => this.updateCellRatio(v)}
-                min={0}
-                max={100}
-                marks={cellRatioMarks}
-                defaultValue={50}
-                handle={SliderHandle}
-              />
-            </div>
-
+            {this.props.parentTab === 'RANDOM' && (
+              <div
+                className={'random-probabilities-slider'}
+                style={wrapperStyle}
+              >
+                {'Alive/Dead Cell Ratio'}
+                <Slider
+                  onChange={(v) => this.updateCellRatio(v)}
+                  min={0}
+                  max={100}
+                  marks={cellRatioMarks}
+                  defaultValue={this.state.alivePercentage}
+                  handle={SliderHandle}
+                />
+              </div>
+            )}
             <div className={'framerate-slider'} style={wrapperStyle}>
               {`Framerate: ${this.state.framerate}`}
               <Slider
