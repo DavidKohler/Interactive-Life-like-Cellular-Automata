@@ -4,6 +4,7 @@ import 'rc-slider/assets/index.css';
 import { SliderHandle } from './SliderHandle';
 import { dimensionMarks, framerateMarks, resolutionMarks } from './SliderMarks';
 import { CompactPicker } from 'react-color';
+import './GridCustomization.css';
 
 const wrapperStyle = { width: 800, margin: 50 };
 
