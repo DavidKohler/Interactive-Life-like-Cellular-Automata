@@ -1,3 +1,6 @@
+.customizer-drawer {
+  user-select: none;
+}
 .compact-picker {
   width: 280px !important;
 }

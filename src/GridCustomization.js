@@ -16,7 +16,7 @@ class GridCustomization extends Component {
   constructor() {
     super();
     this.state = {
-      columns: 10,
+      cols: 10,
       rows: 10,
       framerate: 10,
       resolution: 10,
@@ -47,7 +47,7 @@ class GridCustomization extends Component {
         false,
         false,
       ],
-      bornRule: [3],
+      birthRule: [3],
       surviveRule: [2, 3],
     };
     this.updateColumns = this.updateColumns.bind(this);
@@ -62,6 +62,11 @@ class GridCustomization extends Component {
     this.toggleBornButton = this.toggleBornButton.bind(this);
     this.toggleSurviveButton = this.toggleSurviveButton.bind(this);
   }
+
+  handleSubmit = () => {
+    this.setState({ drawerOpen: false });
+    this.props.submitFunction(this.state);
+  };
 
   componentDidUpdate() {
     setTimeout(function () {
@@ -79,18 +84,12 @@ class GridCustomization extends Component {
   }
 
   toggleDrawer = (open) => (event) => {
-    if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return;
-    }
     this.setState({ drawerOpen: open });
   };
 
   updateColumns = (val) => {
     this.setState({
-      columns: val,
+      cols: val,
     });
   };
 
@@ -125,7 +124,7 @@ class GridCustomization extends Component {
     newPressings[index] = !isPressed;
     this.setState({
       bornRulePressed: newPressings,
-      bornRule: newPressings.reduce(
+      birthRule: newPressings.reduce(
         (out, bool, index) => (bool ? out.concat(index) : out),
         []
       ),
@@ -148,8 +147,7 @@ class GridCustomization extends Component {
     let { bornRulePressed, surviveRulePressed } = this.state;
 
     return (
-      <div>
-        Home Page!
+      <div className="customizer-drawer">
         <React.Fragment key={'drawerOpen'}>
           <Button onClick={this.toggleDrawer(true)}>{'Customize'}</Button>
           <Drawer
@@ -159,7 +157,7 @@ class GridCustomization extends Component {
           >
             {'Customization'}
             <ButtonToolbar aria-label="Born Rule">
-              {`Born Rule: B${this.state.bornRule.map(String).join('')}`}
+              {`Born Rule: B${this.state.birthRule.map(String).join('')}`}
               <ButtonGroup className="mr-2" aria-label="born group">
                 {bornRulePressed.map((val, ind) => {
                   return (
@@ -173,7 +171,7 @@ class GridCustomization extends Component {
                   );
                 })}
               </ButtonGroup>
-              {`Survival Rule: S${this.state.surviveRule.map(String).join('')}`}
+              {`Survive Rule: S${this.state.surviveRule.map(String).join('')}`}
               <ButtonGroup className="mr-2" aria-label="survive group">
                 {surviveRulePressed.map((val, ind) => {
                   return (
@@ -189,13 +187,13 @@ class GridCustomization extends Component {
               </ButtonGroup>
             </ButtonToolbar>
             <div className={'column-slider'} style={wrapperStyle}>
-              {`Columns: ${this.state.columns}`}
+              {`Columns: ${this.state.cols}`}
               <Slider
                 onChange={(v) => this.updateColumns(v)}
                 min={1}
                 max={80}
                 marks={dimensionMarks}
-                defaultValue={this.state.columns}
+                defaultValue={this.state.cols}
                 handle={SliderHandle}
               />
             </div>
@@ -246,6 +244,7 @@ class GridCustomization extends Component {
                 onChange={this.handleBackgroundColorUpdate}
               />
             </div>
+            <Button onClick={this.handleSubmit}>Submit</Button>
           </Drawer>
         </React.Fragment>
       </div>

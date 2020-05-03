@@ -10,6 +10,8 @@ class CellularAutomatonSketch extends Component {
       resolution,
       birthRule,
       surviveRule,
+      backgroundColor,
+      cellColor,
     } = this.props;
 
     let { grid } = this.props;
@@ -54,15 +56,15 @@ class CellularAutomatonSketch extends Component {
       }
 
       p.draw = () => {
-        p.background(0);
+        p.background(backgroundColor);
 
         for (let i = 0; i < rows; i++) {
           for (let j = 0; j < cols; j++) {
             let x = j * resolution;
             let y = i * resolution;
             if (grid[i][j] === 1) {
-              p.fill(255);
-              p.stroke(0);
+              p.fill(cellColor);
+              p.stroke(backgroundColor);
               p.rect(x, y, resolution - 1, resolution - 1);
             }
           }

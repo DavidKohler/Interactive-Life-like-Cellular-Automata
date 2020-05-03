@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CellularAutomatonSketch from './CellularAutomatonSketch';
 import Button from 'react-bootstrap/Button';
+import GridCustomization from './GridCustomization';
 
 class RandomGridPage extends Component {
   constructor() {
@@ -11,6 +12,8 @@ class RandomGridPage extends Component {
       rows: 5,
       framerate: 1,
       resolution: 20,
+      cellColor: '#000000',
+      backgroundColor: '#FFFFFF',
       myGrid: [],
       birthRule: [3],
       surviveRule: [2, 3],
@@ -18,7 +21,21 @@ class RandomGridPage extends Component {
     this.renderRef = React.createRef();
     this.resetAutomata = this.resetAutomata.bind(this);
     this.generateGrid = this.generateGrid.bind(this);
+    this.updateParameters = this.updateParameters.bind(this);
   }
+
+  updateParameters = (newParams) => {
+    this.setState({
+      cols: newParams.cols,
+      rows: newParams.rows,
+      framerate: newParams.framerate,
+      resolution: newParams.resolution,
+      birthRule: newParams.birthRule,
+      surviveRule: newParams.surviveRule,
+      cellColor: newParams.cellColor,
+      backgroundColor: newParams.backgroundColor,
+    });
+  };
 
   resetAutomata() {
     let elem = document.querySelector('body > button');
@@ -58,12 +75,14 @@ class RandomGridPage extends Component {
       myGrid,
       birthRule,
       surviveRule,
+      cellColor,
+      backgroundColor,
     } = this.state;
-
     let displayResetButton = myGrid.length > 0;
     return (
       <div>
         Random Grid Page!
+        <GridCustomization submitFunction={this.updateParameters} />
         <Button onClick={this.generateGrid}>Create Random Grid</Button>
         {myGrid.length > 0 && (
           <CellularAutomatonSketch
@@ -75,6 +94,8 @@ class RandomGridPage extends Component {
             resolution={resolution}
             birthRule={birthRule}
             surviveRule={surviveRule}
+            cellColor={cellColor}
+            backgroundColor={backgroundColor}
             key={this.state.refreshVal}
           />
         )}
@@ -93,4 +114,3 @@ export default RandomGridPage;
 // UI for changing parameters
 // find meaningful boundaries for saved RLE grids
 // styling
-// allow for different rulesets
