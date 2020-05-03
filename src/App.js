@@ -14,11 +14,11 @@ class App extends React.Component {
       myGrid: [],
     };
     this.renderRef = React.createRef();
-    this.refreshAutomata = this.refreshAutomata.bind(this);
+    this.resetAutomata = this.resetAutomata.bind(this);
     this.generateGrid = this.generateGrid.bind(this);
   }
 
-  refreshAutomata() {
+  resetAutomata() {
     let elem = document.querySelector('body > button');
     elem.parentNode.removeChild(elem);
     this.setState((state) => ({
@@ -42,11 +42,17 @@ class App extends React.Component {
   generateGrid() {
     let { cols, rows } = this.state;
     let newGrid = this.createGrid(cols, rows);
+    if (this.state.myGrid.length > 0) {
+      this.resetAutomata();
+    }
     this.setState({ myGrid: newGrid });
   }
 
   render() {
     let { cols, rows, framerate, resolution, myGrid } = this.state;
+
+    let displayResetButton = myGrid.length > 0;
+
     return (
       <div className="App">
         <button onClick={this.generateGrid}>Create Random Grid</button>
@@ -61,8 +67,9 @@ class App extends React.Component {
             key={this.state.refreshVal}
           />
         )}
-        Hello World
-        <button onClick={this.refreshAutomata}>Reset</button>
+        {displayResetButton && (
+          <button onClick={this.resetAutomata}>Reset</button>
+        )}
       </div>
     );
   }
