@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import p5 from 'p5';
 
-class CellularAutomaton extends Component {
+class CellularAutomatonSketch extends Component {
   componentDidMount() {
     const { cols, rows, framerate, resolution } = this.props;
     let { grid } = this.props;
@@ -20,16 +20,6 @@ class CellularAutomaton extends Component {
         playButton = p.createButton('Play');
         playButton.mousePressed(togglePlay);
         playButton.position();
-
-        // if (!(Array.isArray(grid) && grid.length)) {
-        //   grid = this.createGrid(cols, rows);
-
-        //   for (let i = 0; i < rows; i++) {
-        //     for (let j = 0; j < cols; j++) {
-        //       grid[i][j] = Math.floor(Math.random() * Math.floor(2));
-        //     }
-        //   }
-        // }
 
         p.noLoop();
       };
@@ -104,11 +94,11 @@ class CellularAutomaton extends Component {
 
   render() {
     return (
-      <div className="CellularAutomaton">
+      <div className="CellularAutomatonSketch">
         <div ref={this.props.refLoc}></div>
       </div>
     );
   }
 }
 
-export default CellularAutomaton;
+export default CellularAutomatonSketch;

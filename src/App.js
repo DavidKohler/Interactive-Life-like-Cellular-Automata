@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import CellularAutomaton from './CellularAutomaton';
+import CellularAutomatonSketch from './CellularAutomatonSketch';
 
 class App extends React.Component {
   constructor() {
@@ -57,7 +57,7 @@ class App extends React.Component {
       <div className="App">
         <button onClick={this.generateGrid}>Create Random Grid</button>
         {myGrid.length > 0 && (
-          <CellularAutomaton
+          <CellularAutomatonSketch
             refLoc={this.renderRef}
             rows={rows}
             cols={cols}
@@ -76,3 +76,12 @@ class App extends React.Component {
 }
 
 export default App;
+
+//TODO:
+// load in RLE grids
+// save grid to RLE
+// UI for changing parameters
+// allow for different rulesets
+// allow user to draw grid
+// add padding for RLE input grids
+// find meaningful boundaries for saved RLE grids
