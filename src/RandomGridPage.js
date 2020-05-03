@@ -7,11 +7,13 @@ class RandomGridPage extends Component {
     super();
     this.state = {
       refreshVal: 0,
-      cols: 10,
-      rows: 10,
-      framerate: 60,
+      cols: 5,
+      rows: 5,
+      framerate: 1,
       resolution: 20,
       myGrid: [],
+      birthRule: [3],
+      surviveRule: [2, 3],
     };
     this.renderRef = React.createRef();
     this.resetAutomata = this.resetAutomata.bind(this);
@@ -48,7 +50,15 @@ class RandomGridPage extends Component {
     this.setState({ myGrid: newGrid });
   }
   render() {
-    let { cols, rows, framerate, resolution, myGrid } = this.state;
+    let {
+      cols,
+      rows,
+      framerate,
+      resolution,
+      myGrid,
+      birthRule,
+      surviveRule,
+    } = this.state;
 
     let displayResetButton = myGrid.length > 0;
     return (
@@ -63,6 +73,8 @@ class RandomGridPage extends Component {
             grid={myGrid}
             framerate={framerate}
             resolution={resolution}
+            birthRule={birthRule}
+            surviveRule={surviveRule}
             key={this.state.refreshVal}
           />
         )}

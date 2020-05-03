@@ -3,7 +3,15 @@ import p5 from 'p5';
 
 class CellularAutomatonSketch extends Component {
   componentDidMount() {
-    const { cols, rows, framerate, resolution } = this.props;
+    const {
+      cols,
+      rows,
+      framerate,
+      resolution,
+      birthRule,
+      surviveRule,
+    } = this.props;
+
     let { grid } = this.props;
     let playButton;
     let playing = false;
@@ -64,15 +72,27 @@ class CellularAutomatonSketch extends Component {
 
         for (let i = 0; i < rows; i++) {
           for (let j = 0; j < cols; j++) {
-            let state = grid[i][j];
-            let neighbors = this.countNeighbors(grid, i, j, rows, cols);
+            let thisCell = grid[i][j];
+            let nAlive = this.countNeighbors(grid, i, j, rows, cols);
 
-            if (state === 0 && neighbors === 3) {
-              next[i][j] = 1;
-            } else if (state === 1 && (neighbors < 2 || neighbors > 3)) {
-              next[i][j] = 0;
+            if (thisCell === 1) {
+              // alive cell, check for survival
+              if (surviveRule.includes(nAlive)) {
+                // lives on
+                next[i][j] = 1;
+              } else {
+                // underpopulation or overpopulation -> dies
+                next[i][j] = 0;
+              }
             } else {
-              next[i][j] = state;
+              // dead cell, check for birth
+              if (birthRule.includes(nAlive)) {
+                // reproduces
+                next[i][j] = 1;
+              } else {
+                // stays dead
+                next[i][j] = 0;
+              }
             }
           }
         }

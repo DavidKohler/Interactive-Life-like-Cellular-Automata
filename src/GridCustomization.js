@@ -7,6 +7,8 @@ import { dimensionMarks, framerateMarks, resolutionMarks } from './SliderMarks';
 import { ChromePicker } from 'react-color';
 import './GridCustomization.css';
 import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
 const wrapperStyle = { width: 800, margin: 50 };
 
@@ -20,7 +22,33 @@ class GridCustomization extends Component {
       resolution: 10,
       cellColor: '#000000',
       backgroundColor: '#FFFFFF',
-      right: false,
+      drawerOpen: false,
+      bornRulePressed: [
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ],
+      surviveRulePressed: [
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ],
+      bornRule: [3],
+      surviveRule: [2, 3],
     };
     this.updateColumns = this.updateColumns.bind(this);
     this.updateRows = this.updateRows.bind(this);
@@ -31,6 +59,23 @@ class GridCustomization extends Component {
       this
     );
     this.toggleDrawer = this.toggleDrawer.bind(this);
+    this.toggleBornButton = this.toggleBornButton.bind(this);
+    this.toggleSurviveButton = this.toggleSurviveButton.bind(this);
+  }
+
+  componentDidUpdate() {
+    setTimeout(function () {
+      let alphaSlider1 = document.querySelector(
+        'body > div.MuiDrawer-root.MuiDrawer-modal > div.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 > div.cell-color-picker > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)'
+      );
+      let alphaSlider2 = document.querySelector(
+        'body > div.MuiDrawer-root.MuiDrawer-modal > div.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 > div.cell-background-picker > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)'
+      );
+      if (alphaSlider1 !== null)
+        alphaSlider1.parentNode.removeChild(alphaSlider1);
+      if (alphaSlider2 !== null)
+        alphaSlider2.parentNode.removeChild(alphaSlider2);
+    }, 0);
   }
 
   toggleDrawer = (open) => (event) => {
@@ -40,7 +85,7 @@ class GridCustomization extends Component {
     ) {
       return;
     }
-    this.setState({ right: open });
+    this.setState({ drawerOpen: open });
   };
 
   updateColumns = (val) => {
@@ -75,18 +120,74 @@ class GridCustomization extends Component {
     this.setState({ backgroundColor: color.hex });
   };
 
+  toggleBornButton = (isPressed, index) => {
+    let newPressings = this.state.bornRulePressed.slice(0);
+    newPressings[index] = !isPressed;
+    this.setState({
+      bornRulePressed: newPressings,
+      bornRule: newPressings.reduce(
+        (out, bool, index) => (bool ? out.concat(index) : out),
+        []
+      ),
+    });
+  };
+
+  toggleSurviveButton = (isPressed, index) => {
+    let newPressings = this.state.surviveRulePressed.slice(0);
+    newPressings[index] = !isPressed;
+    this.setState({
+      surviveRulePressed: newPressings,
+      surviveRule: newPressings.reduce(
+        (out, bool, index) => (bool ? out.concat(index) : out),
+        []
+      ),
+    });
+  };
+
   render() {
+    let { bornRulePressed, surviveRulePressed } = this.state;
+
     return (
       <div>
         Home Page!
-        <React.Fragment key={'right'}>
+        <React.Fragment key={'drawerOpen'}>
           <Button onClick={this.toggleDrawer(true)}>{'Customize'}</Button>
           <Drawer
             anchor={'right'}
-            open={this.state.right}
+            open={this.state.drawerOpen}
             onClose={this.toggleDrawer(false)}
           >
-            Customization
+            {'Customization'}
+            <ButtonToolbar aria-label="Born Rule">
+              {`Born Rule: B${this.state.bornRule.map(String).join('')}`}
+              <ButtonGroup className="mr-2" aria-label="born group">
+                {bornRulePressed.map((val, ind) => {
+                  return (
+                    <Button
+                      key={ind}
+                      onClick={() => this.toggleBornButton(val, ind)}
+                      variant={val === true ? 'success' : 'outline-success'}
+                    >
+                      {ind}
+                    </Button>
+                  );
+                })}
+              </ButtonGroup>
+              {`Survival Rule: S${this.state.surviveRule.map(String).join('')}`}
+              <ButtonGroup className="mr-2" aria-label="survive group">
+                {surviveRulePressed.map((val, ind) => {
+                  return (
+                    <Button
+                      key={ind}
+                      onClick={() => this.toggleSurviveButton(val, ind)}
+                      variant={val === true ? 'success' : 'outline-success'}
+                    >
+                      {ind}
+                    </Button>
+                  );
+                })}
+              </ButtonGroup>
+            </ButtonToolbar>
             <div className={'column-slider'} style={wrapperStyle}>
               {`Columns: ${this.state.columns}`}
               <Slider
@@ -137,7 +238,6 @@ class GridCustomization extends Component {
                 color={this.state.cellColor}
                 onChange={this.handleCellColorUpdate}
               />
-              ;
             </div>
             <div className={'cell-background-picker'}>
               {`Background Color: ${this.state.backgroundColor}`}
@@ -145,7 +245,6 @@ class GridCustomization extends Component {
                 color={this.state.backgroundColor}
                 onChange={this.handleBackgroundColorUpdate}
               />
-              ;
             </div>
           </Drawer>
         </React.Fragment>
@@ -155,3 +254,5 @@ class GridCustomization extends Component {
 }
 
 export default GridCustomization;
+
+// TODO styling
