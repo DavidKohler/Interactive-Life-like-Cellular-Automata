@@ -36,17 +36,20 @@ class RandomGridPage extends Component {
   updateParameters = (newParams) => {
     this.resetAutomata();
     setTimeout(() => {
-      this.setState({
-        cols: newParams.cols,
-        gridRows: newParams.rows,
-        framerate: newParams.framerate,
-        resolution: newParams.resolution,
-        birthRule: newParams.birthRule,
-        surviveRule: newParams.surviveRule,
-        cellColor: newParams.cellColor,
-        backgroundColor: newParams.backgroundColor,
-        alivePercentage: newParams.alivePercentage,
-      });
+      this.setState(
+        {
+          cols: newParams.cols,
+          gridRows: newParams.rows,
+          framerate: newParams.framerate,
+          resolution: newParams.resolution,
+          birthRule: newParams.birthRule,
+          surviveRule: newParams.surviveRule,
+          cellColor: newParams.cellColor,
+          backgroundColor: newParams.backgroundColor,
+          alivePercentage: newParams.alivePercentage,
+        },
+        () => this.generateGrid()
+      );
     }, 0);
   };
 
@@ -82,6 +85,7 @@ class RandomGridPage extends Component {
     }
     this.setState({ myGrid: newGrid });
   }
+
   render() {
     let {
       cols,
