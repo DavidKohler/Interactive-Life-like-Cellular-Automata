@@ -1,57 +1,35 @@
-import React, { Component } from 'react';
-import CellularAutomatonSketch from './CellularAutomatonSketch';
 import Button from 'react-bootstrap/Button';
+import CellularAutomatonSketch from './CellularAutomatonSketch';
 import GridCustomization from './GridCustomization';
 import gridToRLE from './RLElogic';
+import React, { Component } from 'react';
+
+/*
+    Component for Random Grid Tab
+*/
 
 class RandomGridPage extends Component {
   constructor() {
     super();
     this.state = {
-      refreshVal: 0,
-      cols: 10,
-      gridRows: 10,
-      framerate: 5,
-      resolution: 20,
-      cellColor: '#000000',
-      backgroundColor: '#FFFFFF',
-      myGrid: [],
-      birthRule: [3],
-      surviveRule: [2, 3],
       alivePercentage: 50,
+      backgroundColor: '#FFFFFF',
+      birthRule: [3],
+      cellColor: '#000000',
+      cols: 10,
+      framerate: 5,
+      gridRows: 10,
+      myGrid: [],
+      refreshVal: 0,
+      resolution: 20,
+      surviveRule: [2, 3],
     };
     this.renderRef = React.createRef();
     this.resetAutomata = this.resetAutomata.bind(this);
     this.generateGrid = this.generateGrid.bind(this);
-    this.updateParameters = this.updateParameters.bind(this);
     this.saveRLE = this.saveRLE.bind(this);
+    this.updateParameters = this.updateParameters.bind(this);
   }
-
-  saveRLE() {
-    const { myGrid, birthRule, surviveRule } = this.state;
-    let gridRLE = gridToRLE(myGrid, birthRule, surviveRule);
-    console.log(gridRLE);
-  }
-
-  updateParameters = (newParams) => {
-    this.resetAutomata();
-    setTimeout(() => {
-      this.setState(
-        {
-          cols: newParams.cols,
-          gridRows: newParams.rows,
-          framerate: newParams.framerate,
-          resolution: newParams.resolution,
-          birthRule: newParams.birthRule,
-          surviveRule: newParams.surviveRule,
-          cellColor: newParams.cellColor,
-          backgroundColor: newParams.backgroundColor,
-          alivePercentage: newParams.alivePercentage,
-        },
-        () => this.generateGrid()
-      );
-    }, 0);
-  };
 
   resetAutomata() {
     this.setState((state) => ({
@@ -82,47 +60,87 @@ class RandomGridPage extends Component {
     this.setState({ myGrid: newGrid });
   }
 
+  saveRLE() {
+    let { birthRule, myGrid, surviveRule } = this.state;
+    let gridRLE = gridToRLE(myGrid, birthRule, surviveRule);
+    console.log(gridRLE);
+  }
+
+  updateParameters = (newParams) => {
+    this.resetAutomata();
+    setTimeout(() => {
+      this.setState(
+        {
+          alivePercentage: newParams.alivePercentage,
+          backgroundColor: newParams.backgroundColor,
+          birthRule: newParams.birthRule,
+          cellColor: newParams.cellColor,
+          cols: newParams.cols,
+          framerate: newParams.framerate,
+          gridRows: newParams.rows,
+          resolution: newParams.resolution,
+          surviveRule: newParams.surviveRule,
+        },
+        () => this.generateGrid()
+      );
+    }, 0);
+  };
+
   render() {
+    // render random grid page
     let {
-      cols,
-      gridRows,
-      framerate,
-      resolution,
-      myGrid,
-      birthRule,
-      surviveRule,
-      cellColor,
       backgroundColor,
+      birthRule,
+      cellColor,
+      cols,
+      framerate,
+      gridRows,
+      myGrid,
+      resolution,
+      surviveRule,
     } = this.state;
-    let displayResetButton = myGrid.length > 0;
+
+    // check if grid exists, then render grid
+    let displayGrid = myGrid.length > 0;
+
     return (
-      <div>
+      <div className="random-page">
         Random Grid Page!
-        <GridCustomization
-          submitFunction={this.updateParameters}
-          parentTab={'RANDOM'}
-        />
-        <Button onClick={this.generateGrid}>Create Random Grid</Button>
-        {myGrid.length > 0 && (
-          <CellularAutomatonSketch
-            refLoc={this.renderRef}
-            rows={gridRows}
-            cols={cols}
-            grid={myGrid}
-            framerate={framerate}
-            resolution={resolution}
-            birthRule={birthRule}
-            surviveRule={surviveRule}
-            cellColor={cellColor}
-            backgroundColor={backgroundColor}
-            key={this.state.refreshVal}
+        <div className="customization-container">
+          <GridCustomization
+            parentTab={'RANDOM'}
+            submitFunction={this.updateParameters}
           />
+        </div>
+        <div className="generate-grid-container">
+          <Button onClick={this.generateGrid}>Create Random Grid</Button>
+        </div>
+        {displayGrid && (
+          <div className="sketch-container">
+            <CellularAutomatonSketch
+              backgroundColor={backgroundColor}
+              birthRule={birthRule}
+              cellColor={cellColor}
+              cols={cols}
+              framerate={framerate}
+              grid={myGrid}
+              key={this.state.refreshVal}
+              refLoc={this.renderRef}
+              resolution={resolution}
+              rows={gridRows}
+              surviveRule={surviveRule}
+            />
+          </div>
         )}
-        {displayResetButton && (
-          <Button onClick={this.resetAutomata}>Reset</Button>
+        {displayGrid && (
+          <div className="reset-button-container">
+            <Button onClick={this.resetAutomata}>Reset</Button>
+          </div>
         )}
-        {displayResetButton && (
-          <Button onClick={this.saveRLE}>Get RLE Pattern</Button>
+        {displayGrid && (
+          <div className="save-rle-container">
+            <Button onClick={this.saveRLE}>Get RLE Pattern</Button>
+          </div>
         )}
       </div>
     );
@@ -132,6 +150,4 @@ class RandomGridPage extends Component {
 export default RandomGridPage;
 
 // TODO
-// save grid to RLE
-// find meaningful boundaries for saved RLE grids
 // styling
