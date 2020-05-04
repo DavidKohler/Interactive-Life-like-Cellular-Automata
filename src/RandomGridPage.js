@@ -54,10 +54,6 @@ class RandomGridPage extends Component {
   };
 
   resetAutomata() {
-    setTimeout(function () {
-      let elem = document.querySelector('body > button');
-      if (elem !== null) elem.parentNode.removeChild(elem);
-    }, 0);
     this.setState((state) => ({
       refreshVal: state.refreshVal + 1,
     }));

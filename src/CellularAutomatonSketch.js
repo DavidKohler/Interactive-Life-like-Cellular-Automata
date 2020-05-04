@@ -17,6 +17,7 @@ class CellularAutomatonSketch extends Component {
     let { grid } = this.props;
     let playButton;
     let playing = false;
+    let nextButton;
 
     this.sketch = new p5((p) => {
       p.setup = () => {
@@ -41,6 +42,20 @@ class CellularAutomatonSketch extends Component {
 
         playButton.position(50, 50);
 
+        nextButton = p.createButton('Next');
+        nextButton.mousePressed(toggleNext);
+        nextButton.style('color', '#fff');
+        nextButton.style('background-color', '#007bff');
+        nextButton.style('border-color', '#007bff');
+        nextButton.style('font-weight', '400');
+        nextButton.style('border', '1px solid transparent');
+        nextButton.style('padding', '.375rem .75rem');
+        nextButton.style('font-size', '1rem');
+        nextButton.style('line-height', '1.5');
+        nextButton.style('border-radius', '.25rem');
+
+        nextButton.position(100, 100);
+
         p.noLoop();
       };
 
@@ -53,6 +68,10 @@ class CellularAutomatonSketch extends Component {
           playButton.html('Pause');
         }
         playing = !playing;
+      }
+
+      function toggleNext() {
+        p.draw();
       }
 
       p.draw = () => {
@@ -136,4 +155,4 @@ class CellularAutomatonSketch extends Component {
 export default CellularAutomatonSketch;
 
 //TODO
-// allow for different rulesets
+// change position and style of buttons

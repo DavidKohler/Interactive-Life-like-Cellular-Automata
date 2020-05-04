@@ -10,13 +10,7 @@ export default function gridToRLE(grid, bRule, sRule) {
   let finishedWriting = false;
   let pos = 0;
   let individualLine = '';
-  //   console.log('RLEgroups');
-  //   console.log(RLEgroups);
   while (finishedWriting === false) {
-    // console.log('individual line:');
-    // console.log(individualLine);
-    // console.log('rle array:');
-    // console.log(RLEarray);
     if (RLEgroups[pos][1] === 1) {
       // single cell
       if (1 + individualLine.length > 70) {
