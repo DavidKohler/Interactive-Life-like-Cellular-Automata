@@ -3,7 +3,7 @@ import p5 from 'p5';
 
 class CellularAutomatonSketch extends Component {
   componentDidMount() {
-    const {
+    let {
       cols,
       rows,
       framerate,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CellularAutomatonSketch from './CellularAutomatonSketch';
 import Button from 'react-bootstrap/Button';
 import GridCustomization from './GridCustomization';
+import gridToRLE from './RLElogic';
 
 class RandomGridPage extends Component {
   constructor() {
@@ -23,6 +24,13 @@ class RandomGridPage extends Component {
     this.resetAutomata = this.resetAutomata.bind(this);
     this.generateGrid = this.generateGrid.bind(this);
     this.updateParameters = this.updateParameters.bind(this);
+    this.saveRLE = this.saveRLE.bind(this);
+  }
+
+  saveRLE() {
+    const { myGrid, birthRule, surviveRule } = this.state;
+    let gridRLE = gridToRLE(myGrid, birthRule, surviveRule);
+    console.log(gridRLE);
   }
 
   updateParameters = (newParams) => {
@@ -63,7 +71,8 @@ class RandomGridPage extends Component {
   };
 
   generateGrid() {
-    const { cols, rows, alivePercentage } = this.state;
+    let { cols, rows, alivePercentage } = this.state;
+    console.log(rows);
     let newGrid = this.createGrid(cols, rows, alivePercentage);
     if (this.state.myGrid.length > 0) {
       this.resetAutomata();
@@ -83,6 +92,7 @@ class RandomGridPage extends Component {
       backgroundColor,
     } = this.state;
     let displayResetButton = myGrid.length > 0;
+    console.log(this.state);
     return (
       <div>
         Random Grid Page!
@@ -109,6 +119,9 @@ class RandomGridPage extends Component {
         {displayResetButton && (
           <Button onClick={this.resetAutomata}>Reset</Button>
         )}
+        {displayResetButton && (
+          <Button onClick={this.saveRLE}>Get RLE Pattern</Button>
+        )}
       </div>
     );
   }
@@ -118,6 +131,5 @@ export default RandomGridPage;
 
 // TODO
 // save grid to RLE
-// UI for changing parameters
 // find meaningful boundaries for saved RLE grids
 // styling
