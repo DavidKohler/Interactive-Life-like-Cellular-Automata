@@ -32,12 +32,14 @@ class RandomGridPage extends Component {
   }
 
   resetAutomata() {
+    // refresh grid by increasing key
     this.setState((state) => ({
       refreshVal: state.refreshVal + 1,
     }));
   }
 
   createGrid = (r, c, aliveP) => {
+    // create grid with random cells
     let grid = new Array(r);
     for (let i = 0; i < grid.length; i++) {
       grid[i] = new Array(c);
@@ -52,6 +54,7 @@ class RandomGridPage extends Component {
   };
 
   generateGrid() {
+    // generate new grid
     let { cols, gridRows, alivePercentage } = this.state;
     let newGrid = this.createGrid(gridRows, cols, alivePercentage);
     if (this.state.myGrid.length > 0) {
@@ -61,12 +64,14 @@ class RandomGridPage extends Component {
   }
 
   saveRLE() {
+    // create RLE strings from grid
     let { birthRule, myGrid, surviveRule } = this.state;
     let gridRLE = gridToRLE(myGrid, birthRule, surviveRule);
     console.log(gridRLE);
   }
 
   updateParameters = (newParams) => {
+    // update grid parameters passed up from customization drawer
     this.resetAutomata();
     setTimeout(() => {
       this.setState(
@@ -151,3 +156,4 @@ export default RandomGridPage;
 
 // TODO
 // styling
+// display RLE
