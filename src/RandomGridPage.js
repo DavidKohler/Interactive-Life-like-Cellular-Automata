@@ -10,7 +10,7 @@ class RandomGridPage extends Component {
     this.state = {
       refreshVal: 0,
       cols: 10,
-      rows: 10,
+      gridRows: 10,
       framerate: 5,
       resolution: 20,
       cellColor: '#000000',
@@ -34,36 +34,40 @@ class RandomGridPage extends Component {
   }
 
   updateParameters = (newParams) => {
-    this.setState({
-      cols: newParams.cols,
-      rows: newParams.rows,
-      framerate: newParams.framerate,
-      resolution: newParams.resolution,
-      birthRule: newParams.birthRule,
-      surviveRule: newParams.surviveRule,
-      cellColor: newParams.cellColor,
-      backgroundColor: newParams.backgroundColor,
-      alivePercentage: newParams.alivePercentage,
-    });
     this.resetAutomata();
+    setTimeout(() => {
+      this.setState({
+        cols: newParams.cols,
+        gridRows: newParams.rows,
+        framerate: newParams.framerate,
+        resolution: newParams.resolution,
+        birthRule: newParams.birthRule,
+        surviveRule: newParams.surviveRule,
+        cellColor: newParams.cellColor,
+        backgroundColor: newParams.backgroundColor,
+        alivePercentage: newParams.alivePercentage,
+      });
+    }, 0);
   };
 
   resetAutomata() {
-    let elem = document.querySelector('body > button');
-    if (elem !== null) elem.parentNode.removeChild(elem);
+    setTimeout(function () {
+      let elem = document.querySelector('body > button');
+      if (elem !== null) elem.parentNode.removeChild(elem);
+    }, 0);
     this.setState((state) => ({
       refreshVal: state.refreshVal + 1,
     }));
   }
 
-  createGrid = (cols, rows, aliveP) => {
-    let grid = new Array(rows);
+  createGrid = (r, c, aliveP) => {
+    let grid = new Array(r);
     for (let i = 0; i < grid.length; i++) {
-      grid[i] = new Array(cols);
+      grid[i] = new Array(c);
     }
     let modifiedProbRandom = Array(100).fill(1).fill(0, aliveP);
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
+    for (let i = 0; i < r; i++) {
+      for (let j = 0; j < c; j++) {
         grid[i][j] = modifiedProbRandom[Math.floor(Math.random() * 100)];
       }
     }
@@ -71,9 +75,8 @@ class RandomGridPage extends Component {
   };
 
   generateGrid() {
-    let { cols, rows, alivePercentage } = this.state;
-    console.log(rows);
-    let newGrid = this.createGrid(cols, rows, alivePercentage);
+    let { cols, gridRows, alivePercentage } = this.state;
+    let newGrid = this.createGrid(gridRows, cols, alivePercentage);
     if (this.state.myGrid.length > 0) {
       this.resetAutomata();
     }
@@ -82,7 +85,7 @@ class RandomGridPage extends Component {
   render() {
     let {
       cols,
-      rows,
+      gridRows,
       framerate,
       resolution,
       myGrid,
@@ -92,7 +95,6 @@ class RandomGridPage extends Component {
       backgroundColor,
     } = this.state;
     let displayResetButton = myGrid.length > 0;
-    console.log(this.state);
     return (
       <div>
         Random Grid Page!
@@ -104,7 +106,7 @@ class RandomGridPage extends Component {
         {myGrid.length > 0 && (
           <CellularAutomatonSketch
             refLoc={this.renderRef}
-            rows={rows}
+            rows={gridRows}
             cols={cols}
             grid={myGrid}
             framerate={framerate}

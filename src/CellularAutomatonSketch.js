@@ -70,7 +70,7 @@ class CellularAutomatonSketch extends Component {
           }
         }
 
-        let next = this.createGrid(cols, rows);
+        let next = this.createGrid(rows, cols);
 
         for (let i = 0; i < rows; i++) {
           for (let j = 0; j < cols; j++) {
@@ -116,12 +116,12 @@ class CellularAutomatonSketch extends Component {
     return sum;
   };
 
-  createGrid = (rows, cols) => {
-    let grid = new Array(rows);
-    for (let i = 0; i < grid.length; i++) {
-      grid[i] = new Array(cols);
+  createGrid = (r, c) => {
+    let g = new Array(r);
+    for (let i = 0; i < g.length; i++) {
+      g[i] = new Array(c);
     }
-    return grid;
+    return g;
   };
 
   render() {
