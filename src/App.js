@@ -17,13 +17,17 @@ class App extends React.Component {
   }
 
   resetTab() {
-    let elem = document.querySelector('body > button');
-    if (elem !== null) {
-      elem.parentNode.removeChild(elem);
-      this.setState((state) => ({
-        refreshTabVal: state.refreshTabVal + 1,
-      }));
-    }
+    setTimeout(() => {
+      let elems = document.querySelectorAll('body > button');
+      if (elems.length > 0) {
+        for (let i = 0; i < elems.length; i++) {
+          elems[i].parentNode.removeChild(elems[i]);
+        }
+        this.setState((state) => ({
+          refreshTabVal: state.refreshTabVal + 1,
+        }));
+      }
+    }, 0);
   }
 
   render() {
