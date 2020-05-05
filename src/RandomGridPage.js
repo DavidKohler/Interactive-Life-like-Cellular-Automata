@@ -161,4 +161,3 @@ export default RandomGridPage;
 
 // TODO
 // styling
-// display RLE

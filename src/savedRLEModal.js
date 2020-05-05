@@ -8,7 +8,7 @@ class SavedRLEModal extends Component {
     super();
     this.state = {
       showModal: false,
-      savedRLE: '',
+      savedRLE: [''],
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
@@ -20,12 +20,12 @@ class SavedRLEModal extends Component {
 
   handleShow = () => {
     let RLE = gridToRLE(this.props.grid, this.props.bRule, this.props.sRule);
-    this.setState({ showModal: true, savedRLE: RLE.join('\n') });
+    this.setState({ showModal: true, savedRLE: RLE });
   };
 
   // Function to download data to a file
   downloadRLEFile = () => {
-    let data = this.state.savedRLE;
+    let data = this.state.savedRLE.join('\n');
     let filename = 'savedRLE.rle';
     let type = '.rle';
     let file = new Blob([data], { type: type });
@@ -54,11 +54,15 @@ class SavedRLEModal extends Component {
           View RLE File
         </Button>
 
-        <Modal show={this.state.showModal} onHide={this.handleClose}>
+        <Modal show={this.state.showModal} size="lg" onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>RLE File</Modal.Title>
           </Modal.Header>
-          <Modal.Body>{this.state.savedRLE}</Modal.Body>
+          <Modal.Body>
+            {this.state.savedRLE.map((line, i) => (
+              <p key={i}>{line}</p>
+            ))}
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Close
