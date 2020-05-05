@@ -3,6 +3,7 @@ import CellularAutomatonSketch from './CellularAutomatonSketch';
 import GridCustomization from './GridCustomization';
 import gridToRLE from './RLElogic';
 import React, { Component } from 'react';
+import SavedRLEModal from './savedRLEModal';
 
 /*
     Component for Random Grid Tab
@@ -142,9 +143,18 @@ class RandomGridPage extends Component {
             <Button onClick={this.resetAutomata}>Reset</Button>
           </div>
         )}
-        {displayGrid && (
+        {/* {displayGrid && (
           <div className="save-rle-container">
             <Button onClick={this.saveRLE}>Get RLE Pattern</Button>
+          </div>
+        )} */}
+        {displayGrid && (
+          <div className="save-rle-container">
+            <SavedRLEModal
+              grid={this.state.myGrid}
+              bRule={this.state.birthRule}
+              sRule={this.state.surviveRule}
+            />
           </div>
         )}
       </div>
