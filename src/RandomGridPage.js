@@ -161,3 +161,4 @@ export default RandomGridPage;
 
 // TODO
 // styling
+// add text explaining page
