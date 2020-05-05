@@ -1,30 +1,40 @@
-import React, { Component } from 'react';
-import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import gridToRLE from './RLElogic';
+import Modal from 'react-bootstrap/Modal';
+import React, { Component } from 'react';
+
+/*
+    Component for RLE popup modal
+*/
 
 class SavedRLEModal extends Component {
   constructor() {
     super();
     this.state = {
-      showModal: false,
       savedRLE: [''],
+      showModal: false,
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
   }
 
   handleClose = () => {
+    // handle closing modal
     this.setState({ showModal: false });
   };
 
   handleShow = () => {
-    let RLE = gridToRLE(this.props.grid, this.props.bRule, this.props.sRule);
+    // handle rendering modal
+    let RLE = gridToRLE(
+      this.props.grid,
+      this.props.birthRule,
+      this.props.surviveRule
+    );
     this.setState({ showModal: true, savedRLE: RLE });
   };
 
-  // Function to download data to a file
   downloadRLEFile = () => {
+    // function to download RLE data to an RLE file for user
     let data = this.state.savedRLE.join('\n');
     let filename = 'savedRLE.rle';
     let type = '.rle';
@@ -48,6 +58,7 @@ class SavedRLEModal extends Component {
   };
 
   render() {
+    // render component
     return (
       <div>
         <Button variant="primary" onClick={this.handleShow}>

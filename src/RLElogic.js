@@ -1,4 +1,10 @@
+/*
+    File for all functions dealing with RLE logic
+*/
+
 export default function gridToRLE(grid, bRule, sRule) {
+  // convert grid with B rule and S rule to RLE array
+  // where each element in array is a separate line of RLE file
   let { top, bot, minCol, maxCol } = findMeaningfulBoundaries(grid);
   let RLEarray = [];
   RLEarray.push(
@@ -48,6 +54,8 @@ export default function gridToRLE(grid, bRule, sRule) {
 }
 
 function findMeaningfulBoundaries(grid) {
+  // given grid, find smallest boundaries that contain all
+  // specified cells, which is needed for RLE file
   let rowSums = grid.map((row) => {
     return row.reduce((a, b) => {
       return a + b;
@@ -83,6 +91,8 @@ function findMeaningfulBoundaries(grid) {
 }
 
 function cellCounter(cells) {
+  // convert strings of cells to value length format
+  // ex: bb -> ['b', 2]
   let s = cells.match(/([a-zA-Z])\1*/g) || [];
   return s.map((v) => {
     return [v.charAt(0), v.length];
@@ -90,6 +100,9 @@ function cellCounter(cells) {
 }
 
 function encodeGrid(grid, top, bot, minCol, maxCol) {
+  // encode a grid from 2D array of 0's and 1's to
+  // unsimplified RLE string format
+  // ex: 0 1 1 -> boo
   let RLEgroups = [];
   for (let row = top; row < bot + 1; row++) {
     let rowString = '';
@@ -112,6 +125,7 @@ function encodeGrid(grid, top, bot, minCol, maxCol) {
     }
   }
 
+  // optimize RLE string by considering neighbors in string
   let possibleOptimization = true;
   while (possibleOptimization === true) {
     possibleOptimization = false;
@@ -134,6 +148,7 @@ function encodeGrid(grid, top, bot, minCol, maxCol) {
       }
     }
 
+    // remove specified indices from array
     if (indicesToRemove.length > 0) {
       possibleOptimization = true;
       // delete indices

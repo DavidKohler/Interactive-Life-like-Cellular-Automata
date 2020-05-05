@@ -1,4 +1,7 @@
-// Idea for this code comes from zealous-snyder-0bj4r
+/*
+    Function to create desired slider handle for customization drawers
+    Idea for this code comes from zealous-snyder-0bj4r
+*/
 
 import React from 'react';
 import styled from 'styled-components';

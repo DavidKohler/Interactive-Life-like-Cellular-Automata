@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import { SliderHandle } from './SliderHandle';
-import Drawer from '@material-ui/core/Drawer';
-import {
-  dimensionMarks,
-  framerateMarks,
-  resolutionMarks,
-  cellRatioMarks,
-} from './SliderMarks';
-import { ChromePicker } from 'react-color';
 import './GridCustomization.css';
+import 'rc-slider/assets/index.css';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import { ChromePicker } from 'react-color';
+import Drawer from '@material-ui/core/Drawer';
+import Slider from 'rc-slider';
+import { SliderHandle } from './SliderHandle';
+import React, { Component } from 'react';
+import {
+  cellRatioMarks,
+  cellSizeMarks,
+  dimensionMarks,
+  framerateMarks,
+} from './SliderMarks';
 
 const wrapperStyle = { width: 800, margin: 50 };
+
+/*
+    Component rendering customization drawer for grid
+*/
 
 class GridCustomization extends Component {
   constructor() {
     super();
     this.state = {
-      cols: 10,
-      rows: 10,
-      framerate: 10,
-      resolution: 10,
-      cellColor: '#000000',
+      alivePercentage: 50,
       backgroundColor: '#FFFFFF',
-      drawerOpen: false,
+      birthRule: [3],
       bornRulePressed: [
         false,
         false,
@@ -39,6 +39,13 @@ class GridCustomization extends Component {
         false,
         false,
       ],
+      cellColor: '#000000',
+      cols: 10,
+      drawerOpen: false,
+      framerate: 10,
+      cellSize: 20,
+      rows: 10,
+      surviveRule: [2, 3],
       surviveRulePressed: [
         false,
         false,
@@ -50,30 +57,24 @@ class GridCustomization extends Component {
         false,
         false,
       ],
-      birthRule: [3],
-      surviveRule: [2, 3],
-      alivePercentage: 50,
     };
-    this.updateColumns = this.updateColumns.bind(this);
-    this.updateRows = this.updateRows.bind(this);
-    this.updateFramerate = this.updateFramerate.bind(this);
-    this.updateResolution = this.updateResolution.bind(this);
-    this.handleCellColorUpdate = this.handleCellColorUpdate.bind(this);
+
     this.handleBackgroundColorUpdate = this.handleBackgroundColorUpdate.bind(
       this
     );
+    this.handleCellColorUpdate = this.handleCellColorUpdate.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
-    this.toggleBornButton = this.toggleBornButton.bind(this);
-    this.toggleSurviveButton = this.toggleSurviveButton.bind(this);
+    this.updateBornButtons = this.updateBornButtons.bind(this);
     this.updateCellRatio = this.updateCellRatio.bind(this);
+    this.updateCellSize = this.updateCellSize.bind(this);
+    this.updateColumns = this.updateColumns.bind(this);
+    this.updateFramerate = this.updateFramerate.bind(this);
+    this.updateRows = this.updateRows.bind(this);
+    this.updateSurviveButtons = this.updateSurviveButtons.bind(this);
   }
 
-  handleSubmit = () => {
-    this.setState({ drawerOpen: false });
-    this.props.submitFunction(this.state);
-  };
-
   componentDidUpdate() {
+    // get rid of alpha sliders from react-color that do not work
     setTimeout(function () {
       let alphaSlider1 = document.querySelector(
         'body > div.MuiDrawer-root.MuiDrawer-modal > div.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 > div.cell-color-picker > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)'
@@ -88,49 +89,29 @@ class GridCustomization extends Component {
     }, 0);
   }
 
-  toggleDrawer = (open) => (event) => {
-    this.setState({ drawerOpen: open });
-  };
-
-  updateColumns = (val) => {
-    this.setState({
-      cols: val,
-    });
-  };
-
-  updateRows = (val) => {
-    this.setState({
-      rows: val,
-    });
-  };
-
-  updateFramerate = (val) => {
-    this.setState({
-      framerate: val,
-    });
-  };
-
-  updateResolution = (val) => {
-    this.setState({
-      resolution: val,
-    });
-  };
-
-  updateCellRatio = (val) => {
-    this.setState({
-      alivePercentage: val,
-    });
-  };
-
-  handleCellColorUpdate = (color) => {
-    this.setState({ cellColor: color.hex });
-  };
-
   handleBackgroundColorUpdate = (color) => {
+    // update color of background of grid
     this.setState({ backgroundColor: color.hex });
   };
 
-  toggleBornButton = (isPressed, index) => {
+  handleCellColorUpdate = (color) => {
+    // update color of live cells in grid
+    this.setState({ cellColor: color.hex });
+  };
+
+  handleSubmit = () => {
+    // handle click on submit button, activate parent submit function
+    this.setState({ drawerOpen: false });
+    this.props.submitFunction(this.state);
+  };
+
+  toggleDrawer = (open) => (event) => {
+    // toggle opening customization drawer
+    this.setState({ drawerOpen: open });
+  };
+
+  updateBornButtons = (isPressed, index) => {
+    // update birth rule and which buttons are pressed
     let newPressings = this.state.bornRulePressed.slice(0);
     newPressings[index] = !isPressed;
     this.setState({
@@ -142,7 +123,43 @@ class GridCustomization extends Component {
     });
   };
 
-  toggleSurviveButton = (isPressed, index) => {
+  updateCellRatio = (val) => {
+    // update percentage of live vs dead cells in grid
+    this.setState({
+      alivePercentage: val,
+    });
+  };
+
+  updateCellSize = (val) => {
+    // update cell size of sketch
+    this.setState({
+      cellSize: val,
+    });
+  };
+
+  updateColumns = (val) => {
+    // update number of columns in grid
+    this.setState({
+      cols: val,
+    });
+  };
+
+  updateFramerate = (val) => {
+    // update framerate for sketch
+    this.setState({
+      framerate: val,
+    });
+  };
+
+  updateRows = (val) => {
+    // update number of rows in grid
+    this.setState({
+      rows: val,
+    });
+  };
+
+  updateSurviveButtons = (isPressed, index) => {
+    // update survive rule and which buttons are pressed
     let newPressings = this.state.surviveRulePressed.slice(0);
     newPressings[index] = !isPressed;
     this.setState({
@@ -155,6 +172,7 @@ class GridCustomization extends Component {
   };
 
   render() {
+    // render customization drawer and toggle button
     let { bornRulePressed, surviveRulePressed } = this.state;
 
     return (
@@ -163,115 +181,120 @@ class GridCustomization extends Component {
           <Button onClick={this.toggleDrawer(true)}>{'Customize'}</Button>
           <Drawer
             anchor={'right'}
-            open={this.state.drawerOpen}
             onClose={this.toggleDrawer(false)}
+            open={this.state.drawerOpen}
           >
             {'Customization'}
-            <ButtonToolbar aria-label="Born Rule">
-              {`Born Rule: B${this.state.birthRule.map(String).join('')}`}
-              <ButtonGroup className="mr-2" aria-label="born group">
-                {bornRulePressed.map((val, ind) => {
-                  return (
-                    <Button
-                      key={ind}
-                      onClick={() => this.toggleBornButton(val, ind)}
-                      variant={val === true ? 'success' : 'outline-success'}
-                    >
-                      {ind}
-                    </Button>
-                  );
-                })}
-              </ButtonGroup>
-              {`Survive Rule: S${this.state.surviveRule.map(String).join('')}`}
-              <ButtonGroup className="mr-2" aria-label="survive group">
-                {surviveRulePressed.map((val, ind) => {
-                  return (
-                    <Button
-                      key={ind}
-                      onClick={() => this.toggleSurviveButton(val, ind)}
-                      variant={val === true ? 'success' : 'outline-success'}
-                    >
-                      {ind}
-                    </Button>
-                  );
-                })}
-              </ButtonGroup>
-            </ButtonToolbar>
-            <div className={'column-slider'} style={wrapperStyle}>
+            <div className="column-slider" style={wrapperStyle}>
               {`Columns: ${this.state.cols}`}
               <Slider
-                onChange={(v) => this.updateColumns(v)}
-                min={1}
-                max={80}
-                marks={dimensionMarks}
                 defaultValue={this.state.cols}
                 handle={SliderHandle}
-              />
-            </div>
-            <div className={'row-slider'} style={wrapperStyle}>
-              {`Rows: ${this.state.rows}`}
-              <Slider
-                onChange={(v) => this.updateRows(v)}
-                min={1}
                 max={80}
                 marks={dimensionMarks}
+                min={1}
+                onChange={(v) => this.updateColumns(v)}
+              />
+            </div>
+            <div className="row-slider" style={wrapperStyle}>
+              {`Rows: ${this.state.rows}`}
+              <Slider
                 defaultValue={this.state.rows}
                 handle={SliderHandle}
+                marks={dimensionMarks}
+                max={80}
+                min={1}
+                onChange={(v) => this.updateRows(v)}
+              />
+            </div>
+            <div className="cell-size-slider" style={wrapperStyle}>
+              {`Cell Size: ${this.state.cellSize}`}
+              <Slider
+                defaultValue={this.state.cellSize}
+                handle={SliderHandle}
+                marks={cellSizeMarks}
+                max={40}
+                min={1}
+                onChange={(v) => this.updateCellSize(v)}
               />
             </div>
             {this.props.parentTab === 'RANDOM' && (
-              <div
-                className={'random-probabilities-slider'}
-                style={wrapperStyle}
-              >
+              <div className="cell-ratio-slider" style={wrapperStyle}>
                 {'Alive/Dead Cell Ratio'}
                 <Slider
-                  onChange={(v) => this.updateCellRatio(v)}
-                  min={0}
-                  max={100}
-                  marks={cellRatioMarks}
                   defaultValue={this.state.alivePercentage}
                   handle={SliderHandle}
+                  marks={cellRatioMarks}
+                  max={100}
+                  min={0}
+                  onChange={(v) => this.updateCellRatio(v)}
                 />
               </div>
             )}
-            <div className={'framerate-slider'} style={wrapperStyle}>
+            <div className="button-toolbar-container">
+              <ButtonToolbar aria-label="Born Rule">
+                {`Born Rule: B${this.state.birthRule.map(String).join('')}`}
+                <ButtonGroup className="mr-2" aria-label="born group">
+                  {bornRulePressed.map((val, ind) => {
+                    return (
+                      <Button
+                        key={ind}
+                        onClick={() => this.updateBornButtons(val, ind)}
+                        variant={val === true ? 'success' : 'outline-success'}
+                      >
+                        {ind}
+                      </Button>
+                    );
+                  })}
+                </ButtonGroup>
+                {`Survive Rule: S${this.state.surviveRule
+                  .map(String)
+                  .join('')}`}
+                <ButtonGroup className="mr-2" aria-label="survive group">
+                  {surviveRulePressed.map((val, ind) => {
+                    return (
+                      <Button
+                        key={ind}
+                        onClick={() => this.updateSurviveButtons(val, ind)}
+                        variant={val === true ? 'success' : 'outline-success'}
+                      >
+                        {ind}
+                      </Button>
+                    );
+                  })}
+                </ButtonGroup>
+              </ButtonToolbar>
+            </div>
+            <div className="framerate-slider" style={wrapperStyle}>
               {`Framerate: ${this.state.framerate}`}
               <Slider
-                onChange={(v) => this.updateFramerate(v)}
-                min={1}
-                max={60}
-                marks={framerateMarks}
                 defaultValue={this.state.framerate}
                 handle={SliderHandle}
-              />
-            </div>
-            <div className={'resolution-slider'} style={wrapperStyle}>
-              {`Resolution: ${this.state.resolution}`}
-              <Slider
-                onChange={(v) => this.updateResolution(v)}
+                marks={framerateMarks}
+                max={60}
                 min={1}
-                max={40}
-                marks={resolutionMarks}
-                defaultValue={this.state.resolution}
-                handle={SliderHandle}
+                onChange={(v) => this.updateFramerate(v)}
               />
             </div>
-            <div className={'cell-color-picker'}>
-              {`Cell Color: ${this.state.cellColor}`}
-              <ChromePicker
-                color={this.state.cellColor}
-                onChange={this.handleCellColorUpdate}
-              />
+            <div className="color-pickers">
+              <div className="cell-color-picker">
+                {`Cell Color: ${this.state.cellColor}`}
+                <ChromePicker
+                  color={this.state.cellColor}
+                  onChange={this.handleCellColorUpdate}
+                />
+              </div>
+              <div className="cell-background-picker">
+                {`Background Color: ${this.state.backgroundColor}`}
+                <ChromePicker
+                  color={this.state.backgroundColor}
+                  onChange={this.handleBackgroundColorUpdate}
+                />
+              </div>
             </div>
-            <div className={'cell-background-picker'}>
-              {`Background Color: ${this.state.backgroundColor}`}
-              <ChromePicker
-                color={this.state.backgroundColor}
-                onChange={this.handleBackgroundColorUpdate}
-              />
+            <div className="submit-container">
+              <Button onClick={this.handleSubmit}>Submit</Button>
             </div>
-            <Button onClick={this.handleSubmit}>Submit</Button>
           </Drawer>
         </React.Fragment>
       </div>

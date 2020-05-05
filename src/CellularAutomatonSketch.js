@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
 import p5 from 'p5';
 
+/*
+    Component to render p5 sketch of cellular automaton based on parameters passed in
+*/
+
 class CellularAutomatonSketch extends Component {
   componentDidMount() {
     let {
-      cols,
-      rows,
-      framerate,
-      resolution,
-      birthRule,
-      surviveRule,
       backgroundColor,
+      birthRule,
       cellColor,
+      cellSize,
+      cols,
+      framerate,
+      grid,
+      rows,
+      surviveRule,
     } = this.props;
 
-    let { grid } = this.props;
     let playButton;
     let playing = false;
     let nextButton;
 
+    // create sketch
     this.sketch = new p5((p) => {
       p.setup = () => {
-        let width = cols * resolution;
-        let height = rows * resolution;
+        // setup sketch and buttons
+        let width = cols * cellSize;
+        let height = rows * cellSize;
 
         p.createCanvas(width, height).parent(this.props.refLoc.current);
 
@@ -59,32 +65,18 @@ class CellularAutomatonSketch extends Component {
         p.noLoop();
       };
 
-      function togglePlay() {
-        if (playing) {
-          p.noLoop();
-          playButton.html('Play');
-        } else {
-          p.loop();
-          playButton.html('Pause');
-        }
-        playing = !playing;
-      }
-
-      function toggleNext() {
-        p.draw();
-      }
-
       p.draw = () => {
+        // draw cells and grid
         p.background(backgroundColor);
 
         for (let i = 0; i < rows; i++) {
           for (let j = 0; j < cols; j++) {
-            let x = j * resolution;
-            let y = i * resolution;
+            let x = j * cellSize;
+            let y = i * cellSize;
             if (grid[i][j] === 1) {
               p.fill(cellColor);
               p.stroke(backgroundColor);
-              p.rect(x, y, resolution - 1, resolution - 1);
+              p.rect(x, y, cellSize - 1, cellSize - 1);
             }
           }
         }
@@ -119,10 +111,28 @@ class CellularAutomatonSketch extends Component {
         }
         grid = next;
       };
+
+      function toggleNext() {
+        // control next button
+        p.draw();
+      }
+
+      function togglePlay() {
+        // control play button
+        if (playing) {
+          p.noLoop();
+          playButton.html('Play');
+        } else {
+          p.loop();
+          playButton.html('Pause');
+        }
+        playing = !playing;
+      }
     });
   }
 
   countNeighbors = (g, r, c, maxR, maxC) => {
+    // find number of neighbors from cell at g[r][c]
     let sum = 0;
     for (let i = r - 1; i < r + 2; i++) {
       for (let j = c - 1; j < c + 2; j++) {
@@ -136,6 +146,7 @@ class CellularAutomatonSketch extends Component {
   };
 
   createGrid = (r, c) => {
+    // create new grid of size r*c
     let g = new Array(r);
     for (let i = 0; i < g.length; i++) {
       g[i] = new Array(c);
@@ -144,6 +155,7 @@ class CellularAutomatonSketch extends Component {
   };
 
   render() {
+    // render to parent component
     return (
       <div className="CellularAutomatonSketch">
         <div ref={this.props.refLoc}></div>
