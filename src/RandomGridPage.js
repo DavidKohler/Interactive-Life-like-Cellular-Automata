@@ -143,11 +143,6 @@ class RandomGridPage extends Component {
             <Button onClick={this.resetAutomata}>Reset</Button>
           </div>
         )}
-        {/* {displayGrid && (
-          <div className="save-rle-container">
-            <Button onClick={this.saveRLE}>Get RLE Pattern</Button>
-          </div>
-        )} */}
         {displayGrid && (
           <div className="save-rle-container">
             <SavedRLEModal
