@@ -20,14 +20,12 @@ class LoadRLEPage extends Component {
       grid: [],
       refreshVal: 0,
       surviveRule: [],
-      file: [],
+      file: '',
     };
     this.renderRef = React.createRef();
     this.resetAutomata = this.resetAutomata.bind(this);
     this.updateParameters = this.updateParameters.bind(this);
     this.toggleLoadDrawer = this.toggleLoadDrawer.bind(this);
-    // this.handleCapture = this.handleCapture.bind(this);
-    this.displayContents = this.displayContents.bind(this);
   }
 
   toggleLoadDrawer = (open) => (event) => {
@@ -50,49 +48,32 @@ class LoadRLEPage extends Component {
     }, 0);
   };
 
-  // handleCapture = (files) => {
-  //   let file = files[0];
-  //   if (!file) {
-  //     return;
-  //   }
-  //   console.log(file);
-  //   const fileReader = new FileReader();
-  //   // console.log(target);
-  //   // if (target !== undefined) {
-  //   fileReader.readAsText(file);
-  //   console.log(fileReader);
-  //   // fileReader.onload = (e) => {
-  //   // console.log(e.target.result);
-  //   // };
-  //   // }
-  //   // this.setState({
-  //   // file: e.target.result,
-  //   // });
-  //   // };
-  // };
-
   readSingleFile = (e) => {
-    var file = e.target.files[0];
+    // read RLE file from upload
+    let file = e.target.files[0];
     if (!file) {
       return;
     }
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.onload = (e) => {
-      var contents = e.target.result;
-      this.displayContents(contents);
+      let contents = e.target.result;
+      // this.displayContents(contents);
+      this.setState({
+        file: contents,
+      });
     };
     reader.readAsText(file);
   };
 
-  displayContents = (contents) => {
-    var element = document.getElementById('file-content');
-    element.textContent = contents;
-  };
-
-  componentDidMount() {
-    document
-      .getElementById('file-input')
-      .addEventListener('change', this.readSingleFile, false);
+  componentDidUpdate() {
+    // set listener for file upload when drawer is open
+    if (this.state.loadDrawer === true) {
+      setTimeout(() => {
+        document
+          .getElementById('file-input')
+          .addEventListener('change', this.readSingleFile, false);
+      }, 0);
+    }
   }
 
   render() {
@@ -112,13 +93,9 @@ class LoadRLEPage extends Component {
               open={this.state.loadDrawer}
             >
               {'Load RLE'}
-              <DropzoneArea
-                acceptedFiles={['.rle']}
-                filesLimit={1}
-                dropzoneText={'Drag and drop an RLE here or click'}
-                showPreviewsInDropzone={true}
-                onChange={this.handleCapture}
-              />
+              <input type="file" id="file-input" accept=".rle" />
+              <h3>Contents of the file:</h3>
+              {this.state.file}
             </Drawer>
           </React.Fragment>
         </div>
@@ -141,9 +118,6 @@ class LoadRLEPage extends Component {
             />
           </div>
         )}
-        <input type="file" id="file-input" accept=".rle" />
-        <h3>Contents of the file:</h3>
-        <pre id="file-content"></pre>
         {displayGrid && (
           <div className="reset-button-container">
             <Button onClick={this.resetAutomata}>Reset</Button>
