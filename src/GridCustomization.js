@@ -28,7 +28,7 @@ class GridCustomization extends Component {
       alivePercentage: 50,
       backgroundColor: '#FFFFFF',
       birthRule: [3],
-      bornRulePressed: [
+      birthRulePressed: [
         false,
         false,
         false,
@@ -73,19 +73,25 @@ class GridCustomization extends Component {
     this.updateSurviveButtons = this.updateSurviveButtons.bind(this);
   }
 
-  componentDidUpdate() {
-    // get rid of alpha sliders from react-color that do not work
-    setTimeout(function () {
-      let alphaSlider1 = document.querySelector(
-        'body > div.MuiDrawer-root.MuiDrawer-modal > div.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 > div.cell-color-picker > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)'
-      );
-      let alphaSlider2 = document.querySelector(
-        'body > div.MuiDrawer-root.MuiDrawer-modal > div.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 > div.cell-background-picker > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)'
-      );
-      if (alphaSlider1 !== null)
-        alphaSlider1.parentNode.removeChild(alphaSlider1);
-      if (alphaSlider2 !== null)
-        alphaSlider2.parentNode.removeChild(alphaSlider2);
+  componentDidMount() {
+    // check if rules were passed in (if tab is 'LOADRLE')
+    setTimeout(() => {
+      if (this.props.parentTab === 'LOADRLE') {
+        let bPressed = Array(9).fill(false);
+        let sPressed = Array(9).fill(false);
+        this.props.bRule.forEach((v) => {
+          if (v !== undefined) bPressed[v] = true;
+        });
+        this.props.sRule.forEach((v) => {
+          if (v !== undefined) sPressed[v] = true;
+        });
+        this.setState({
+          birthRule: this.props.bRule,
+          birthRulePressed: bPressed,
+          surviveRule: this.props.sRule,
+          surviveRulePressed: sPressed,
+        });
+      }
     }, 0);
   }
 
@@ -112,10 +118,10 @@ class GridCustomization extends Component {
 
   updateBornButtons = (isPressed, index) => {
     // update birth rule and which buttons are pressed
-    let newPressings = this.state.bornRulePressed.slice(0);
+    let newPressings = this.state.birthRulePressed.slice(0);
     newPressings[index] = !isPressed;
     this.setState({
-      bornRulePressed: newPressings,
+      birthRulePressed: newPressings,
       birthRule: newPressings.reduce(
         (out, bool, index) => (bool ? out.concat(index) : out),
         []
@@ -173,7 +179,7 @@ class GridCustomization extends Component {
 
   render() {
     // render customization drawer and toggle button
-    let { bornRulePressed, surviveRulePressed } = this.state;
+    let { birthRulePressed, surviveRulePressed } = this.state;
 
     return (
       <div className="customizer-drawer">
@@ -235,7 +241,7 @@ class GridCustomization extends Component {
               <ButtonToolbar aria-label="Born Rule">
                 {`Born Rule: B${this.state.birthRule.map(String).join('')}`}
                 <ButtonGroup className="mr-2" aria-label="born group">
-                  {bornRulePressed.map((val, ind) => {
+                  {birthRulePressed.map((val, ind) => {
                     return (
                       <Button
                         key={ind}
