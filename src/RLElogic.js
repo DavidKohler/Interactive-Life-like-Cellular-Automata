@@ -2,7 +2,7 @@
     File for all functions dealing with RLE logic
 */
 
-export default function gridToRLE(grid, bRule, sRule) {
+function gridToRLE(grid, bRule, sRule) {
   // convert grid with B rule and S rule to RLE array
   // where each element in array is a separate line of RLE file
   let { top, bot, minCol, maxCol } = findMeaningfulBoundaries(grid);
@@ -162,3 +162,67 @@ function encodeGrid(grid, top, bot, minCol, maxCol) {
   }
   return RLEgroups;
 }
+
+function RLEtoGrid(RLEstring) {
+  let RLElines = RLEstring.split('\n');
+  let gridString = '';
+  let xvalue, yvalue, rulestring;
+  for (let i = 0; i < RLElines.length; i++) {
+    if (RLElines[i][0] === '#') {
+      // comment line
+      continue;
+    } else if (RLElines[i][0] === 'x') {
+      // rule line
+      let chunks = RLElines[i].split(',');
+      xvalue = Number(chunks[0].trim().split('=')[1]);
+      yvalue = Number(chunks[1].trim().split('=')[1]);
+      rulestring = chunks[2].split('=')[1].trim();
+    } else {
+      gridString = gridString.concat(RLElines[i]);
+    }
+    if (RLElines[i][RLElines[i].length - 1] === '!') {
+      gridString = gridString.slice(0, -1);
+    }
+  }
+  let grid = [];
+  let rowChunks = gridString.split('$');
+  for (let j = 0; j < rowChunks.length; j++) {
+    let re = /[bo]/g;
+    let RLEtags = [];
+    let match = null;
+    let tagCounts = rowChunks[j].split(/[bo]/);
+    do {
+      match = re.exec(rowChunks[j]);
+      if (match) {
+        RLEtags.push(match[0]);
+      }
+    } while (match);
+    let gridRow = [];
+    console.log(RLEtags);
+    for (let k = 0; k < RLEtags.length; k++) {
+      let curTag = RLEtags[k];
+      let curCt = Number(tagCounts[k]);
+      if (curCt === 0) {
+        curCt = 1;
+      }
+      if (curTag === 'b') {
+        gridRow.push(...Array(curCt).fill(0));
+      } else {
+        gridRow.push(...Array(curCt).fill(1));
+      }
+    }
+    if (gridRow.length !== xvalue) {
+      gridRow.push(...Array(xvalue - gridRow.length).fill(0));
+    }
+    grid.push(gridRow);
+    if (tagCounts[tagCounts.length - 1] !== '') {
+      // account for gap lines
+      for (let z = 0; z < Number(tagCounts[tagCounts.length - 1]) - 1; z++) {
+        grid.push(Array(xvalue).fill(0));
+      }
+    }
+  }
+  return { grid, rulestring };
+}
+
+export { gridToRLE, RLEtoGrid };

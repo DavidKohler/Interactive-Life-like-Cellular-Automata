@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button';
-import gridToRLE from './RLElogic';
+import { gridToRLE } from './RLElogic';
 import Modal from 'react-bootstrap/Modal';
 import React, { Component } from 'react';
 
