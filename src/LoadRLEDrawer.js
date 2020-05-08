@@ -32,10 +32,10 @@ class LoadRLEDrawer extends Component {
   handleSubmit = () => {
     // handle click on submit button, activate parent submit function
     let convertedRLE = RLEtoGrid(this.state.file);
-    this.setState(
-      { loadDrawer: false },
-      this.props.submitFunction(convertedRLE.grid)
-    );
+    setTimeout(() => {
+      this.props.submitFunction(convertedRLE);
+      this.setState({ loadDrawer: false });
+    }, 50);
   };
 
   readSingleFile = (e) => {

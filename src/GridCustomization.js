@@ -22,41 +22,32 @@ const wrapperStyle = { width: 800, margin: 50 };
 */
 
 class GridCustomization extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       alivePercentage: 50,
       backgroundColor: '#FFFFFF',
-      birthRule: [3],
-      birthRulePressed: [
-        false,
-        false,
-        false,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ],
+      birthRule: this.props.bRule !== undefined ? this.props.bRule : [3],
+      birthRulePressed:
+        this.props.bRule !== undefined
+          ? Array(9)
+              .fill(false)
+              .map((v, i) => (this.props.bRule.includes(i) ? true : false))
+          : Array(9).fill(false).fill(true, 3, 4),
       cellColor: '#000000',
-      cols: 10,
+      cols: this.props.defaultCols !== undefined ? this.props.defaultCols : 10,
       drawerOpen: false,
       framerate: 10,
+      loadedUpdate: false,
       cellSize: 20,
-      rows: 10,
-      surviveRule: [2, 3],
-      surviveRulePressed: [
-        false,
-        false,
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ],
+      rows: this.props.defaultRows !== undefined ? this.props.defaultRows : 10,
+      surviveRule: this.props.sRule !== undefined ? this.props.sRule : [2, 3],
+      surviveRulePressed:
+        this.props.sRule !== undefined
+          ? Array(9)
+              .fill(false)
+              .map((v, i) => (this.props.sRule.includes(i) ? true : false))
+          : Array(9).fill(false).fill(true, 2, 4),
     };
 
     this.handleBackgroundColorUpdate = this.handleBackgroundColorUpdate.bind(
@@ -73,10 +64,10 @@ class GridCustomization extends Component {
     this.updateSurviveButtons = this.updateSurviveButtons.bind(this);
   }
 
-  componentDidMount() {
-    // check if rules were passed in (if tab is 'LOADRLE')
-    setTimeout(() => {
-      if (this.props.parentTab === 'LOADRLE') {
+  componentDidUpdate(prevProps, prevState) {
+    // check if new rules were passed in (if tab is 'LOADRLE')
+    if (this.props.parentTab === 'LOADRLE' && prevProps !== this.props) {
+      setTimeout(() => {
         let bPressed = Array(9).fill(false);
         let sPressed = Array(9).fill(false);
         this.props.bRule.forEach((v) => {
@@ -86,13 +77,16 @@ class GridCustomization extends Component {
           if (v !== undefined) sPressed[v] = true;
         });
         this.setState({
+          rows: this.props.defaultRows,
+          cols: this.props.defaultCols,
           birthRule: this.props.bRule,
           birthRulePressed: bPressed,
           surviveRule: this.props.sRule,
           surviveRulePressed: sPressed,
+          loadedUpdate: true,
         });
-      }
-    }, 0);
+      }, 0);
+    }
   }
 
   handleBackgroundColorUpdate = (color) => {
@@ -107,8 +101,8 @@ class GridCustomization extends Component {
 
   handleSubmit = () => {
     // handle click on submit button, activate parent submit function
-    this.setState({ drawerOpen: false });
     this.props.submitFunction(this.state);
+    this.setState({ drawerOpen: false });
   };
 
   toggleDrawer = (open) => (event) => {

@@ -1,8 +1,13 @@
-import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
-import GridCustomization from './GridCustomization';
 import CellularAutomatonSketch from './CellularAutomatonSketch';
+import GridCustomization from './GridCustomization';
 import LoadRLEDrawer from './LoadRLEDrawer';
+import { reshapeGrid } from './gridLogic';
+import React, { Component } from 'react';
+
+/*
+    Component rendering tab to load RLE
+*/
 
 class LoadRLEPage extends Component {
   constructor() {
@@ -12,12 +17,13 @@ class LoadRLEPage extends Component {
       birthRule: [],
       cellColor: '#000000',
       cellSize: 20,
+      changesMade: false,
       cols: 10,
-      framerate: 5,
-      loadDrawer: false,
-      rows: 10,
+      framerate: 10,
       grid: [],
+      loadDrawer: false,
       refreshVal: 0,
+      rows: 10,
       surviveRule: [],
     };
     this.renderRef = React.createRef();
@@ -51,17 +57,34 @@ class LoadRLEPage extends Component {
 
   updateParameters = (newParams) => {
     // update grid parameters passed up from customization drawer
-    this.resetAutomata();
+    let prevChanges = this.state.changesMade;
+    let oldGrid = this.state.grid;
+    if (
+      newParams.rows !== this.state.rows ||
+      newParams.cols !== this.state.cols
+    ) {
+      this.setState(
+        { grid: reshapeGrid(oldGrid, newParams.rows, newParams.cols) },
+        this.setState(
+          { ...newParams, changesMade: !prevChanges },
+          this.resetAutomata()
+        )
+      );
+    } else {
+      this.setState(
+        { ...newParams, changesMade: !prevChanges },
+        this.resetAutomata()
+      );
+    }
+  };
+
+  updateGrid = (newParams) => {
+    // update grid from loaded RLE
     setTimeout(() => {
       this.setState({ ...newParams });
     }, 0);
-  };
-
-  updateGrid = (newGrid) => {
-    // update grid from loaded RLE
-    this.resetAutomata();
     setTimeout(() => {
-      this.setState({ grid: newGrid });
+      this.resetAutomata();
     }, 0);
   };
 
@@ -75,11 +98,12 @@ class LoadRLEPage extends Component {
         <div className="load-drawer-container">
           <LoadRLEDrawer submitFunction={this.updateGrid} />
         </div>
-        {this.state.grid}
         {displayGrid && (
           <div className="customization-container">
             <GridCustomization
               bRule={this.state.birthRule}
+              defaultRows={this.state.rows}
+              defaultCols={this.state.cols}
               parentTab={'LOADRLE'}
               sRule={this.state.surviveRule}
               submitFunction={this.updateParameters}
@@ -108,9 +132,4 @@ class LoadRLEPage extends Component {
 export default LoadRLEPage;
 
 //TODO
-// load in RLE grids
-// add animation
-// add UI customization
-// add padding for RLE input grids
 // styling
-// allow for other rulesets

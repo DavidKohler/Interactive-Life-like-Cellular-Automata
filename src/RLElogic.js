@@ -198,7 +198,6 @@ function RLEtoGrid(RLEstring) {
       }
     } while (match);
     let gridRow = [];
-    console.log(RLEtags);
     for (let k = 0; k < RLEtags.length; k++) {
       let curTag = RLEtags[k];
       let curCt = Number(tagCounts[k]);
@@ -222,7 +221,18 @@ function RLEtoGrid(RLEstring) {
       }
     }
   }
-  return { grid, rulestring };
+  let birthRule = rulestring
+    .split('/')[0]
+    .split('B')[1]
+    .split('')
+    .map((e) => Number(e));
+  let surviveRule = rulestring
+    .split('/')[1]
+    .split('S')[1]
+    .split('')
+    .map((e) => Number(e));
+
+  return { grid, birthRule, surviveRule, rows: yvalue, cols: xvalue };
 }
 
 export { gridToRLE, RLEtoGrid };
