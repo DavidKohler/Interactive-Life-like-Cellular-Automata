@@ -1,11 +1,15 @@
-import React from 'react';
 import './App.css';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import HomePage from './HomePage';
 import DrawGridPage from './DrawGridPage';
+import HomePage from './HomePage';
 import LoadRLEPage from './LoadRLEPage';
 import RandomGridPage from './RandomGridPage';
+import React from 'react';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+
+/*
+    Root component to render tabs and tab switching
+*/
 
 class App extends React.Component {
   constructor() {
@@ -17,6 +21,7 @@ class App extends React.Component {
   }
 
   resetTab() {
+    // remove sketch buttons when chaning tabs, and refresh tabs
     setTimeout(() => {
       let elems = document.querySelectorAll('body > button');
       if (elems.length > 0) {
@@ -42,10 +47,10 @@ class App extends React.Component {
             <HomePage />
           </Tab>
           <Tab eventKey="draw" title="Draw Grid">
-            <DrawGridPage />
+            <DrawGridPage key={this.state.refreshTabVal} />
           </Tab>
           <Tab eventKey="loadrle" title="Load RLE">
-            <LoadRLEPage />
+            <LoadRLEPage key={this.state.refreshTabVal} />
           </Tab>
           <Tab eventKey="random" title="Random Grid">
             <RandomGridPage key={this.state.refreshTabVal} />
@@ -59,12 +64,6 @@ class App extends React.Component {
 export default App;
 
 //TODO:
-// load in RLE grids
-// save grid to RLE
-// UI for changing parameters
-// allow for different rulesets
 // allow user to draw grid
-// add padding for RLE input grids
-// find meaningful boundaries for saved RLE grids
 // styling
 // homepage

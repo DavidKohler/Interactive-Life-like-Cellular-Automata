@@ -6,14 +6,14 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { ChromePicker } from 'react-color';
 import Drawer from '@material-ui/core/Drawer';
 import Slider from 'rc-slider';
-import { SliderHandle } from './SliderHandle';
+import { SliderHandle } from './sliderHandle';
 import React, { Component } from 'react';
 import {
   cellRatioMarks,
   cellSizeMarks,
   dimensionMarks,
   framerateMarks,
-} from './SliderMarks';
+} from './sliderMarks';
 
 const wrapperStyle = { width: 800, margin: 50 };
 

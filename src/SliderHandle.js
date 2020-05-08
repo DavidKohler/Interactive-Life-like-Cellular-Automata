@@ -3,9 +3,9 @@
     Idea for this code comes from zealous-snyder-0bj4r
 */
 
+import { Handle } from 'rc-slider';
 import React from 'react';
 import styled from 'styled-components';
-import { Handle } from 'rc-slider';
 
 export function SliderHandle(props) {
   const { value, dragging, index, ...rest } = props;

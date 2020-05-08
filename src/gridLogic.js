@@ -1,3 +1,23 @@
+/*
+    File for all functions dealing with grid logic
+*/
+
+function createGrid(r, c, aliveP) {
+  // create grid with random cells
+  let grid = new Array(r);
+  for (let i = 0; i < grid.length; i++) {
+    grid[i] = new Array(c);
+  }
+  // modify probability based on specified percentage alive
+  let modifiedProbRandom = Array(100).fill(1).fill(0, aliveP);
+  for (let i = 0; i < r; i++) {
+    for (let j = 0; j < c; j++) {
+      grid[i][j] = modifiedProbRandom[Math.floor(Math.random() * 100)];
+    }
+  }
+  return grid;
+}
+
 function reshapeGrid(oldGrid, newR, newC) {
   // reshape cells to grid if grid needs to be resized
   let newGrid = oldGrid.map((inner) => inner.slice());
@@ -53,4 +73,4 @@ function reshapeGrid(oldGrid, newR, newC) {
   return newGrid;
 }
 
-export { reshapeGrid };
+export { createGrid, reshapeGrid };

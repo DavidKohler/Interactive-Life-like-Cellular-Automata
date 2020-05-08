@@ -1,16 +1,20 @@
-import Drawer from '@material-ui/core/Drawer';
-import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
-import { RLEtoGrid } from './RLElogic';
+import Drawer from '@material-ui/core/Drawer';
+import { RLEtoGrid } from './rleLogic';
+import React, { Component } from 'react';
+
+/*
+    Component rendering drawer to load RLE
+*/
 
 class LoadRLEDrawer extends Component {
   constructor() {
     super();
     this.state = {
-      howToLoad: 'FILELOADER',
       file: '',
-      loadDrawer: false,
       grid: [],
+      howToLoad: 'FILELOADER',
+      loadDrawer: false,
     };
     this.toggleLoadDrawer = this.toggleLoadDrawer.bind(this);
   }
@@ -91,7 +95,7 @@ class LoadRLEDrawer extends Component {
             {this.state.howToLoad === 'FILELOADER' && (
               <div>
                 <input type="file" id="file-input" accept=".rle" />
-                <h3>Contents of the file:</h3>
+                <p>Contents of the file:</p>
                 {this.state.file.split('\n').map((item, i) => (
                   <p key={i}>{item}</p>
                 ))}

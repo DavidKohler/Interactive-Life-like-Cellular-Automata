@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import CellularAutomatonSketch from './CellularAutomatonSketch';
+import { createGrid } from './gridLogic';
 import GridCustomization from './GridCustomization';
 import SavedRLEModal from './SavedRLEModal';
 import React, { Component } from 'react';
@@ -19,9 +20,9 @@ class RandomGridPage extends Component {
       cellSize: 20,
       cols: 10,
       framerate: 5,
-      rows: 10,
       grid: [],
       refreshVal: 0,
+      rows: 10,
       surviveRule: [2, 3],
     };
     this.generateGrid = this.generateGrid.bind(this);
@@ -30,26 +31,10 @@ class RandomGridPage extends Component {
     this.updateParameters = this.updateParameters.bind(this);
   }
 
-  createGrid = (r, c, aliveP) => {
-    // create grid with random cells
-    let grid = new Array(r);
-    for (let i = 0; i < grid.length; i++) {
-      grid[i] = new Array(c);
-    }
-    // modify probability based on specified percentage alive
-    let modifiedProbRandom = Array(100).fill(1).fill(0, aliveP);
-    for (let i = 0; i < r; i++) {
-      for (let j = 0; j < c; j++) {
-        grid[i][j] = modifiedProbRandom[Math.floor(Math.random() * 100)];
-      }
-    }
-    return grid;
-  };
-
   generateGrid() {
     // generate new grid
     let { cols, rows, alivePercentage } = this.state;
-    let newGrid = this.createGrid(rows, cols, alivePercentage);
+    let newGrid = createGrid(rows, cols, alivePercentage);
     if (this.state.grid.length > 0) {
       // get rid of old grid
       this.resetAutomata();

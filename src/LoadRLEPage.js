@@ -28,8 +28,8 @@ class LoadRLEPage extends Component {
     };
     this.renderRef = React.createRef();
     this.resetAutomata = this.resetAutomata.bind(this);
-    this.updateParameters = this.updateParameters.bind(this);
     this.updateGrid = this.updateGrid.bind(this);
+    this.updateParameters = this.updateParameters.bind(this);
   }
 
   readSingleFile = (e) => {
@@ -55,6 +55,16 @@ class LoadRLEPage extends Component {
     }));
   }
 
+  updateGrid = (newParams) => {
+    // update grid from loaded RLE
+    setTimeout(() => {
+      this.setState({ ...newParams });
+    }, 0);
+    setTimeout(() => {
+      this.resetAutomata();
+    }, 0);
+  };
+
   updateParameters = (newParams) => {
     // update grid parameters passed up from customization drawer
     let prevChanges = this.state.changesMade;
@@ -76,16 +86,6 @@ class LoadRLEPage extends Component {
         this.resetAutomata()
       );
     }
-  };
-
-  updateGrid = (newParams) => {
-    // update grid from loaded RLE
-    setTimeout(() => {
-      this.setState({ ...newParams });
-    }, 0);
-    setTimeout(() => {
-      this.resetAutomata();
-    }, 0);
   };
 
   render() {

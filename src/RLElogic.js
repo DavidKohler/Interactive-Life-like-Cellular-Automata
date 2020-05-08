@@ -164,6 +164,7 @@ function encodeGrid(grid, top, bot, minCol, maxCol) {
 }
 
 function RLEtoGrid(RLEstring) {
+  // given and RLE file (string), convert to 2d array for grid
   let RLElines = RLEstring.split('\n');
   let gridString = '';
   let xvalue, yvalue, rulestring;

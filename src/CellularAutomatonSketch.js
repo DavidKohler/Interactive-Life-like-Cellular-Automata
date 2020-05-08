@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import p5 from 'p5';
 
 /*
-    Component to render p5 sketch of cellular automaton based on parameters passed in
+    Component to render p5 sketch of cellular automaton based on props passed in
 */
 
 class CellularAutomatonSketch extends Component {
