@@ -1,5 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Drawer from '@material-ui/core/Drawer';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import InputGroup from 'react-bootstrap/InputGroup';
 import { RLEtoGrid } from './rleLogic';
 import React, { Component } from 'react';
 
@@ -11,11 +14,21 @@ class LoadRLEDrawer extends Component {
   constructor() {
     super();
     this.state = {
-      file: '',
+      birthInput: '',
+      loadedContents: '',
       grid: [],
       howToLoad: 'FILELOADER',
       loadDrawer: false,
+      surviveInput: '',
+      xValue: '',
+      yValue: '',
+      textboxInput: '',
+      textboxError: false,
     };
+    this.handleFileSubmit = this.handleFileSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleTextSubmit = this.handleTextSubmit.bind(this);
+    this.resetTextbox = this.resetTextbox.bind(this);
     this.toggleLoadDrawer = this.toggleLoadDrawer.bind(this);
   }
 
@@ -33,13 +46,47 @@ class LoadRLEDrawer extends Component {
     }
   }
 
-  handleSubmit = () => {
+  handleFileSubmit = () => {
     // handle click on submit button, activate parent submit function
-    let convertedRLE = RLEtoGrid(this.state.file);
+    let convertedRLE = RLEtoGrid(this.state.loadedContents);
     setTimeout(() => {
       this.props.submitFunction(convertedRLE);
       this.setState({ loadDrawer: false });
     }, 50);
+  };
+
+  handleInputChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleTextSubmit = (event) => {
+    // handle click on submit button, activate parent submit function
+    event.preventDefault();
+    let hasError = true;
+    // make sure input are correctly formatted
+    if (
+      /^\d+$/.test(this.state.xValue) &&
+      /^\d+$/.test(this.state.yValue) &&
+      (this.state.birthInput === '' || /^\d+$/.test(this.state.birthInput)) &&
+      (this.state.surviveInput === '' ||
+        /^\d+$/.test(this.state.surviveInput)) &&
+      /^[0-9ob$!\n\r\s]+$/.test(this.state.textboxInput)
+    ) {
+      hasError = false;
+      this.setState({ textboxError: false });
+    } else {
+      this.setState({ textboxError: true });
+    }
+    if (hasError === false) {
+      console.log(this.state);
+      let firstLine = `x = ${this.state.xValue}, y = ${this.state.yValue}, rule = B${this.state.birthInput}/S${this.state.surviveInput}\n`;
+      let fullString = firstLine.concat(this.state.textboxInput);
+      let convertedRLE = RLEtoGrid(fullString);
+      setTimeout(() => {
+        this.props.submitFunction(convertedRLE);
+        this.setState({ loadDrawer: false });
+      }, 50);
+    }
   };
 
   readSingleFile = (e) => {
@@ -53,7 +100,7 @@ class LoadRLEDrawer extends Component {
     reader.onload = (e) => {
       let contents = e.target.result;
       this.setState({
-        file: contents,
+        loadedContents: contents,
       });
     };
   };
@@ -63,6 +110,17 @@ class LoadRLEDrawer extends Component {
     this.setState((state) => ({
       refreshVal: state.refreshVal + 1,
     }));
+  }
+
+  resetTextbox() {
+    // resets textbox contents
+    this.setState({
+      xValue: '',
+      yValue: '',
+      birthInput: '',
+      surviveInput: '',
+      textboxInput: '',
+    });
   }
 
   toggleFileLoader = () => {
@@ -96,17 +154,89 @@ class LoadRLEDrawer extends Component {
               <div>
                 <input type="file" id="file-input" accept=".rle" />
                 <p>Contents of the file:</p>
-                {this.state.file.split('\n').map((item, i) => (
+                {this.state.loadedContents.split('\n').map((item, i) => (
                   <p key={i}>{item}</p>
                 ))}
+                <Button onClick={this.handleFileSubmit}>Submit</Button>
               </div>
             )}
             {this.state.howToLoad === 'TEXTBOX' && (
               <div>
-                <h3>Textbox!</h3>
+                <Form onSubmit={this.handleTextSubmit}>
+                  <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                      <InputGroup.Text id="x-input">X</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                      placeholder="X Value"
+                      aria-label="X Value"
+                      aria-describedby="x-input"
+                      name="xValue"
+                      value={this.state.xValue}
+                      onChange={this.handleInputChange}
+                    />
+                    <InputGroup.Append>
+                      <InputGroup.Text id="y-input">Y</InputGroup.Text>
+                    </InputGroup.Append>
+                    <FormControl
+                      placeholder="Y Value"
+                      aria-label="Y Value"
+                      aria-describedby="y-input"
+                      name="yValue"
+                      value={this.state.yValue}
+                      onChange={this.handleInputChange}
+                    />
+                  </InputGroup>
+                  <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                      <InputGroup.Text id="birth-input">B</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                      placeholder="Birth Rule"
+                      aria-label="Birth Rule"
+                      aria-describedby="birth-input"
+                      name="birthInput"
+                      value={this.state.birthInput}
+                      onChange={this.handleInputChange}
+                    />
+                    <InputGroup.Append>
+                      <InputGroup.Text id="survive-input">S</InputGroup.Text>
+                    </InputGroup.Append>
+                    <FormControl
+                      placeholder="Survive Rule"
+                      aria-label="Survive Rule"
+                      aria-describedby="survive-input"
+                      name="surviveInput"
+                      value={this.state.surviveInput}
+                      onChange={this.handleInputChange}
+                    />
+                  </InputGroup>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>RLE Text</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                      as="textarea"
+                      aria-label="RLE Text"
+                      aria-describedby="textbox-input"
+                      placeholder="Enter RLE Text Here"
+                      name="textboxInput"
+                      value={this.state.textboxInput}
+                      onChange={this.handleInputChange}
+                    />
+                  </InputGroup>
+                  <Button onClick={this.resetTextbox} variant="secondary">
+                    Reset
+                  </Button>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                  {this.state.textboxError === true && (
+                    <div>Error! Error! Error!</div>
+                  )}
+                </Form>
               </div>
             )}
-            <Button onClick={this.handleSubmit}>Submit</Button>
           </Drawer>
         </React.Fragment>
       </div>
@@ -115,3 +245,7 @@ class LoadRLEDrawer extends Component {
 }
 
 export default LoadRLEDrawer;
+
+// TODO
+// styling
+// error handling
