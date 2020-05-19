@@ -1,8 +1,35 @@
 import React, { Component } from 'react';
+import GridDrawing from './GridDrawing';
+import Button from 'react-bootstrap/Button';
 
 class DrawGridPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      refreshVal: 0,
+      grid: [],
+      loadGrid: false,
+    };
+    this.renderRef = React.createRef();
+    this.makeGridAppear = this.makeGridAppear.bind(this);
+  }
+
+  makeGridAppear() {
+    this.setState({ loadGrid: true });
+  }
+
   render() {
-    return <div>Draw Grid Page!</div>;
+    return (
+      <div>
+        Draw Grid Page!
+        {!this.state.loadGrid && (
+          <Button onClick={this.makeGridAppear}>{'Open Grid'}</Button>
+        )}
+        {this.state.loadGrid && (
+          <GridDrawing key={this.props.key} refLoc={this.renderRef} />
+        )}
+      </div>
+    );
   }
 }
 

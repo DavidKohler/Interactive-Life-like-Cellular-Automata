@@ -23,11 +23,18 @@ class App extends React.Component {
   resetTab() {
     // remove sketch buttons when chaning tabs, and refresh tabs
     setTimeout(() => {
-      let elems = document.querySelectorAll('body > button');
-      if (elems.length > 0) {
-        for (let i = 0; i < elems.length; i++) {
-          elems[i].parentNode.removeChild(elems[i]);
+      let buttons = document.querySelectorAll('body > button');
+      let table = document.querySelector('body > table');
+      if (buttons.length > 0) {
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].parentNode.removeChild(buttons[i]);
         }
+        this.setState((state) => ({
+          refreshTabVal: state.refreshTabVal + 1,
+        }));
+      }
+      if (table !== null) {
+        table.parentNode.removeChild(table);
         this.setState((state) => ({
           refreshTabVal: state.refreshTabVal + 1,
         }));
