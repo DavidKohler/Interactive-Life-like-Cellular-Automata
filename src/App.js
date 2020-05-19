@@ -1,8 +1,8 @@
-import './App.css';
-import DrawGridPage from './DrawGridPage';
-import HomePage from './HomePage';
-import LoadRLEPage from './LoadRLEPage';
-import RandomGridPage from './RandomGridPage';
+import './css/App.css';
+import DrawGridPage from './tab_pages/DrawGridPage';
+import HomePage from './tab_pages/HomePage';
+import LoadRLEPage from './tab_pages/LoadRLEPage';
+import RandomGridPage from './tab_pages/RandomGridPage';
 import React from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -73,4 +73,3 @@ export default App;
 //TODO:
 // allow user to draw grid
 // styling
-// homepage

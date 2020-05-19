@@ -3,7 +3,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { RLEtoGrid } from './rleLogic';
+import { RLEtoGrid } from '../logic/rleLogic';
 import React, { Component } from 'react';
 
 /*

@@ -1,26 +1,23 @@
-import './GridDrawing.css';
+import '../css/InteractiveGrid.css';
 import React, { Component } from 'react';
 
-class GridDrawing extends Component {
-  constructor() {
-    super();
-    this.state = {
-      grid: [],
-    };
-  }
+/*
+        Component for Interactive Grid
+*/
 
+class InteractiveGrid extends Component {
   componentDidMount() {
+    // create clickable grid
     let grid = this.clickableGrid(this.props.rows, this.props.cols, function (
       el,
       row,
       col
     ) {
-      //   console.log('You clicked on element:', el);
-      //   console.log('You clicked on row:', row);
-      //   console.log('You clicked on col:', col);
       if (el.className === 'clicked') {
+        // make dead
         el.className = '';
       } else {
+        // make alive
         el.className = 'clicked';
       }
     });
@@ -54,11 +51,11 @@ class GridDrawing extends Component {
   render() {
     // render to parent component
     return (
-      <div className="GridDrawingSketch">
+      <div className="InteractiveGridSketch">
         <div ref={this.props.refLoc}></div>
       </div>
     );
   }
 }
 
-export default GridDrawing;
+export default InteractiveGrid;

@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button';
-import CellularAutomatonSketch from './CellularAutomatonSketch';
-import { createGrid } from './gridLogic';
-import GridCustomization from './GridCustomization';
-import SavedRLEModal from './SavedRLEModal';
+import CellularAutomatonSketch from '../sketches/CellularAutomatonSketch';
+import { createGrid } from '../logic/gridLogic';
+import GridCustomization from '../components/GridCustomization';
+import SavedRLEModal from '../components/SavedRLEModal';
 import React, { Component } from 'react';
 
 /*

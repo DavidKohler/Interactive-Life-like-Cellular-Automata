@@ -1,4 +1,4 @@
-import './GridCustomization.css';
+import '../css/GridCustomization.css';
 import 'rc-slider/assets/index.css';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -6,14 +6,14 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { ChromePicker } from 'react-color';
 import Drawer from '@material-ui/core/Drawer';
 import Slider from 'rc-slider';
-import { SliderHandle } from './sliderHandle';
+import { SliderHandle } from '../sliders/sliderHandle';
 import React, { Component } from 'react';
 import {
   cellRatioMarks,
   cellSizeMarks,
   dimensionMarks,
   framerateMarks,
-} from './sliderMarks';
+} from '../sliders/sliderMarks';
 
 const wrapperStyle = { width: 800, margin: 50 };
 

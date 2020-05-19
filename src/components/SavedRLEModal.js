@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
-import { gridToRLE } from './rleLogic';
-import { tableToGrid } from './gridLogic';
+import { gridToRLE } from '../logic/rleLogic';
+import { tableToGrid } from '../logic/gridLogic';
 import Modal from 'react-bootstrap/Modal';
 import React, { Component } from 'react';
 

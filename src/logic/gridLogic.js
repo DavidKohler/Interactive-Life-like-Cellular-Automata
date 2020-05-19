@@ -92,3 +92,6 @@ function tableToGrid(table) {
 }
 
 export { createGrid, reshapeGrid, tableToGrid };
+
+// TODO
+// error handling

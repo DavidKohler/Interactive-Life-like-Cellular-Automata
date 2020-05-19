@@ -237,3 +237,6 @@ function RLEtoGrid(RLEstring) {
 }
 
 export { gridToRLE, RLEtoGrid };
+
+// TODO
+// error handling

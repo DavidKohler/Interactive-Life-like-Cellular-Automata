@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Drawer from '@material-ui/core/Drawer';
-import GridDrawing from './GridDrawing';
-import SavedRLEModal from './SavedRLEModal';
+import InteractiveGrid from '../components/InteractiveGrid';
+import SavedRLEModal from '../components/SavedRLEModal';
 import React, { Component } from 'react';
 import Slider from 'rc-slider';
-import { SliderHandle } from './sliderHandle';
-import { dimensionMarks } from './sliderMarks';
+import { SliderHandle } from '../sliders/sliderHandle';
+import { dimensionMarks } from '../sliders/sliderMarks';
 
 /*
     Component for Drawing Grid Tab
@@ -72,6 +72,7 @@ class DrawGridPage extends Component {
   };
 
   render() {
+    // render page and buttons
     let displayGrid = this.state.loadGrid;
     return (
       <div>
@@ -80,7 +81,7 @@ class DrawGridPage extends Component {
           <Button onClick={this.makeGridAppear}>{'Open Grid'}</Button>
         )}
         {displayGrid && (
-          <GridDrawing
+          <InteractiveGrid
             key={this.props.refreshVal}
             rows={this.state.rows}
             cols={this.state.cols}
@@ -136,11 +137,5 @@ class DrawGridPage extends Component {
 export default DrawGridPage;
 
 //TODO
-// add drawing grid
-// convert grid to RLE
-// find meaningful boundaries for saved RLE
-// run animation from grid sketch
-// swtich sketch components
-// add UI for customization
 // styling
-// allow for other rulesets
+// description
