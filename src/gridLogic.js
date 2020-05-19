@@ -73,4 +73,22 @@ function reshapeGrid(oldGrid, newR, newC) {
   return newGrid;
 }
 
-export { createGrid, reshapeGrid };
+function tableToGrid(table) {
+  // converts table elements to 2D grid notation
+  let rows = table.childNodes;
+  let rowCount = rows.length;
+  let colsCount = rows[0].childNodes.length;
+  let grid = new Array(rowCount);
+  for (let i = 0; i < rowCount; i++) {
+    grid[i] = new Array(colsCount).fill(0);
+    let cols = rows[i].childNodes;
+    for (let j = 0; j < colsCount; j++) {
+      if (cols[j].className === 'clicked') {
+        grid[i][j] = 1;
+      }
+    }
+  }
+  return grid;
+}
+
+export { createGrid, reshapeGrid, tableToGrid };

@@ -1,18 +1,5 @@
-import React, { Component } from 'react';
-import p5 from 'p5';
 import './GridDrawing.css';
-
-let numberOfRows; //determine the number of rows we want
-let numberOfColumns; //determine the number of columns we want
-
-let xStep; //determine the size of the gap between two points on the x axis
-let yStep; //determine the size of the gap between two points on the y axis
-
-let positions = []; //an array of positions where we will store each of our Vectors
-let width = 400;
-let height = 400;
-
-let lastClicked;
+import React, { Component } from 'react';
 
 class GridDrawing extends Component {
   constructor() {
@@ -23,44 +10,40 @@ class GridDrawing extends Component {
   }
 
   componentDidMount() {
-    this.setState({ oobo: 0 });
-  }
-
-  componentDidUpdate() {
-    let boobo = this.state.oobo + 1;
-    if (boobo === 1) {
-      let grid = this.clickableGrid(10, 10, function (el, row, col, i) {
-        console.log('You clicked on element:', el);
-        console.log('You clicked on row:', row);
-        console.log('You clicked on col:', col);
-        console.log('You clicked on item #:', i);
-
+    let grid = this.clickableGrid(this.props.rows, this.props.cols, function (
+      el,
+      row,
+      col
+    ) {
+      //   console.log('You clicked on element:', el);
+      //   console.log('You clicked on row:', row);
+      //   console.log('You clicked on col:', col);
+      if (el.className === 'clicked') {
+        el.className = '';
+      } else {
         el.className = 'clicked';
-        /* if (lastClicked) lastClicked.className='';
-            lastClicked = el; */
-      });
-      this.setState({ oobo: 2 });
+      }
+    });
 
-      document.body.appendChild(grid);
-    }
+    document.body.appendChild(grid);
   }
 
   clickableGrid = (rows, cols, callback) => {
-    var i = 0;
-    var grid = document.createElement('table');
+    // Function that handles clickable grid
+    // Credit to Phrogz from stackoverflow
+    let grid = document.createElement('table');
     grid.className = 'grid';
-    for (var r = 0; r < rows; ++r) {
-      var tr = grid.appendChild(document.createElement('tr'));
-      for (var c = 0; c < cols; ++c) {
-        var cell = tr.appendChild(document.createElement('td'));
-        cell.innerHTML = ++i;
+    for (let r = 0; r < rows; ++r) {
+      let tr = grid.appendChild(document.createElement('tr'));
+      for (let c = 0; c < cols; ++c) {
+        let cell = tr.appendChild(document.createElement('td'));
         cell.addEventListener(
           'click',
-          (function (el, r, c, i) {
+          (function (el, r, c) {
             return function () {
-              callback(el, r, c, i);
+              callback(el, r, c);
             };
-          })(cell, r, c, i),
+          })(cell, r, c),
           false
         );
       }
@@ -70,7 +53,6 @@ class GridDrawing extends Component {
 
   render() {
     // render to parent component
-
     return (
       <div className="GridDrawingSketch">
         <div ref={this.props.refLoc}></div>

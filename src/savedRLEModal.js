@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import { gridToRLE } from './rleLogic';
+import { tableToGrid } from './gridLogic';
 import Modal from 'react-bootstrap/Modal';
 import React, { Component } from 'react';
 
@@ -25,11 +26,15 @@ class SavedRLEModal extends Component {
 
   handleShow = () => {
     // handle rendering modal
-    let RLE = gridToRLE(
-      this.props.grid,
-      this.props.birthRule,
-      this.props.surviveRule
-    );
+    let grid;
+    if (this.props.grid.length === 0) {
+      // convert table from drawn grid
+      grid = tableToGrid(document.querySelector('body > table'));
+    } else {
+      // get grid from props
+      grid = this.props.grid;
+    }
+    let RLE = gridToRLE(grid, this.props.birthRule, this.props.surviveRule);
     this.setState({ showModal: true, savedRLE: RLE });
   };
 

@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import GridDrawing from './GridDrawing';
 import Button from 'react-bootstrap/Button';
+import SavedRLEModal from './SavedRLEModal';
 
 class DrawGridPage extends Component {
   constructor() {
     super();
     this.state = {
-      refreshVal: 0,
       grid: [],
       loadGrid: false,
+      surviveRule: [2, 3],
+      birthRule: [3],
     };
     this.renderRef = React.createRef();
     this.makeGridAppear = this.makeGridAppear.bind(this);
+  }
+
+  getRLE() {
+    let table = document.querySelector('body > table');
+    console.log(table);
   }
 
   makeGridAppear() {
@@ -26,7 +33,17 @@ class DrawGridPage extends Component {
           <Button onClick={this.makeGridAppear}>{'Open Grid'}</Button>
         )}
         {this.state.loadGrid && (
-          <GridDrawing key={this.props.key} refLoc={this.renderRef} />
+          <GridDrawing
+            key={this.props.key}
+            rows={10}
+            cols={20}
+            refLoc={this.renderRef}
+          />
+        )}
+        {this.state.loadGrid && (
+          <div className="save-rle-container">
+            <SavedRLEModal {...this.state} />
+          </div>
         )}
       </div>
     );
