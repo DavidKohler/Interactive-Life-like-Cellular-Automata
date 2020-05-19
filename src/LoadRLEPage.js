@@ -3,6 +3,7 @@ import CellularAutomatonSketch from './CellularAutomatonSketch';
 import GridCustomization from './GridCustomization';
 import LoadRLEDrawer from './LoadRLEDrawer';
 import { reshapeGrid } from './gridLogic';
+import SavedRLEModal from './SavedRLEModal';
 import React, { Component } from 'react';
 
 /*
@@ -124,6 +125,11 @@ class LoadRLEPage extends Component {
             <Button onClick={this.resetAutomata}>Reset</Button>
           </div>
         )}
+        {displayGrid && (
+          <div className="save-rle-container">
+            <SavedRLEModal {...this.state} />
+          </div>
+        )}
       </div>
     );
   }
@@ -133,3 +139,5 @@ export default LoadRLEPage;
 
 //TODO
 // styling
+// add description
+// error handling
