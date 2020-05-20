@@ -140,4 +140,3 @@ export default LoadRLEPage;
 //TODO
 // styling
 // add description
-// error handling

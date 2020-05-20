@@ -15,10 +15,12 @@ class LoadRLEDrawer extends Component {
     super();
     this.state = {
       birthInput: '',
-      loadedContents: '',
+      errorType: '',
       grid: [],
       howToLoad: 'FILELOADER',
       loadDrawer: false,
+      loadedContents: '',
+      loadFileError: false,
       surviveInput: '',
       xValue: '',
       yValue: '',
@@ -48,43 +50,54 @@ class LoadRLEDrawer extends Component {
 
   handleFileSubmit = () => {
     // handle click on submit button, activate parent submit function
-    let convertedRLE = RLEtoGrid(this.state.loadedContents);
-    setTimeout(() => {
-      this.props.submitFunction(convertedRLE);
-      this.setState({ loadDrawer: false });
-    }, 50);
+    let convertedRLE;
+    let hasError = false;
+    try {
+      convertedRLE = RLEtoGrid(this.state.loadedContents);
+    } catch (err) {
+      hasError = true;
+      setTimeout(() => {
+        this.setState({
+          loadFileError: true,
+          errorType: err.message,
+        });
+      }, 0);
+    }
+    if (hasError === false) {
+      setTimeout(() => {
+        this.props.submitFunction(convertedRLE);
+        this.setState({ loadDrawer: false, loadFileError: false });
+      }, 50);
+    }
   };
 
   handleInputChange = (event) => {
+    // handle changes to textbox input fields
     this.setState({ [event.target.name]: event.target.value });
   };
 
   handleTextSubmit = (event) => {
     // handle click on submit button, activate parent submit function
     event.preventDefault();
-    let hasError = true;
-    // make sure input are correctly formatted
-    if (
-      /^\d+$/.test(this.state.xValue) &&
-      /^\d+$/.test(this.state.yValue) &&
-      (this.state.birthInput === '' || /^\d+$/.test(this.state.birthInput)) &&
-      (this.state.surviveInput === '' ||
-        /^\d+$/.test(this.state.surviveInput)) &&
-      /^[0-9ob$!\n\r\s]+$/.test(this.state.textboxInput)
-    ) {
-      hasError = false;
-      this.setState({ textboxError: false });
-    } else {
-      this.setState({ textboxError: true });
-    }
-    if (hasError === false) {
-      console.log(this.state);
+    let convertedRLE;
+    let hasError = false;
+    try {
       let firstLine = `x = ${this.state.xValue}, y = ${this.state.yValue}, rule = B${this.state.birthInput}/S${this.state.surviveInput}\n`;
       let fullString = firstLine.concat(this.state.textboxInput);
-      let convertedRLE = RLEtoGrid(fullString);
+      convertedRLE = RLEtoGrid(fullString);
+    } catch (err) {
+      hasError = true;
+      setTimeout(() => {
+        this.setState({
+          textboxError: true,
+          errorType: err.message,
+        });
+      }, 0);
+    }
+    if (hasError === false) {
       setTimeout(() => {
         this.props.submitFunction(convertedRLE);
-        this.setState({ loadDrawer: false });
+        this.setState({ loadDrawer: false, textboxError: false });
       }, 50);
     }
   };
@@ -101,6 +114,7 @@ class LoadRLEDrawer extends Component {
       let contents = e.target.result;
       this.setState({
         loadedContents: contents,
+        loadFileError: false,
       });
     };
   };
@@ -137,6 +151,7 @@ class LoadRLEDrawer extends Component {
     // toggle textbox as method to load RLE
     this.setState({ howToLoad: 'TEXTBOX' });
   };
+
   render() {
     return (
       <div>
@@ -158,6 +173,9 @@ class LoadRLEDrawer extends Component {
                   <p key={i}>{item}</p>
                 ))}
                 <Button onClick={this.handleFileSubmit}>Submit</Button>
+                {this.state.loadFileError === true && (
+                  <div>Error! Error! Error!{this.state.errorType}</div>
+                )}
               </div>
             )}
             {this.state.howToLoad === 'TEXTBOX' && (
@@ -232,7 +250,7 @@ class LoadRLEDrawer extends Component {
                     Submit
                   </Button>
                   {this.state.textboxError === true && (
-                    <div>Error! Error! Error!</div>
+                    <div>Error! Error! Error!{this.state.errorType}</div>
                   )}
                 </Form>
               </div>
@@ -248,4 +266,3 @@ export default LoadRLEDrawer;
 
 // TODO
 // styling
-// error handling

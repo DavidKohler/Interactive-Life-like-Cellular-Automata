@@ -1,3 +1,5 @@
+import { uniq } from 'lodash';
+
 /*
     File for all functions dealing with RLE logic
 */
@@ -81,6 +83,15 @@ function findMeaningfulBoundaries(grid) {
       .slice()
       .reverse()
       .findIndex((v) => v > 0);
+
+  if (top === -1 || bot === -1) {
+    // empty grid found, no meaningful boundary possible
+    // return default grid dimensions
+    top = 0;
+    bot = grid.length - 1;
+    minCol = 0;
+    maxCol = grid[0].length - 1;
+  }
 
   return {
     top,
@@ -185,10 +196,15 @@ function RLEtoGrid(RLEstring) {
       gridString = gridString.slice(0, -1);
     }
   }
+  if (!(xvalue > 0) || !(yvalue > 0)) {
+    // x or y not valid/not specified
+    throw new Error('Dimension Error');
+  }
   let grid = [];
   let rowChunks = gridString.split('$');
   for (let j = 0; j < rowChunks.length; j++) {
     let re = /[bo]/g;
+    // only match b's and o's
     let RLEtags = [];
     let match = null;
     let tagCounts = rowChunks[j].split(/[bo]/);
@@ -211,8 +227,16 @@ function RLEtoGrid(RLEstring) {
         gridRow.push(...Array(curCt).fill(1));
       }
     }
-    if (gridRow.length !== xvalue) {
+    if (gridRow.length < xvalue) {
+      // add extra 0's
       gridRow.push(...Array(xvalue - gridRow.length).fill(0));
+    }
+    if (gridRow.length > xvalue) {
+      // prune RLE based on provided xvalue
+      let gridRowLen = gridRow.length;
+      for (let p = 0; p < gridRowLen - xvalue; p++) {
+        gridRow.pop();
+      }
     }
     grid.push(gridRow);
     if (tagCounts[tagCounts.length - 1] !== '') {
@@ -222,21 +246,45 @@ function RLEtoGrid(RLEstring) {
       }
     }
   }
-  let birthRule = rulestring
-    .split('/')[0]
-    .split('B')[1]
-    .split('')
-    .map((e) => Number(e));
-  let surviveRule = rulestring
-    .split('/')[1]
-    .split('S')[1]
-    .split('')
-    .map((e) => Number(e));
+
+  if (grid.length < yvalue) {
+    // handle discrepency when RLE provided doesn't match yvalue provided
+    let len = grid.length;
+    for (let p = 0; p < yvalue - len; p++) {
+      grid.push(Array(xvalue).fill(0));
+    }
+  }
+
+  // check for valid birth and survive rules, otherwise default to empty rules
+  let birthRule, surviveRule;
+  try {
+    birthRule = uniq(
+      rulestring
+        .split('/')[0]
+        .split('B')[1]
+        .split('')
+        .map((e) => Number(e))
+        .filter((e) => e >= 0)
+    );
+  } catch (err) {
+    // no birth rule specified
+    birthRule = [];
+  }
+  try {
+    surviveRule = uniq(
+      rulestring
+        .split('/')[1]
+        .split('S')[1]
+        .split('')
+        .map((e) => Number(e))
+        .filter((e) => e >= 0)
+    );
+  } catch (err) {
+    // no survive rule specified
+    surviveRule = [];
+  }
 
   return { grid, birthRule, surviveRule, rows: yvalue, cols: xvalue };
 }
 
 export { gridToRLE, RLEtoGrid };
-
-// TODO
-// error handling
