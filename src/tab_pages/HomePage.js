@@ -1,6 +1,11 @@
+import '../css/HomePage.css';
 import exampleGif from '../assets/gliderGif.gif';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import React, { Component } from 'react';
+
+/*
+    Component for Home Page Tab
+*/
 
 class HomePage extends Component {
   render() {
@@ -21,8 +26,12 @@ class HomePage extends Component {
               below
             </h5>
           </Jumbotron>
-          <div>
-            <div>What is this site?</div>
+        </div>
+        <div className="description-container">
+          <div className="site-description">
+            <div className="site-description-header">
+              <b>What is this site?</b>
+            </div>
             <div>
               This site, created by{' '}
               <a
@@ -42,7 +51,11 @@ class HomePage extends Component {
               such as Golly might use), and thus boundaries and B0 rules may
               behave slightly differently
             </div>
-            <div>What are cellular automata?</div>
+          </div>
+          <div className="automata-description">
+            <div className="automata-description-header">
+              <b>What are cellular automata?</b>
+            </div>
             <div>
               Cellular automata (plural for automaton), are a class of
               mathematical objects that have been used in the fields of
@@ -56,14 +69,14 @@ class HomePage extends Component {
               the state of each cell at time <i>t</i>, with a transition rule
               specified that determines how the state changes based on the
               states of each cell and neighborhood. <br />
-              <br />A life-like cellular automaton is a subclass of cellular
-              automata that has two dimensions, has two states (on/off or
-              alive/dead), uses the Moore neighborhood, and has a semitotalistic
-              rule. The most famous cellular automaton, and in fact what this
-              subclass is named after, is Conway's Game of Life. This site
-              focuses specifically on life-like cellular automata, of which
-              there exist an incredible amount. For more info on cellular
-              automata or on Conway's Game of Life, visit{' '}
+              <br className="custom-break" />A life-like cellular automaton is a
+              subclass of cellular automata that has two dimensions, has two
+              states (on/off or alive/dead), uses the Moore neighborhood, and
+              has a semitotalistic rule. The most famous cellular automaton, and
+              in fact what this subclass is named after, is Conway's Game of
+              Life. This site focuses specifically on life-like cellular
+              automata, of which there exist an incredible amount. For more info
+              on cellular automata or on Conway's Game of Life, visit{' '}
               <a
                 href={'https://www.conwaylife.com/wiki/Main_Page'}
                 rel="noopener noreferrer"

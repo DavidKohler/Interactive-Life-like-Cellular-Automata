@@ -9,7 +9,7 @@ import SavedRLEModal from '../components/SavedRLEModal';
 import React, { Component } from 'react';
 
 /*
-    Component rendering tab to load RLE
+    Component for tab to load RLE
 */
 
 class LoadRLEPage extends Component {

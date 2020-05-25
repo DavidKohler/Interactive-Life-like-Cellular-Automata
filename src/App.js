@@ -44,32 +44,30 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <Tabs
-          defaultActiveKey="home"
-          id="main-tab-group"
-          onSelect={() => this.resetTab()}
-        >
-          <Tab eventKey="home" title="Home">
-            <HomePage />
-          </Tab>
-          <Tab eventKey="draw" title="Draw Automaton">
-            <DrawGridPage key={this.state.refreshTabVal} />
-          </Tab>
-          <Tab eventKey="loadrle" title="Load Automaton">
-            <LoadRLEPage key={this.state.refreshTabVal} />
-          </Tab>
-          <Tab eventKey="random" title="Random Automaton">
-            <RandomGridPage key={this.state.refreshTabVal} />
-          </Tab>
-        </Tabs>
+      <div className="main-container">
+        <div className="tab-container">
+          <Tabs
+            defaultActiveKey="home"
+            id="main-tab-group"
+            onSelect={() => this.resetTab()}
+          >
+            <Tab eventKey="home" title="Home">
+              <HomePage />
+            </Tab>
+            <Tab eventKey="draw" title="Draw Automaton">
+              <DrawGridPage key={this.state.refreshTabVal} />
+            </Tab>
+            <Tab eventKey="loadrle" title="Load Automaton">
+              <LoadRLEPage key={this.state.refreshTabVal} />
+            </Tab>
+            <Tab eventKey="random" title="Random Automaton">
+              <RandomGridPage key={this.state.refreshTabVal} />
+            </Tab>
+          </Tabs>
+        </div>
       </div>
     );
   }
 }
 
 export default App;
-
-//TODO:
-// allow user to draw grid
-// styling

@@ -1,0 +1,27 @@
+.gif-container {
+  padding: 20px 0px 30px 0px;
+}
+
+.jumbotron {
+  padding: 3.5rem 2rem 2.5rem 2rem !important;
+}
+
+.description-container {
+  padding: 0px 20%;
+}
+
+.site-description {
+  padding-bottom: 30px;
+}
+
+.site-description-header {
+  padding-bottom: 7px;
+}
+
+.automata-description {
+  padding-bottom: 10px;
+}
+
+.automata-description-header {
+  padding-bottom: 7px;
+}
