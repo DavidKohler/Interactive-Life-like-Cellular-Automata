@@ -1,12 +1,12 @@
 .grid {
-  margin: 1em auto;
+  margin: -20px auto 100px auto;
   border-collapse: collapse;
 }
 .grid td {
   cursor: pointer;
   width: 30px;
   height: 30px;
-  border: 1px solid #ccc;
+  border: 1px solid #9f9f9f;
 }
 .grid td.clicked {
   background-color: black;

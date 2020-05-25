@@ -101,8 +101,3 @@ class HomePage extends Component {
 }
 
 export default HomePage;
-
-//TODO
-// styling
-// add user-select: none to text stuff
-// add warning about using B0 on other boundless apps

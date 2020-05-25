@@ -66,7 +66,11 @@ class SavedRLEModal extends Component {
     // render component
     return (
       <div>
-        <Button variant="primary" onClick={this.handleShow}>
+        <Button
+          variant={this.props.loadGrid ? 'primary' : 'secondary'}
+          onClick={this.handleShow}
+          disabled={!this.props.loadGrid}
+        >
           Save Automaton
         </Button>
 

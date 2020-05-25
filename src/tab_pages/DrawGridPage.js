@@ -1,3 +1,4 @@
+import '../css/DrawGridPage.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -13,7 +14,7 @@ import { dimensionMarks } from '../sliders/sliderMarks';
     Component for Drawing Grid Tab
 */
 
-const wrapperStyle = { width: 800, margin: 50 };
+const wrapperStyle = { width: 600, margin: 50 };
 
 class DrawGridPage extends Component {
   constructor() {
@@ -42,9 +43,14 @@ class DrawGridPage extends Component {
       let table = document.querySelector('body > table');
       if (table !== null) {
         table.parentNode.removeChild(table);
-        this.setState((state) => ({
-          refreshTabVal: state.refreshTabVal + 1,
-        }));
+        this.setState(
+          (state) => (
+            {
+              refreshTabVal: state.refreshTabVal + 1,
+            },
+            this.setState({ loadGrid: true })
+          )
+        );
       }
     }, 0);
   };
@@ -75,13 +81,16 @@ class DrawGridPage extends Component {
 
   render() {
     // render page and buttons
-    let displayGrid = this.state.loadGrid;
     return (
       <div>
-        <div>
-          <Accordion defaultActiveKey="0">
+        <div className="accordion-container">
+          <Accordion defaultActiveKey="">
             <Card>
-              <Accordion.Toggle as={Card.Header} eventKey="0">
+              <Accordion.Toggle
+                as={Card.Header}
+                eventKey="0"
+                style={{ cursor: 'pointer' }}
+              >
                 Click Here to Toggle Page Explanation
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="0">
@@ -125,55 +134,67 @@ class DrawGridPage extends Component {
             </Card>
           </Accordion>
         </div>
-        <div className="customizer-drawer">
-          <React.Fragment key={'drawerOpen'}>
-            <Button onClick={this.toggleDrawer(true)}>{'Resize'}</Button>
-            <Drawer
-              anchor={'right'}
-              onClose={this.toggleDrawer(false)}
-              open={this.state.drawerOpen}
-            >
-              <div className="column-slider" style={wrapperStyle}>
-                <div>
-                  Customize dimensions of interactive grid. Remember to hit
-                  submit to save changes!
+        <div className="draw-buttons">
+          <div className="customizer-drawer">
+            <React.Fragment key={'drawerOpen'}>
+              <div className="resize-button-container">
+                <Button onClick={this.toggleDrawer(true)}>{'Resize'}</Button>
+              </div>
+              <Drawer
+                anchor={'right'}
+                onClose={this.toggleDrawer(false)}
+                open={this.state.drawerOpen}
+                style={{ 'user-select': 'none' }}
+              >
+                <div className="drawer-header">
+                  Customize dimensions of interactive grid below <br />
+                  <br />
+                  Remember to hit submit to save changes!
                 </div>
-                {`Columns: ${this.state.cols}`}
-                <Slider
-                  defaultValue={this.state.cols}
-                  handle={SliderHandle}
-                  max={80}
-                  marks={dimensionMarks}
-                  min={1}
-                  onChange={(v) => this.updateColumns(v)}
-                />
-              </div>
-              <div className="row-slider" style={wrapperStyle}>
-                {`Rows: ${this.state.rows}`}
-                <Slider
-                  defaultValue={this.state.rows}
-                  handle={SliderHandle}
-                  marks={dimensionMarks}
-                  max={80}
-                  min={1}
-                  onChange={(v) => this.updateRows(v)}
-                />
-              </div>
-              <div className="submit-container">
-                <Button onClick={this.handleSubmit}>Submit</Button>
-              </div>
-            </Drawer>
-          </React.Fragment>
-        </div>
-        {displayGrid && (
+                <div className="column-slider" style={wrapperStyle}>
+                  <div className="column-header">
+                    {`Columns: ${this.state.cols}`}
+                  </div>
+                  <Slider
+                    defaultValue={this.state.cols}
+                    handle={SliderHandle}
+                    max={80}
+                    marks={dimensionMarks}
+                    min={1}
+                    onChange={(v) => this.updateColumns(v)}
+                  />
+                </div>
+                <div className="row-slider" style={wrapperStyle}>
+                  <div className="row-header">{`Rows: ${this.state.rows}`}</div>
+                  <Slider
+                    defaultValue={this.state.rows}
+                    handle={SliderHandle}
+                    marks={dimensionMarks}
+                    max={80}
+                    min={1}
+                    onChange={(v) => this.updateRows(v)}
+                  />
+                </div>
+                <div className="submit-container">
+                  <Button onClick={this.handleSubmit}>Submit</Button>
+                </div>
+              </Drawer>
+            </React.Fragment>
+          </div>
+          <div className="open-grid-button-container">
+            <Button
+              onClick={this.makeGridAppear}
+              disabled={this.state.loadGrid}
+              variant={!this.state.loadGrid ? 'primary' : 'secondary'}
+            >
+              {'Open Grid'}
+            </Button>
+          </div>
           <div className="save-rle-container">
             <SavedRLEModal {...this.state} />
           </div>
-        )}
-        {!displayGrid && (
-          <Button onClick={this.makeGridAppear}>{'Open Grid'}</Button>
-        )}
-        {displayGrid && (
+        </div>
+        {this.state.loadGrid && (
           <InteractiveGrid
             key={this.props.refreshVal}
             rows={this.state.rows}
@@ -190,3 +211,4 @@ export default DrawGridPage;
 
 //TODO
 // styling
+// add user-select: none to text stuff

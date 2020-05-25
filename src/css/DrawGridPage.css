@@ -1,0 +1,37 @@
+.accordion-container {
+  padding: 20px 20%;
+}
+
+.draw-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.resize-button-container {
+  padding: 0px 10px;
+}
+
+.open-grid-button-container {
+  padding-right: 10px;
+}
+
+.drawer-header {
+  padding-left: 40px;
+  padding-top: 20px;
+  font-weight: 600;
+}
+
+.column-header {
+  font-weight: 500;
+}
+
+.row-header {
+  font-weight: 500;
+}
+
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+}
