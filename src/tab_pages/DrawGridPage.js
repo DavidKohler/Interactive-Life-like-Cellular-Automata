@@ -107,7 +107,9 @@ class DrawGridPage extends Component {
                   have drawn, they may hit the <b>Save Automaton</b> button to
                   open a modal window showing the RLE format of their automaton.
                   The user can now copy the RLE text or click the{' '}
-                  <b>Download</b> button to download this RLE to a file
+                  <b>Download</b> button to download this RLE to a .rle file. By
+                  default, each drawn automaton is saved with the 'B3/S23'
+                  rulestring that describes Conway's Game of Life
                   <br />
                   <br />
                   RLE (or Run Length Encoded) is a file format commonly used for

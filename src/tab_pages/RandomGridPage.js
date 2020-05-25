@@ -86,11 +86,19 @@ class RandomGridPage extends Component {
                   screen), the Alive/Dead cell ratio (the desired ratio of live
                   cells to dead cells for the starting state of the automaton),
                   birth and survival rules (rules which govern how cells are
-                  born and survive through each generation), framerate (the
-                  speed at which the simulation runs), and finally the cell and
-                  background colors (purely aesthetic). The user may hit{' '}
-                  <b>Submit</b> to save any changes, close the drawer, and
-                  create a random automaton <br />
+                  born and survive through each generation -- for more info
+                  about rules visit{' '}
+                  <a
+                    href={
+                      'https://www.conwaylife.com/wiki/Cellular_automaton#Rules'
+                    }
+                  >
+                    LifeWiki
+                  </a>
+                  ), framerate (the speed at which the simulation runs), and
+                  finally the cell and background colors (purely aesthetic). The
+                  user may hit <b>Submit</b> to save any changes, close the
+                  drawer, and create a random automaton <br />
                   <br />
                   The <b>Create Automaton</b> button then lets the user generate
                   a new, random cellular automaton based on the user's

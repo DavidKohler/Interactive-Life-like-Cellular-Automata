@@ -130,11 +130,19 @@ class LoadRLEPage extends Component {
                   simulation. They can change the number of columns and rows,
                   the cell size (how large the grid cells appear on the screen),
                   birth and survival rules (rules which govern how cells are
-                  born and survive through each generation), framerate (the
-                  speed at which the simulation runs), and finally the cell and
-                  background colors (purely aesthetic). The user may hit{' '}
-                  <b>Submit</b> to save any changes, close the drawer, and
-                  display the changes <br />
+                  born and survive through each generation -- for more info
+                  about rules visit{' '}
+                  <a
+                    href={
+                      'https://www.conwaylife.com/wiki/Cellular_automaton#Rules'
+                    }
+                  >
+                    LifeWiki
+                  </a>
+                  ), framerate (the speed at which the simulation runs), and
+                  finally the cell and background colors (purely aesthetic). The
+                  user may hit <b>Submit</b> to save any changes, close the
+                  drawer, and display the changes <br />
                   <br /> The <b>Play</b> and <b>Next</b> buttons control the
                   simulation of the automaton. When the <b>Play</b> button is
                   pressed, it will start to play an infinite simulation, which
