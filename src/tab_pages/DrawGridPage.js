@@ -1,4 +1,6 @@
+import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import Drawer from '@material-ui/core/Drawer';
 import InteractiveGrid from '../components/InteractiveGrid';
 import SavedRLEModal from '../components/SavedRLEModal';
@@ -76,32 +78,63 @@ class DrawGridPage extends Component {
     let displayGrid = this.state.loadGrid;
     return (
       <div>
-        Draw Grid Page!
-        {!displayGrid && (
-          <Button onClick={this.makeGridAppear}>{'Open Grid'}</Button>
-        )}
-        {displayGrid && (
-          <InteractiveGrid
-            key={this.props.refreshVal}
-            rows={this.state.rows}
-            cols={this.state.cols}
-            refLoc={this.renderRef}
-          />
-        )}
-        {displayGrid && (
-          <div className="save-rle-container">
-            <SavedRLEModal {...this.state} />
-          </div>
-        )}
+        <div>
+          <Accordion defaultActiveKey="0">
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="0">
+                Click Here to Toggle Page Explanation
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="0">
+                <Card.Body>
+                  This is the <b>Draw Automaton</b> page where the user is able
+                  to create a grid of their desired size, draw a cellular
+                  automaton to their liking, and save this automaton to simulate
+                  later in the <b>Load Automaton</b> tab or another application
+                  <br />
+                  <br />
+                  Click the <b>Resize</b> button to open a drawer that will
+                  allow the user to change the dimensions of the grid that will
+                  be generated. Change the desired number of rows or columns and
+                  hit submit to save any changes and close the drawer <br />
+                  <br />
+                  The <b>Open Grid</b> button then lets the user open the
+                  interactive grid of specified size (or 10x10 by default). Now,
+                  the user is able to click on any grid cells to toggle them
+                  on/off. A blank (white) cell is off or dead, while a filled
+                  (black) cell is on or alive. <br />
+                  <br /> When the user is satisfied with their automaton they
+                  have drawn, they may hit the <b>Save Automaton</b> button to
+                  open a modal window showing the RLE format of their automaton.
+                  The user may now copy the RLE text or click the{' '}
+                  <b>Download</b> button to download this RLE to a file
+                  <br />
+                  <br />
+                  RLE (or Run Length Encoded) is a file format commonly used for
+                  storing and reading cellular automata patterns. For more
+                  information about how it works, visit the{' '}
+                  <a
+                    href={'https://www.conwaylife.com/wiki/Run_Length_Encoded'}
+                  >
+                    LifeWiki
+                  </a>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
+        </div>
         <div className="customizer-drawer">
           <React.Fragment key={'drawerOpen'}>
-            <Button onClick={this.toggleDrawer(true)}>{'Customize'}</Button>
+            <Button onClick={this.toggleDrawer(true)}>{'Resize'}</Button>
             <Drawer
               anchor={'right'}
               onClose={this.toggleDrawer(false)}
               open={this.state.drawerOpen}
             >
               <div className="column-slider" style={wrapperStyle}>
+                <div>
+                  Customize dimensions of interactive grid. Remember to hit
+                  submit to save changes!
+                </div>
                 {`Columns: ${this.state.cols}`}
                 <Slider
                   defaultValue={this.state.cols}
@@ -129,6 +162,22 @@ class DrawGridPage extends Component {
             </Drawer>
           </React.Fragment>
         </div>
+        {displayGrid && (
+          <div className="save-rle-container">
+            <SavedRLEModal {...this.state} />
+          </div>
+        )}
+        {!displayGrid && (
+          <Button onClick={this.makeGridAppear}>{'Open Grid'}</Button>
+        )}
+        {displayGrid && (
+          <InteractiveGrid
+            key={this.props.refreshVal}
+            rows={this.state.rows}
+            cols={this.state.cols}
+            refLoc={this.renderRef}
+          />
+        )}
       </div>
     );
   }
@@ -138,4 +187,3 @@ export default DrawGridPage;
 
 //TODO
 // styling
-// description

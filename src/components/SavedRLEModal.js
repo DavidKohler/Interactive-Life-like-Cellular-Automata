@@ -67,7 +67,7 @@ class SavedRLEModal extends Component {
     return (
       <div>
         <Button variant="primary" onClick={this.handleShow}>
-          View RLE File
+          Save Automaton
         </Button>
 
         <Modal show={this.state.showModal} size="lg" onHide={this.handleClose}>

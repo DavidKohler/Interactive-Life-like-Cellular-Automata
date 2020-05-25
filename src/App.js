@@ -53,13 +53,13 @@ class App extends React.Component {
           <Tab eventKey="home" title="Home">
             <HomePage />
           </Tab>
-          <Tab eventKey="draw" title="Draw Grid">
+          <Tab eventKey="draw" title="Draw Automaton">
             <DrawGridPage key={this.state.refreshTabVal} />
           </Tab>
-          <Tab eventKey="loadrle" title="Load RLE">
+          <Tab eventKey="loadrle" title="Load Automaton">
             <LoadRLEPage key={this.state.refreshTabVal} />
           </Tab>
-          <Tab eventKey="random" title="Random Grid">
+          <Tab eventKey="random" title="Random Automaton">
             <RandomGridPage key={this.state.refreshTabVal} />
           </Tab>
         </Tabs>
