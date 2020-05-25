@@ -4,6 +4,8 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { RLEtoGrid } from '../logic/rleLogic';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import React, { Component } from 'react';
 
 /*
@@ -17,7 +19,6 @@ class LoadRLEDrawer extends Component {
       birthInput: '',
       errorType: '',
       grid: [],
-      howToLoad: 'FILELOADER',
       loadDrawer: false,
       loadedContents: '',
       loadFileError: false,
@@ -137,19 +138,9 @@ class LoadRLEDrawer extends Component {
     });
   }
 
-  toggleFileLoader = () => {
-    // toggle file input as method to load RLE
-    this.setState({ howToLoad: 'FILELOADER' });
-  };
-
   toggleLoadDrawer = (open) => (event) => {
     // toggle opening customization drawer
     this.setState({ loadDrawer: open });
-  };
-
-  toggleTextbox = () => {
-    // toggle textbox as method to load RLE
-    this.setState({ howToLoad: 'TEXTBOX' });
   };
 
   render() {
@@ -162,99 +153,98 @@ class LoadRLEDrawer extends Component {
             onClose={this.toggleLoadDrawer(false)}
             open={this.state.loadDrawer}
           >
-            {'Load RLE'}
-            <Button onClick={this.toggleFileLoader}>{'Load From File'}</Button>
-            <Button onClick={this.toggleTextbox}>{'Paste Into Textbox'}</Button>
-            {this.state.howToLoad === 'FILELOADER' && (
-              <div>
-                <input type="file" id="file-input" accept=".rle" />
-                <p>Contents of the file:</p>
-                {this.state.loadedContents.split('\n').map((item, i) => (
-                  <p key={i}>{item}</p>
-                ))}
-                <Button onClick={this.handleFileSubmit}>Submit</Button>
-                {this.state.loadFileError === true && (
-                  <div>Error! Error! Error!{this.state.errorType}</div>
-                )}
-              </div>
-            )}
-            {this.state.howToLoad === 'TEXTBOX' && (
-              <div>
-                <Form onSubmit={this.handleTextSubmit}>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Prepend>
-                      <InputGroup.Text id="x-input">X</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl
-                      placeholder="X Value"
-                      aria-label="X Value"
-                      aria-describedby="x-input"
-                      name="xValue"
-                      value={this.state.xValue}
-                      onChange={this.handleInputChange}
-                    />
-                    <InputGroup.Append>
-                      <InputGroup.Text id="y-input">Y</InputGroup.Text>
-                    </InputGroup.Append>
-                    <FormControl
-                      placeholder="Y Value"
-                      aria-label="Y Value"
-                      aria-describedby="y-input"
-                      name="yValue"
-                      value={this.state.yValue}
-                      onChange={this.handleInputChange}
-                    />
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Prepend>
-                      <InputGroup.Text id="birth-input">B</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl
-                      placeholder="Birth Rule"
-                      aria-label="Birth Rule"
-                      aria-describedby="birth-input"
-                      name="birthInput"
-                      value={this.state.birthInput}
-                      onChange={this.handleInputChange}
-                    />
-                    <InputGroup.Append>
-                      <InputGroup.Text id="survive-input">S</InputGroup.Text>
-                    </InputGroup.Append>
-                    <FormControl
-                      placeholder="Survive Rule"
-                      aria-label="Survive Rule"
-                      aria-describedby="survive-input"
-                      name="surviveInput"
-                      value={this.state.surviveInput}
-                      onChange={this.handleInputChange}
-                    />
-                  </InputGroup>
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text>RLE Text</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl
-                      as="textarea"
-                      aria-label="RLE Text"
-                      aria-describedby="textbox-input"
-                      placeholder="Enter RLE Text Here"
-                      name="textboxInput"
-                      value={this.state.textboxInput}
-                      onChange={this.handleInputChange}
-                    />
-                  </InputGroup>
-                  <Button onClick={this.resetTextbox} variant="secondary">
-                    Reset
-                  </Button>
-                  <Button variant="primary" type="submit">
-                    Submit
-                  </Button>
-                  {this.state.textboxError === true && (
+            <Tabs defaultActiveKey="loadFile" id="load-tab-group">
+              <Tab eventKey="loadFile" title="Load From File">
+                <div>
+                  <input type="file" id="file-input" accept=".rle" />
+                  <p>Contents of the file:</p>
+                  {this.state.loadedContents.split('\n').map((item, i) => (
+                    <p key={i}>{item}</p>
+                  ))}
+                  <Button onClick={this.handleFileSubmit}>Submit</Button>
+                  {this.state.loadFileError === true && (
                     <div>Error! Error! Error!{this.state.errorType}</div>
                   )}
-                </Form>
-              </div>
-            )}
+                </div>
+              </Tab>
+              <Tab eventKey="loadTextbox" title="Paste Into Textbox">
+                <div>
+                  <Form onSubmit={this.handleTextSubmit}>
+                    <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                        <InputGroup.Text id="x-input">X</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                        placeholder="X Value"
+                        aria-label="X Value"
+                        aria-describedby="x-input"
+                        name="xValue"
+                        value={this.state.xValue}
+                        onChange={this.handleInputChange}
+                      />
+                      <InputGroup.Append>
+                        <InputGroup.Text id="y-input">Y</InputGroup.Text>
+                      </InputGroup.Append>
+                      <FormControl
+                        placeholder="Y Value"
+                        aria-label="Y Value"
+                        aria-describedby="y-input"
+                        name="yValue"
+                        value={this.state.yValue}
+                        onChange={this.handleInputChange}
+                      />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                        <InputGroup.Text id="birth-input">B</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                        placeholder="Birth Rule"
+                        aria-label="Birth Rule"
+                        aria-describedby="birth-input"
+                        name="birthInput"
+                        value={this.state.birthInput}
+                        onChange={this.handleInputChange}
+                      />
+                      <InputGroup.Append>
+                        <InputGroup.Text id="survive-input">S</InputGroup.Text>
+                      </InputGroup.Append>
+                      <FormControl
+                        placeholder="Survive Rule"
+                        aria-label="Survive Rule"
+                        aria-describedby="survive-input"
+                        name="surviveInput"
+                        value={this.state.surviveInput}
+                        onChange={this.handleInputChange}
+                      />
+                    </InputGroup>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>RLE Text</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                        as="textarea"
+                        aria-label="RLE Text"
+                        aria-describedby="textbox-input"
+                        placeholder="Enter RLE Text Here"
+                        name="textboxInput"
+                        value={this.state.textboxInput}
+                        onChange={this.handleInputChange}
+                      />
+                    </InputGroup>
+                    <Button onClick={this.resetTextbox} variant="secondary">
+                      Reset
+                    </Button>
+                    <Button variant="primary" type="submit">
+                      Submit
+                    </Button>
+                    {this.state.textboxError === true && (
+                      <div>Error! Error! Error!{this.state.errorType}</div>
+                    )}
+                  </Form>
+                </div>
+              </Tab>
+            </Tabs>
           </Drawer>
         </React.Fragment>
       </div>
