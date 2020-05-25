@@ -92,20 +92,21 @@ class DrawGridPage extends Component {
                   later in the <b>Load Automaton</b> tab or another application
                   <br />
                   <br />
-                  Click the <b>Resize</b> button to open a drawer that will
-                  allow the user to change the dimensions of the grid that will
-                  be generated. Change the desired number of rows or columns and
-                  hit submit to save any changes and close the drawer <br />
+                  The <b>Resize</b> button opens a drawer that will allow the
+                  user to change the dimensions of the grid that will be
+                  generated. Change the desired number of rows or columns and
+                  hit <b>Submit</b> to save any changes and close the drawer{' '}
+                  <br />
                   <br />
                   The <b>Open Grid</b> button then lets the user open the
                   interactive grid of specified size (or 10x10 by default). Now,
                   the user is able to click on any grid cells to toggle them
                   on/off. A blank (white) cell is off or dead, while a filled
-                  (black) cell is on or alive. <br />
+                  (black) cell is on or alive <br />
                   <br /> When the user is satisfied with their automaton they
                   have drawn, they may hit the <b>Save Automaton</b> button to
                   open a modal window showing the RLE format of their automaton.
-                  The user may now copy the RLE text or click the{' '}
+                  The user can now copy the RLE text or click the{' '}
                   <b>Download</b> button to download this RLE to a file
                   <br />
                   <br />

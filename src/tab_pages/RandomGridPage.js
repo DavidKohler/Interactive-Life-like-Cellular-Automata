@@ -1,4 +1,6 @@
+import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import CellularAutomatonSketch from '../sketches/CellularAutomatonSketch';
 import { createGrid } from '../logic/gridLogic';
 import GridCustomization from '../components/GridCustomization';
@@ -64,7 +66,65 @@ class RandomGridPage extends Component {
 
     return (
       <div className="random-page">
-        Random Grid Page!
+        <div>
+          <Accordion defaultActiveKey="0">
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="0">
+                Click Here to Toggle Page Explanation
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="0">
+                <Card.Body>
+                  This is the <b>Random Automaton</b> page where the user is
+                  able to customize, generate, and simulate random cellular
+                  automata
+                  <br />
+                  <br />
+                  The <b>Customize</b> button opens a drawer that will allow the
+                  user to change various aspects of the generated automaton and
+                  its simulation. They can change the number of columns and
+                  rows, the cell size (how large the grid cells appear on the
+                  screen), the Alive/Dead cell ratio (the desired ratio of live
+                  cells to dead cells for the starting state of the automaton),
+                  birth and survival rules (rules which govern how cells are
+                  born and survive through each generation), framerate (the
+                  speed at which the simulation runs), and finally the cell and
+                  background colors (purely aesthetic). The user may hit{' '}
+                  <b>Submit</b> to save any changes, close the drawer, and
+                  create a random automaton <br />
+                  <br />
+                  The <b>Create Automaton</b> button then lets the user generate
+                  a new, random cellular automaton based on the user's
+                  customization choices or default values <br />
+                  <br />
+                  The <b>Play</b> and <b>Next</b> buttons control the simulation
+                  of the automaton. When the <b>Play</b> button is pressed, it
+                  will start to play an infinite simulation, which may be paused
+                  at any time by clicking the <b>Pause</b> button. The{' '}
+                  <b>Next</b> button advances forward a single generation on
+                  every button press. At any time, the user may hit the{' '}
+                  <b>Reset</b> button to reset the automaton back to its initial
+                  state
+                  <br />
+                  <br /> If the user likes an automaton that has been generated,
+                  they may hit the <b>Save Automaton</b> button to open a modal
+                  window showing the RLE format of their automaton. The user may
+                  now copy the RLE text or click the <b>Download</b> button to
+                  download this RLE to a file
+                  <br />
+                  <br />
+                  RLE (or Run Length Encoded) is a file format commonly used for
+                  storing and reading cellular automata patterns. For more
+                  information about how it works, visit the{' '}
+                  <a
+                    href={'https://www.conwaylife.com/wiki/Run_Length_Encoded'}
+                  >
+                    LifeWiki
+                  </a>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
+        </div>
         <div className="customization-container">
           <GridCustomization
             parentTab={'RANDOM'}
@@ -72,7 +132,7 @@ class RandomGridPage extends Component {
           />
         </div>
         <div className="generate-grid-container">
-          <Button onClick={this.generateGrid}>Create Random Grid</Button>
+          <Button onClick={this.generateGrid}>Create Automaton</Button>
         </div>
         {displayGrid && (
           <div className="sketch-container">

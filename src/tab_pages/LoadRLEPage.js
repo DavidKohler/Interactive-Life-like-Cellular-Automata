@@ -1,4 +1,6 @@
+import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import CellularAutomatonSketch from '../sketches/CellularAutomatonSketch';
 import GridCustomization from '../components/GridCustomization';
 import LoadRLEDrawer from '../components/LoadRLEDrawer';
@@ -95,7 +97,73 @@ class LoadRLEPage extends Component {
     let displayGrid = this.state.grid.length > 0;
     return (
       <div>
-        RLE Page!
+        <div>
+          <Accordion defaultActiveKey="0">
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="0">
+                Click Here to Toggle Page Explanation
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="0">
+                <Card.Body>
+                  This is the <b>Load Automaton</b> page where the user is able
+                  to load a cellular automaton, customize it if desired, and
+                  simulate it
+                  <br />
+                  <br />
+                  The <b>Load RLE</b> button opens a drawer that will allow the
+                  user to load in an automaton in RLE format either from a file
+                  or from typing in a textbox. If the <b>Load From File</b> tab
+                  is selected, the user must load an RLE file with the .rle file
+                  extension from their computer by clicking on the{' '}
+                  <b>Choose File</b> button. If the <b>Paste Into Textbox</b>{' '}
+                  tab is selected, the user may type or paste their automaton's
+                  RLE format into the corresponding textboxes. The user may hit
+                  the <b>Reset</b> button to clear all of the textboxes in this
+                  tab. With both tabs, the user must hit <b>Submit</b> to load
+                  their automaton and save any changes
+                  <br />
+                  <br />
+                  Once the user's automaton has been successfully loaded, the
+                  automaton will appear along with several new buttons. The{' '}
+                  <b>Customize</b> button opens a drawer that will allow the
+                  user to change various aspects of the automaton and its
+                  simulation. They can change the number of columns and rows,
+                  the cell size (how large the grid cells appear on the screen),
+                  birth and survival rules (rules which govern how cells are
+                  born and survive through each generation), framerate (the
+                  speed at which the simulation runs), and finally the cell and
+                  background colors (purely aesthetic). The user may hit{' '}
+                  <b>Submit</b> to save any changes, close the drawer, and
+                  display the changes <br />
+                  <br /> The <b>Play</b> and <b>Next</b> buttons control the
+                  simulation of the automaton. When the <b>Play</b> button is
+                  pressed, it will start to play an infinite simulation, which
+                  may be paused at any time by clicking the <b>Pause</b> button.
+                  The <b>Next</b> button advances forward a single generation on
+                  every button press. At any time, the user may hit the{' '}
+                  <b>Reset</b> button to reset the automaton back to its initial
+                  state
+                  <br />
+                  <br /> The <b>Save Automaton</b> button opens a modal window
+                  showing the RLE format of the automaton being simulated, even
+                  if it has been modified from whatever was initially passed in.
+                  The user may now copy the RLE text or click the{' '}
+                  <b>Download</b> button to download this RLE to a file
+                  <br />
+                  <br />
+                  RLE (or Run Length Encoded) is a file format commonly used for
+                  storing and reading cellular automata patterns. For more
+                  information about how it works, visit the{' '}
+                  <a
+                    href={'https://www.conwaylife.com/wiki/Run_Length_Encoded'}
+                  >
+                    LifeWiki
+                  </a>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
+        </div>
         <div className="load-drawer-container">
           <LoadRLEDrawer submitFunction={this.updateGrid} />
         </div>
