@@ -26,6 +26,7 @@ class LoadRLEPage extends Component {
       framerate: 10,
       grid: [],
       loadDrawer: false,
+      loadGrid: false,
       refreshVal: 0,
       rows: 10,
       surviveRule: [],
@@ -35,22 +36,6 @@ class LoadRLEPage extends Component {
     this.updateGrid = this.updateGrid.bind(this);
     this.updateParameters = this.updateParameters.bind(this);
   }
-
-  readSingleFile = (e) => {
-    // read RLE file from upload
-    let file = e.target.files[0];
-    if (!file) {
-      return;
-    }
-    let reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = (e) => {
-      let contents = e.target.result;
-      this.setState({
-        file: contents,
-      });
-    };
-  };
 
   resetAutomata() {
     // refresh grid by increasing key of component
@@ -62,7 +47,7 @@ class LoadRLEPage extends Component {
   updateGrid = (newParams) => {
     // update grid from loaded RLE
     setTimeout(() => {
-      this.setState({ ...newParams });
+      this.setState({ ...newParams, loadGrid: true });
     }, 0);
     setTimeout(() => {
       this.resetAutomata();
@@ -205,11 +190,9 @@ class LoadRLEPage extends Component {
             <Button onClick={this.resetAutomata}>Reset</Button>
           </div>
         )}
-        {displayGrid && (
-          <div className="save-rle-container">
-            <SavedRLEModal {...this.state} />
-          </div>
-        )}
+        <div className="save-rle-container">
+          <SavedRLEModal {...this.state} />
+        </div>
       </div>
     );
   }

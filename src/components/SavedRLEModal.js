@@ -1,3 +1,4 @@
+import '../css/SavedRLEModal.css';
 import Button from 'react-bootstrap/Button';
 import { gridToRLE } from '../logic/rleLogic';
 import { tableToGrid } from '../logic/gridLogic';
