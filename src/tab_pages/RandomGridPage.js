@@ -92,6 +92,8 @@ class RandomGridPage extends Component {
                     href={
                       'https://www.conwaylife.com/wiki/Cellular_automaton#Rules'
                     }
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     LifeWiki
                   </a>
@@ -125,6 +127,8 @@ class RandomGridPage extends Component {
                   information about how it works, visit the{' '}
                   <a
                     href={'https://www.conwaylife.com/wiki/Run_Length_Encoded'}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     LifeWiki
                   </a>

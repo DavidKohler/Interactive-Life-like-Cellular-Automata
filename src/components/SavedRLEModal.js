@@ -84,11 +84,11 @@ class SavedRLEModal extends Component {
             ))}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
             <Button variant="primary" onClick={this.downloadRLEFile}>
               Download RLE File
+            </Button>
+            <Button variant="danger" onClick={this.handleClose}>
+              Close
             </Button>
           </Modal.Footer>
         </Modal>

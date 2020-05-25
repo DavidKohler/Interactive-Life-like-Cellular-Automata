@@ -1,3 +1,4 @@
+import '../css/LoadRLEPage.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -97,10 +98,14 @@ class LoadRLEPage extends Component {
     let displayGrid = this.state.grid.length > 0;
     return (
       <div>
-        <div>
-          <Accordion defaultActiveKey="0">
+        <div className="accordion-container">
+          <Accordion defaultActiveKey="">
             <Card>
-              <Accordion.Toggle as={Card.Header} eventKey="0">
+              <Accordion.Toggle
+                as={Card.Header}
+                eventKey="0"
+                style={{ cursor: 'pointer' }}
+              >
                 Click Here to Toggle Page Explanation
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="0">
@@ -111,16 +116,11 @@ class LoadRLEPage extends Component {
                   <br />
                   <br />
                   The <b>Load RLE</b> button opens a drawer that will allow the
-                  user to load in an automaton in RLE format either from a file
-                  or from typing in a textbox. If the <b>Load From File</b> tab
-                  is selected, the user must load an RLE file with the .rle file
-                  extension from their computer by clicking on the{' '}
-                  <b>Choose File</b> button. If the <b>Paste Into Textbox</b>{' '}
-                  tab is selected, the user may type or paste their automaton's
-                  RLE format into the corresponding textboxes. The user may hit
-                  the <b>Reset</b> button to clear all of the textboxes in this
-                  tab. With both tabs, the user must hit <b>Submit</b> to load
-                  their automaton and save any changes
+                  user to load in an automaton in RLE format from a file. The
+                  user loads their RLE file with the .rle file extension from
+                  their computer by clicking on the <b>Choose File</b> button.
+                  The user must hit <b>Submit</b> to load their automaton and
+                  save any changes
                   <br />
                   <br />
                   Once the user's automaton has been successfully loaded, the
@@ -136,6 +136,8 @@ class LoadRLEPage extends Component {
                     href={
                       'https://www.conwaylife.com/wiki/Cellular_automaton#Rules'
                     }
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     LifeWiki
                   </a>
@@ -164,6 +166,8 @@ class LoadRLEPage extends Component {
                   information about how it works, visit the{' '}
                   <a
                     href={'https://www.conwaylife.com/wiki/Run_Length_Encoded'}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     LifeWiki
                   </a>

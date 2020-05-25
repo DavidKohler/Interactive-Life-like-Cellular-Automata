@@ -126,6 +126,8 @@ class DrawGridPage extends Component {
                   information about how it works, visit the{' '}
                   <a
                     href={'https://www.conwaylife.com/wiki/Run_Length_Encoded'}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     LifeWiki
                   </a>
@@ -208,7 +210,3 @@ class DrawGridPage extends Component {
 }
 
 export default DrawGridPage;
-
-//TODO
-// styling
-// add user-select: none to text stuff
