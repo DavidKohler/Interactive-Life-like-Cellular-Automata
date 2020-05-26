@@ -178,7 +178,13 @@ class GridCustomization extends Component {
     return (
       <div className="customizer-drawer">
         <React.Fragment key={'drawerOpen'}>
-          <Button onClick={this.toggleDrawer(true)}>{'Customize'}</Button>
+          <Button
+            onClick={this.toggleDrawer(true)}
+            disabled={!this.props.loadGrid}
+            variant={this.props.loadGrid ? 'primary' : 'secondary'}
+          >
+            {'Customize'}
+          </Button>
           <Drawer
             anchor={'right'}
             onClose={this.toggleDrawer(false)}
@@ -334,5 +340,3 @@ class GridCustomization extends Component {
 }
 
 export default GridCustomization;
-
-// TODO styling

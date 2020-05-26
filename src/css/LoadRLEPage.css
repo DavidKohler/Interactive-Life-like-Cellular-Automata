@@ -1,0 +1,14 @@
+.load-page-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.load-drawer-container {
+  padding-right: 10px;
+}
+
+.customization-container {
+  padding-right: 10px;
+}

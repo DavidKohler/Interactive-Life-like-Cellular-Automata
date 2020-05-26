@@ -161,10 +161,10 @@ class LoadRLEPage extends Component {
             </Card>
           </Accordion>
         </div>
-        <div className="load-drawer-container">
-          <LoadRLEDrawer submitFunction={this.updateGrid} />
-        </div>
-        {displayGrid && (
+        <div className="load-page-buttons">
+          <div className="load-drawer-container">
+            <LoadRLEDrawer submitFunction={this.updateGrid} />
+          </div>
           <div className="customization-container">
             <GridCustomization
               bRule={this.state.birthRule}
@@ -173,9 +173,13 @@ class LoadRLEPage extends Component {
               parentTab={'LOADRLE'}
               sRule={this.state.surviveRule}
               submitFunction={this.updateParameters}
+              loadGrid={displayGrid}
             />
           </div>
-        )}
+          <div className="save-rle-container">
+            <SavedRLEModal {...this.state} loadGrid={displayGrid} />
+          </div>
+        </div>
         {displayGrid && (
           <div className="sketch-container">
             <CellularAutomatonSketch
@@ -185,13 +189,13 @@ class LoadRLEPage extends Component {
             />
           </div>
         )}
-        {displayGrid && (
-          <div className="reset-button-container">
-            <Button onClick={this.resetAutomata}>Reset</Button>
-          </div>
-        )}
-        <div className="save-rle-container">
-          <SavedRLEModal {...this.state} />
+        <div className="playback-container">
+          <div id="playbutton" />
+          {displayGrid && (
+            <div className="reset-button-container">
+              <Button onClick={this.resetAutomata}>Reset</Button>
+            </div>
+          )}
         </div>
       </div>
     );
