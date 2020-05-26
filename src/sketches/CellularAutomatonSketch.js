@@ -46,7 +46,7 @@ class CellularAutomatonSketch extends Component {
         playButton.style('line-height', '1.5');
         playButton.style('border-radius', '.25rem');
 
-        playButton.position(50, 50);
+        playButton.parent('playbutton');
 
         nextButton = p.createButton('Next');
         nextButton.mousePressed(toggleNext);
@@ -60,7 +60,7 @@ class CellularAutomatonSketch extends Component {
         nextButton.style('line-height', '1.5');
         nextButton.style('border-radius', '.25rem');
 
-        nextButton.position(100, 100);
+        nextButton.parent('nextbutton');
 
         p.noLoop();
       };
@@ -158,13 +158,10 @@ class CellularAutomatonSketch extends Component {
     // render to parent component
     return (
       <div className="CellularAutomatonSketch">
-        <div ref={this.props.refLoc}></div>
+        <div ref={this.props.refLoc} />
       </div>
     );
   }
 }
 
 export default CellularAutomatonSketch;
-
-//TODO
-// change position and style of buttons

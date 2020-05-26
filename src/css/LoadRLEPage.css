@@ -12,3 +12,19 @@
 .customization-container {
   padding-right: 10px;
 }
+
+.playback-container {
+  margin: 20px 0px 80px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.playback-button {
+  padding-right: 10px;
+}
+
+.border-switch {
+  padding-left: 10px;
+  padding-top: 5px;
+}

@@ -3,6 +3,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CellularAutomatonSketch from '../sketches/CellularAutomatonSketch';
+import Form from 'react-bootstrap/Form';
 import GridCustomization from '../components/GridCustomization';
 import LoadRLEDrawer from '../components/LoadRLEDrawer';
 import { reshapeGrid } from '../logic/gridLogic';
@@ -19,6 +20,7 @@ class LoadRLEPage extends Component {
     this.state = {
       backgroundColor: '#FFFFFF',
       birthRule: [],
+      borderOn: false,
       cellColor: '#000000',
       cellSize: 20,
       changesMade: false,
@@ -33,14 +35,40 @@ class LoadRLEPage extends Component {
     };
     this.renderRef = React.createRef();
     this.resetAutomata = this.resetAutomata.bind(this);
+    this.toggleBorder = this.toggleBorder.bind(this);
     this.updateGrid = this.updateGrid.bind(this);
     this.updateParameters = this.updateParameters.bind(this);
+  }
+
+  componentDidUpdate() {
+    // get rid of extra p5js buttons
+    let playbuttons = document.getElementById('playbutton');
+    let nextbuttons = document.getElementById('nextbutton');
+    if (playbuttons.children.length > 1) {
+      playbuttons.children[0].parentNode.removeChild(playbuttons.children[0]);
+    }
+    if (nextbuttons.children.length > 1) {
+      nextbuttons.children[0].parentNode.removeChild(nextbuttons.children[0]);
+    }
   }
 
   resetAutomata() {
     // refresh grid by increasing key of component
     this.setState((state) => ({
       refreshVal: state.refreshVal + 1,
+      borderOn: false,
+    }));
+  }
+
+  toggleBorder() {
+    // toggles border around automaton grid
+    if (this.state.borderOn === false) {
+      document.querySelector('#defaultCanvas0').style.borderStyle = 'groove';
+    } else {
+      document.querySelector('#defaultCanvas0').style.borderStyle = '';
+    }
+    this.setState((state) => ({
+      borderOn: !state.borderOn,
     }));
   }
 
@@ -170,15 +198,25 @@ class LoadRLEPage extends Component {
               bRule={this.state.birthRule}
               defaultRows={this.state.rows}
               defaultCols={this.state.cols}
+              loadGrid={displayGrid}
               parentTab={'LOADRLE'}
               sRule={this.state.surviveRule}
               submitFunction={this.updateParameters}
-              loadGrid={displayGrid}
             />
           </div>
           <div className="save-rle-container">
             <SavedRLEModal {...this.state} loadGrid={displayGrid} />
           </div>
+          <Form className="border-switch">
+            <Form.Check
+              checked={this.state.borderOn}
+              disabled={!displayGrid}
+              id="outline-switch"
+              label="Grid Border"
+              onChange={this.toggleBorder}
+              type="switch"
+            />
+          </Form>
         </div>
         {displayGrid && (
           <div className="sketch-container">
@@ -190,12 +228,9 @@ class LoadRLEPage extends Component {
           </div>
         )}
         <div className="playback-container">
-          <div id="playbutton" />
-          {displayGrid && (
-            <div className="reset-button-container">
-              <Button onClick={this.resetAutomata}>Reset</Button>
-            </div>
-          )}
+          <div className="playback-button" id="playbutton" />
+          <div className="playback-button" id="nextbutton" />
+          {displayGrid && <Button onClick={this.resetAutomata}>Reset</Button>}
         </div>
       </div>
     );
@@ -203,7 +238,3 @@ class LoadRLEPage extends Component {
 }
 
 export default LoadRLEPage;
-
-//TODO
-// styling
-// add description
