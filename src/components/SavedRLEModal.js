@@ -42,7 +42,7 @@ class SavedRLEModal extends Component {
   downloadRLEFile = () => {
     // function to download RLE data to an RLE file for user
     let data = this.state.savedRLE.join('\n');
-    let filename = 'savedRLE.rle';
+    let filename = 'savedAutomaton.rle';
     let type = '.rle';
     let file = new Blob([data], { type: type });
     if (window.navigator.msSaveOrOpenBlob)
