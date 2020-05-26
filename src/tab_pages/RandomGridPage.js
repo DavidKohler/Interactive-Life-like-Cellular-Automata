@@ -115,8 +115,8 @@ class RandomGridPage extends Component {
                     LifeWiki
                   </a>
                   ), framerate (the speed at which the simulation runs), and
-                  finally the cell and background colors (purely aesthetic). The
-                  user may hit <b>Submit</b> to save any changes, close the
+                  finally the live cell and dead cell colors (purely aesthetic).
+                  The user may hit <b>Submit</b> to save any changes, close the
                   drawer, and create a random automaton <br />
                   <br />
                   The <b>Create Automaton</b> button then lets the user generate

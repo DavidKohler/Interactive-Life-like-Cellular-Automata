@@ -60,23 +60,31 @@ class HomePage extends Component {
               Cellular automata (plural for automaton), are a class of
               mathematical objects that have been used in the fields of
               microstructure modeling, physics, quantum mechanics, and
-              theoretical biology. A cellular automaton consists of a grid of
-              cells, each of which has a finite set of allowed states (such as
-              on/off or alive/dead), and each of which also has a neighborhood
-              of other cells that it interacts with. The state of the cellular
-              automaton evolves over time, progressing through a number of
-              generations. The state of each cell at time <i>t+1</i> depends on
-              the state of each cell at time <i>t</i>, with a transition rule
-              specified that determines how the state changes based on the
-              states of each cell and neighborhood. <br />
+              theoretical biology (just to name a few). A cellular automaton
+              consists of a grid of cells, each of which has a finite set of
+              allowed states (such as on/off or alive/dead), and each of which
+              also has a neighborhood of other cells that it interacts with. The
+              state of the cellular automaton evolves over time, progressing
+              through a number of generations. The state of each cell at time{' '}
+              <i>t+1</i> depends on the state of each cell at time <i>t</i>, and
+              so on, with a specified transition rule that determines how the
+              automaton changes based on the states of each cell and
+              neighborhood <br />
               <br className="custom-break" />A life-like cellular automaton is a
               subclass of cellular automata that has two dimensions, has two
-              states (on/off or alive/dead), uses the Moore neighborhood, and
-              has a semitotalistic rule. The most famous cellular automaton, and
-              in fact what this subclass is named after, is Conway's Game of
-              Life. This site focuses specifically on life-like cellular
-              automata, of which there exist an incredible amount. For more info
-              on cellular automata or on Conway's Game of Life, visit{' '}
+              states (on/off or alive/dead), uses the{' '}
+              <a
+                href={'https://en.wikipedia.org/wiki/Moore_neighborhood'}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Moore neighborhood
+              </a>
+              , and has a semitotalistic rule. The most famous cellular
+              automaton, and in fact what this subclass is named after, is
+              Conway's Game of Life. This site focuses specifically on life-like
+              cellular automata, of which there exist an incredible amount. For
+              more info on cellular automata or on Conway's Game of Life, visit{' '}
               <a
                 href={'https://www.conwaylife.com/wiki/Main_Page'}
                 rel="noopener noreferrer"

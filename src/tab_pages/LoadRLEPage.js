@@ -120,9 +120,7 @@ class LoadRLEPage extends Component {
                   save any changes
                   <br />
                   <br />
-                  Once the user's automaton has been successfully loaded, the
-                  automaton will appear along with several new buttons. The{' '}
-                  <b>Customize</b> button opens a drawer that will allow the
+                  The <b>Customize</b> button opens a drawer that will allow the
                   user to change various aspects of the automaton and its
                   simulation. They can change the number of columns and rows,
                   the cell size (how large the grid cells appear on the screen),
@@ -139,17 +137,19 @@ class LoadRLEPage extends Component {
                     LifeWiki
                   </a>
                   ), framerate (the speed at which the simulation runs), and
-                  finally the cell and background colors (purely aesthetic). The
-                  user may hit <b>Submit</b> to save any changes, close the
+                  finally the live cell and dead cell colors (purely aesthetic).
+                  The user may hit <b>Submit</b> to save any changes, close the
                   drawer, and display the changes <br />
-                  <br /> The <b>Play</b> and <b>Next</b> buttons control the
-                  simulation of the automaton. When the <b>Play</b> button is
-                  pressed, it will start to play an infinite simulation, which
-                  may be paused at any time by clicking the <b>Pause</b> button.
-                  The <b>Next</b> button advances forward a single generation on
-                  every button press. At any time, the user may hit the{' '}
-                  <b>Reset</b> button to reset the automaton back to its initial
-                  state
+                  <br />
+                  Once the user's automaton has been successfully loaded, the
+                  automaton will appear along with several new buttons. The{' '}
+                  <b>Play</b> and <b>Next</b> buttons control the simulation of
+                  the automaton. When the <b>Play</b> button is pressed, it will
+                  start to play an infinite simulation, which may be paused at
+                  any time by clicking the <b>Pause</b> button. The <b>Next</b>{' '}
+                  button advances forward a single generation on every button
+                  press. At any time, the user may hit the <b>Reset</b> button
+                  to reset the automaton back to its initial state
                   <br />
                   <br /> The <b>Save Automaton</b> button opens a modal window
                   showing the RLE format of the automaton being simulated, even
