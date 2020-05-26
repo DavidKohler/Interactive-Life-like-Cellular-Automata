@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Lifelike-Cellular-Automata/precache-manifest.d13a21a54d507652375703aa3a90892e.js"
+  "/Lifelike-Cellular-Automata/precache-manifest.67b978b6da8e70819c2faa4c97bf48bd.js"
 );
 
 self.addEventListener('message', (event) => {

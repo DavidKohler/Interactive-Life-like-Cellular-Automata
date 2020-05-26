@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dafdd0dc04c1cd9ade38baa3200dab77",
+    "revision": "1fcfc44eb5b9b58de5bb1551dadf7dce",
     "url": "/Lifelike-Cellular-Automata/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Lifelike-Cellular-Automata/static/css/2.3b27066a.chunk.css"
   },
   {
-    "revision": "fda2d225c8cbc467b460",
-    "url": "/Lifelike-Cellular-Automata/static/css/main.4b91d360.chunk.css"
+    "revision": "562aa5455f9a1e12cde0",
+    "url": "/Lifelike-Cellular-Automata/static/css/main.f2073bbb.chunk.css"
   },
   {
     "revision": "cf897d353c5d8507129a",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Lifelike-Cellular-Automata/static/js/2.ec905b07.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "fda2d225c8cbc467b460",
-    "url": "/Lifelike-Cellular-Automata/static/js/main.fe95ace6.chunk.js"
+    "revision": "562aa5455f9a1e12cde0",
+    "url": "/Lifelike-Cellular-Automata/static/js/main.32c891d7.chunk.js"
   },
   {
     "revision": "1aab664e5b482b827ae4",

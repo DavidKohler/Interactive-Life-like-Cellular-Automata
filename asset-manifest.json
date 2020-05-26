@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Lifelike-Cellular-Automata/static/css/main.4b91d360.chunk.css",
-    "main.js": "/Lifelike-Cellular-Automata/static/js/main.fe95ace6.chunk.js",
-    "main.js.map": "/Lifelike-Cellular-Automata/static/js/main.fe95ace6.chunk.js.map",
+    "main.css": "/Lifelike-Cellular-Automata/static/css/main.f2073bbb.chunk.css",
+    "main.js": "/Lifelike-Cellular-Automata/static/js/main.32c891d7.chunk.js",
+    "main.js.map": "/Lifelike-Cellular-Automata/static/js/main.32c891d7.chunk.js.map",
     "runtime-main.js": "/Lifelike-Cellular-Automata/static/js/runtime-main.26bdddae.js",
     "runtime-main.js.map": "/Lifelike-Cellular-Automata/static/js/runtime-main.26bdddae.js.map",
     "static/css/2.3b27066a.chunk.css": "/Lifelike-Cellular-Automata/static/css/2.3b27066a.chunk.css",
     "static/js/2.ec905b07.chunk.js": "/Lifelike-Cellular-Automata/static/js/2.ec905b07.chunk.js",
     "static/js/2.ec905b07.chunk.js.map": "/Lifelike-Cellular-Automata/static/js/2.ec905b07.chunk.js.map",
     "index.html": "/Lifelike-Cellular-Automata/index.html",
-    "precache-manifest.d13a21a54d507652375703aa3a90892e.js": "/Lifelike-Cellular-Automata/precache-manifest.d13a21a54d507652375703aa3a90892e.js",
+    "precache-manifest.67b978b6da8e70819c2faa4c97bf48bd.js": "/Lifelike-Cellular-Automata/precache-manifest.67b978b6da8e70819c2faa4c97bf48bd.js",
     "service-worker.js": "/Lifelike-Cellular-Automata/service-worker.js",
     "static/css/2.3b27066a.chunk.css.map": "/Lifelike-Cellular-Automata/static/css/2.3b27066a.chunk.css.map",
-    "static/css/main.4b91d360.chunk.css.map": "/Lifelike-Cellular-Automata/static/css/main.4b91d360.chunk.css.map",
+    "static/css/main.f2073bbb.chunk.css.map": "/Lifelike-Cellular-Automata/static/css/main.f2073bbb.chunk.css.map",
     "static/js/2.ec905b07.chunk.js.LICENSE.txt": "/Lifelike-Cellular-Automata/static/js/2.ec905b07.chunk.js.LICENSE.txt",
     "static/media/gliderGif.gif": "/Lifelike-Cellular-Automata/static/media/gliderGif.b0a1b9ac.gif"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.26bdddae.js",
     "static/css/2.3b27066a.chunk.css",
     "static/js/2.ec905b07.chunk.js",
-    "static/css/main.4b91d360.chunk.css",
-    "static/js/main.fe95ace6.chunk.js"
+    "static/css/main.f2073bbb.chunk.css",
+    "static/js/main.32c891d7.chunk.js"
   ]
 }
