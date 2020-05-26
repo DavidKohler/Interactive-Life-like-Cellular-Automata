@@ -47,6 +47,7 @@ class DrawGridPage extends Component {
           (state) => (
             {
               refreshTabVal: state.refreshTabVal + 1,
+              // eslint-disable-next-line
             },
             this.setState({ loadGrid: true })
           )
