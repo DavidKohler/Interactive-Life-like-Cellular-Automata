@@ -15,6 +15,7 @@
 .rule-button-container.btn-toolbar {
   display: flex !important;
   flex-direction: column !important;
+  flex-shrink: 0;
 }
 
 .framerate-slider {
@@ -35,8 +36,11 @@
   flex-direction: row;
   margin: 10px 50px 30px 50px;
   justify-content: space-around;
+  flex-shrink: 0;
 }
 
 .submit-container {
+  margin-top: 20px;
   margin-bottom: 20px;
+  flex-shrink: 0;
 }

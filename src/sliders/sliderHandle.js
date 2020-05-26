@@ -20,6 +20,7 @@ export function SliderHandle(props) {
 const FlexHandle = styled(Handle)`
   display: flex;
   justify-content: center;
+  flex-shrink: 0;
 `;
 
 const Value = styled.div`

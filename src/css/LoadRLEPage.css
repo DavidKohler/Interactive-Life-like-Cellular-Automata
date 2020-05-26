@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: center;
   margin-bottom: 50px;
+  flex-shrink: 0;
 }
 
 .load-drawer-container {
@@ -18,6 +19,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .playback-button {

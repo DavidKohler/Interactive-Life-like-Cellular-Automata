@@ -1,5 +1,6 @@
 .main-container {
   text-align: center;
+  -webkit-appearance: none;
 }
 
 .tab-container {

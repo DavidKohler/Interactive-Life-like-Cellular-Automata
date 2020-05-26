@@ -176,7 +176,7 @@ class GridCustomization extends Component {
     let { birthRulePressed, surviveRulePressed } = this.state;
 
     return (
-      <div className="customizer-drawer">
+      <div className="customizer-drawer-container">
         <React.Fragment key={'drawerOpen'}>
           <Button
             onClick={this.toggleDrawer(true)}
@@ -189,6 +189,7 @@ class GridCustomization extends Component {
             anchor={'right'}
             onClose={this.toggleDrawer(false)}
             open={this.state.drawerOpen}
+            className="customization-drawer"
           >
             <div className="drawer-header">
               Customize automaton and grid below <br />

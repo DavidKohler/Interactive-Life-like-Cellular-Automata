@@ -5,6 +5,7 @@
 .load-file-button {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 .error-text {
