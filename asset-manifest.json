@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/Game-of-Life-Interactive/static/css/main.c10173b4.chunk.css",
-    "main.js": "/Game-of-Life-Interactive/static/js/main.011afafd.chunk.js",
-    "main.js.map": "/Game-of-Life-Interactive/static/js/main.011afafd.chunk.js.map",
-    "runtime-main.js": "/Game-of-Life-Interactive/static/js/runtime-main.35984725.js",
-    "runtime-main.js.map": "/Game-of-Life-Interactive/static/js/runtime-main.35984725.js.map",
-    "static/css/2.9974c224.chunk.css": "/Game-of-Life-Interactive/static/css/2.9974c224.chunk.css",
-    "static/js/2.6b07f64d.chunk.js": "/Game-of-Life-Interactive/static/js/2.6b07f64d.chunk.js",
-    "static/js/2.6b07f64d.chunk.js.map": "/Game-of-Life-Interactive/static/js/2.6b07f64d.chunk.js.map",
-    "index.html": "/Game-of-Life-Interactive/index.html",
-    "precache-manifest.c177d09262f91f42e7ab0863884bdb0c.js": "/Game-of-Life-Interactive/precache-manifest.c177d09262f91f42e7ab0863884bdb0c.js",
-    "service-worker.js": "/Game-of-Life-Interactive/service-worker.js",
-    "static/css/2.9974c224.chunk.css.map": "/Game-of-Life-Interactive/static/css/2.9974c224.chunk.css.map",
-    "static/css/main.c10173b4.chunk.css.map": "/Game-of-Life-Interactive/static/css/main.c10173b4.chunk.css.map",
-    "static/js/2.6b07f64d.chunk.js.LICENSE.txt": "/Game-of-Life-Interactive/static/js/2.6b07f64d.chunk.js.LICENSE.txt",
-    "static/media/gliderGif.gif": "/Game-of-Life-Interactive/static/media/gliderGif.b0a1b9ac.gif"
+    "main.css": "/Cellular-Automata-Interactive/static/css/main.b977f6b4.chunk.css",
+    "main.js": "/Cellular-Automata-Interactive/static/js/main.0f80c00a.chunk.js",
+    "main.js.map": "/Cellular-Automata-Interactive/static/js/main.0f80c00a.chunk.js.map",
+    "runtime-main.js": "/Cellular-Automata-Interactive/static/js/runtime-main.26e35eba.js",
+    "runtime-main.js.map": "/Cellular-Automata-Interactive/static/js/runtime-main.26e35eba.js.map",
+    "static/css/2.3b2aa933.chunk.css": "/Cellular-Automata-Interactive/static/css/2.3b2aa933.chunk.css",
+    "static/js/2.f37c2392.chunk.js": "/Cellular-Automata-Interactive/static/js/2.f37c2392.chunk.js",
+    "static/js/2.f37c2392.chunk.js.map": "/Cellular-Automata-Interactive/static/js/2.f37c2392.chunk.js.map",
+    "index.html": "/Cellular-Automata-Interactive/index.html",
+    "precache-manifest.3f2456752d0ea68bfcb7866b840b1ea4.js": "/Cellular-Automata-Interactive/precache-manifest.3f2456752d0ea68bfcb7866b840b1ea4.js",
+    "service-worker.js": "/Cellular-Automata-Interactive/service-worker.js",
+    "static/css/2.3b2aa933.chunk.css.map": "/Cellular-Automata-Interactive/static/css/2.3b2aa933.chunk.css.map",
+    "static/css/main.b977f6b4.chunk.css.map": "/Cellular-Automata-Interactive/static/css/main.b977f6b4.chunk.css.map",
+    "static/js/2.f37c2392.chunk.js.LICENSE.txt": "/Cellular-Automata-Interactive/static/js/2.f37c2392.chunk.js.LICENSE.txt",
+    "static/media/gliderGif.gif": "/Cellular-Automata-Interactive/static/media/gliderGif.b0a1b9ac.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.35984725.js",
-    "static/css/2.9974c224.chunk.css",
-    "static/js/2.6b07f64d.chunk.js",
-    "static/css/main.c10173b4.chunk.css",
-    "static/js/main.011afafd.chunk.js"
+    "static/js/runtime-main.26e35eba.js",
+    "static/css/2.3b2aa933.chunk.css",
+    "static/js/2.f37c2392.chunk.js",
+    "static/css/main.b977f6b4.chunk.css",
+    "static/js/main.0f80c00a.chunk.js"
   ]
 }
