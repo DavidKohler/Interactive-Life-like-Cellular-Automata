@@ -13,12 +13,12 @@ class HomePage extends Component {
       <div className="homepage-container">
         <div className="jumbo-container">
           <Jumbotron>
-            <h1>Interactive Life-like Cellular Automata</h1>
+            <h1>Lifelike Cellular Automata</h1>
             <div className="gif-container">
               <img src={exampleGif} alt="loading gif..." />
             </div>
             <h5>
-              Create, load, and simulate various life-like cellular automata
+              Create, load, and simulate various lifelike cellular automata
             </h5>
             <br />
             <h5>
@@ -41,7 +41,7 @@ class HomePage extends Component {
               >
                 David Kohler
               </a>
-              , serves as a place to experiment with life-like cellular automata
+              , serves as a place to experiment with lifelike cellular automata
               -- drawing new automata (in the Draw tab), loading in existing
               automata (in the Load tab), or generating completely new and
               random automata (in the Random tab) -- and subsequently simulating
@@ -70,7 +70,7 @@ class HomePage extends Component {
               so on, with a specified transition rule that determines how the
               automaton changes based on the states of each cell and
               neighborhood <br />
-              <br className="custom-break" />A life-like cellular automaton is a
+              <br className="custom-break" />A lifelike cellular automaton is a
               subclass of cellular automata that has two dimensions, has two
               states (on/off or alive/dead), uses the{' '}
               <a
@@ -82,7 +82,7 @@ class HomePage extends Component {
               </a>
               , and has a semitotalistic rule. The most famous cellular
               automaton, and in fact what this subclass is named after, is
-              Conway's Game of Life. This site focuses specifically on life-like
+              Conway's Game of Life. This site focuses specifically on lifelike
               cellular automata, of which there exist an incredible amount. For
               more info on cellular automata or on Conway's Game of Life, visit{' '}
               <a

@@ -1,6 +1,6 @@
 {
-  "homepage": "http://DavidKohler.github.io/Interactive-Life-like-Cellular-Automata",
-  "name": "Interactive-Life-like-Cellular-Automata",
+  "homepage": "http://DavidKohler.github.io/Lifelike-Cellular-Automata",
+  "name": "Lifelike-Cellular-Automata",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
