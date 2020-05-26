@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/Cellular-Automata-Interactive/static/css/main.b977f6b4.chunk.css",
-    "main.js": "/Cellular-Automata-Interactive/static/js/main.0f80c00a.chunk.js",
-    "main.js.map": "/Cellular-Automata-Interactive/static/js/main.0f80c00a.chunk.js.map",
-    "runtime-main.js": "/Cellular-Automata-Interactive/static/js/runtime-main.26e35eba.js",
-    "runtime-main.js.map": "/Cellular-Automata-Interactive/static/js/runtime-main.26e35eba.js.map",
-    "static/css/2.3b2aa933.chunk.css": "/Cellular-Automata-Interactive/static/css/2.3b2aa933.chunk.css",
-    "static/js/2.f37c2392.chunk.js": "/Cellular-Automata-Interactive/static/js/2.f37c2392.chunk.js",
-    "static/js/2.f37c2392.chunk.js.map": "/Cellular-Automata-Interactive/static/js/2.f37c2392.chunk.js.map",
-    "index.html": "/Cellular-Automata-Interactive/index.html",
-    "precache-manifest.3f2456752d0ea68bfcb7866b840b1ea4.js": "/Cellular-Automata-Interactive/precache-manifest.3f2456752d0ea68bfcb7866b840b1ea4.js",
-    "service-worker.js": "/Cellular-Automata-Interactive/service-worker.js",
-    "static/css/2.3b2aa933.chunk.css.map": "/Cellular-Automata-Interactive/static/css/2.3b2aa933.chunk.css.map",
-    "static/css/main.b977f6b4.chunk.css.map": "/Cellular-Automata-Interactive/static/css/main.b977f6b4.chunk.css.map",
-    "static/js/2.f37c2392.chunk.js.LICENSE.txt": "/Cellular-Automata-Interactive/static/js/2.f37c2392.chunk.js.LICENSE.txt",
-    "static/media/gliderGif.gif": "/Cellular-Automata-Interactive/static/media/gliderGif.b0a1b9ac.gif"
+    "main.css": "/Interactive-Life-like-Cellular-Automata/static/css/main.b977f6b4.chunk.css",
+    "main.js": "/Interactive-Life-like-Cellular-Automata/static/js/main.53e09954.chunk.js",
+    "main.js.map": "/Interactive-Life-like-Cellular-Automata/static/js/main.53e09954.chunk.js.map",
+    "runtime-main.js": "/Interactive-Life-like-Cellular-Automata/static/js/runtime-main.a8e6e2a1.js",
+    "runtime-main.js.map": "/Interactive-Life-like-Cellular-Automata/static/js/runtime-main.a8e6e2a1.js.map",
+    "static/css/2.3b2aa933.chunk.css": "/Interactive-Life-like-Cellular-Automata/static/css/2.3b2aa933.chunk.css",
+    "static/js/2.67b54c58.chunk.js": "/Interactive-Life-like-Cellular-Automata/static/js/2.67b54c58.chunk.js",
+    "static/js/2.67b54c58.chunk.js.map": "/Interactive-Life-like-Cellular-Automata/static/js/2.67b54c58.chunk.js.map",
+    "index.html": "/Interactive-Life-like-Cellular-Automata/index.html",
+    "precache-manifest.3c7352ad95d71956bdde0b7db11b93c5.js": "/Interactive-Life-like-Cellular-Automata/precache-manifest.3c7352ad95d71956bdde0b7db11b93c5.js",
+    "service-worker.js": "/Interactive-Life-like-Cellular-Automata/service-worker.js",
+    "static/css/2.3b2aa933.chunk.css.map": "/Interactive-Life-like-Cellular-Automata/static/css/2.3b2aa933.chunk.css.map",
+    "static/css/main.b977f6b4.chunk.css.map": "/Interactive-Life-like-Cellular-Automata/static/css/main.b977f6b4.chunk.css.map",
+    "static/js/2.67b54c58.chunk.js.LICENSE.txt": "/Interactive-Life-like-Cellular-Automata/static/js/2.67b54c58.chunk.js.LICENSE.txt",
+    "static/media/gliderGif.gif": "/Interactive-Life-like-Cellular-Automata/static/media/gliderGif.b0a1b9ac.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.26e35eba.js",
+    "static/js/runtime-main.a8e6e2a1.js",
     "static/css/2.3b2aa933.chunk.css",
-    "static/js/2.f37c2392.chunk.js",
+    "static/js/2.67b54c58.chunk.js",
     "static/css/main.b977f6b4.chunk.css",
-    "static/js/main.0f80c00a.chunk.js"
+    "static/js/main.53e09954.chunk.js"
   ]
 }
