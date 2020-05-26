@@ -1,6 +1,6 @@
 {
-  "homepage": "http://DavidKohler.github.io/Game-of-Life-Interactive",
-  "name": "game-of-life",
+  "homepage": "http://DavidKohler.github.io/Cellular-Automata-Interactive",
+  "name": "Interactive-Life-like-Cellular-Automata",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
