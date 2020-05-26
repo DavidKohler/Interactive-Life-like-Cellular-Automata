@@ -15,7 +15,7 @@ import {
   framerateMarks,
 } from '../sliders/sliderMarks';
 
-const wrapperStyle = { width: 800, margin: 50 };
+const wrapperStyle = { width: 600, margin: 50 };
 
 /*
     Component rendering customization drawer for grid
@@ -184,9 +184,15 @@ class GridCustomization extends Component {
             onClose={this.toggleDrawer(false)}
             open={this.state.drawerOpen}
           >
-            {'Customization'}
+            <div className="drawer-header">
+              Customize automaton and grid below <br />
+              <br />
+              Remember to hit submit to save changes!
+            </div>
             <div className="column-slider" style={wrapperStyle}>
-              {`Columns: ${this.state.cols}`}
+              <div className="column-header">
+                {`Columns: ${this.state.cols}`}
+              </div>
               <Slider
                 defaultValue={this.state.cols}
                 handle={SliderHandle}
@@ -194,10 +200,11 @@ class GridCustomization extends Component {
                 marks={dimensionMarks}
                 min={1}
                 onChange={(v) => this.updateColumns(v)}
+                style={{ 'user-select': 'none' }}
               />
             </div>
             <div className="row-slider" style={wrapperStyle}>
-              {`Rows: ${this.state.rows}`}
+              <div className="row-header">{`Rows: ${this.state.rows}`}</div>
               <Slider
                 defaultValue={this.state.rows}
                 handle={SliderHandle}
@@ -205,10 +212,13 @@ class GridCustomization extends Component {
                 max={80}
                 min={1}
                 onChange={(v) => this.updateRows(v)}
+                style={{ 'user-select': 'none' }}
               />
             </div>
             <div className="cell-size-slider" style={wrapperStyle}>
-              {`Cell Size: ${this.state.cellSize}`}
+              <div className="cell-header">
+                {`Cell Size: ${this.state.cellSize}`}
+              </div>
               <Slider
                 defaultValue={this.state.cellSize}
                 handle={SliderHandle}
@@ -216,11 +226,12 @@ class GridCustomization extends Component {
                 max={40}
                 min={1}
                 onChange={(v) => this.updateCellSize(v)}
+                style={{ 'user-select': 'none' }}
               />
             </div>
             {this.props.parentTab === 'RANDOM' && (
               <div className="cell-ratio-slider" style={wrapperStyle}>
-                {'Alive/Dead Cell Ratio'}
+                <div className="cell-header">{'Alive/Dead Cell Ratio'}</div>
                 <Slider
                   defaultValue={this.state.alivePercentage}
                   handle={SliderHandle}
@@ -228,45 +239,60 @@ class GridCustomization extends Component {
                   max={100}
                   min={0}
                   onChange={(v) => this.updateCellRatio(v)}
+                  style={{ 'user-select': 'none' }}
                 />
               </div>
             )}
             <div className="button-toolbar-container">
-              <ButtonToolbar aria-label="Born Rule">
-                {`Born Rule: B${this.state.birthRule.map(String).join('')}`}
-                <ButtonGroup className="mr-2" aria-label="born group">
-                  {birthRulePressed.map((val, ind) => {
-                    return (
-                      <Button
-                        key={ind}
-                        onClick={() => this.updateBornButtons(val, ind)}
-                        variant={val === true ? 'success' : 'outline-success'}
-                      >
-                        {ind}
-                      </Button>
-                    );
-                  })}
-                </ButtonGroup>
-                {`Survive Rule: S${this.state.surviveRule
-                  .map(String)
-                  .join('')}`}
-                <ButtonGroup className="mr-2" aria-label="survive group">
-                  {surviveRulePressed.map((val, ind) => {
-                    return (
-                      <Button
-                        key={ind}
-                        onClick={() => this.updateSurviveButtons(val, ind)}
-                        variant={val === true ? 'success' : 'outline-success'}
-                      >
-                        {ind}
-                      </Button>
-                    );
-                  })}
-                </ButtonGroup>
+              <ButtonToolbar
+                aria-label="Born Rule"
+                style={{ 'user-select': 'none' }}
+                className="rule-button-container"
+              >
+                <div className="birth-button-toolbar-container">
+                  <div className="rule-header">
+                    {`Born Rule: B${this.state.birthRule.map(String).join('')}`}
+                  </div>
+                  <ButtonGroup className="mr-2" aria-label="born group">
+                    {birthRulePressed.map((val, ind) => {
+                      return (
+                        <Button
+                          key={ind}
+                          onClick={() => this.updateBornButtons(val, ind)}
+                          variant={val === true ? 'success' : 'outline-success'}
+                        >
+                          {ind}
+                        </Button>
+                      );
+                    })}
+                  </ButtonGroup>
+                </div>
+                <div className="survive-button-toolbar-container">
+                  <div className="rule-header">
+                    {`Survive Rule: S${this.state.surviveRule
+                      .map(String)
+                      .join('')}`}
+                  </div>
+                  <ButtonGroup className="mr-2" aria-label="survive group">
+                    {surviveRulePressed.map((val, ind) => {
+                      return (
+                        <Button
+                          key={ind}
+                          onClick={() => this.updateSurviveButtons(val, ind)}
+                          variant={val === true ? 'success' : 'outline-success'}
+                        >
+                          {ind}
+                        </Button>
+                      );
+                    })}
+                  </ButtonGroup>
+                </div>
               </ButtonToolbar>
             </div>
             <div className="framerate-slider" style={wrapperStyle}>
-              {`Framerate: ${this.state.framerate}`}
+              <div className="framerate-header">
+                {`Framerate: ${this.state.framerate}`}
+              </div>
               <Slider
                 defaultValue={this.state.framerate}
                 handle={SliderHandle}
@@ -274,18 +300,23 @@ class GridCustomization extends Component {
                 max={60}
                 min={1}
                 onChange={(v) => this.updateFramerate(v)}
+                style={{ 'user-select': 'none' }}
               />
             </div>
             <div className="color-pickers">
               <div className="cell-color-picker">
-                {`Cell Color: ${this.state.cellColor}`}
+                <div className="cell-header">
+                  {`Live Cell Color: ${this.state.cellColor}`}
+                </div>
                 <ChromePicker
                   color={this.state.cellColor}
                   onChange={this.handleCellColorUpdate}
                 />
               </div>
               <div className="cell-background-picker">
-                {`Background Color: ${this.state.backgroundColor}`}
+                <div className="cell-header">
+                  {`Dead Cell Color: ${this.state.backgroundColor}`}
+                </div>
                 <ChromePicker
                   color={this.state.backgroundColor}
                   onChange={this.handleBackgroundColorUpdate}

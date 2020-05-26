@@ -1,6 +1,38 @@
-.customizer-drawer {
-  user-select: none;
+.cell-header {
+  font-weight: 500;
 }
-.compact-picker {
-  width: 280px !important;
+
+.framerate-header {
+  font-weight: 500;
+}
+
+.button-toolbar-container {
+  width: 600px;
+  padding-left: 50px;
+  margin-top: 10px;
+}
+
+.rule-button-container.btn-toolbar {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.framerate-slider {
+  margin-top: 40px !important;
+}
+
+.birth-button-toolbar-container {
+  padding-bottom: 20px;
+}
+
+.rule-header {
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+
+.color-pickers {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 50px 30px 50px;
+  justify-content: space-around;
 }
