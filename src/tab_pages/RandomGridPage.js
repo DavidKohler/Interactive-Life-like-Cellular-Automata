@@ -1,3 +1,4 @@
+import '../css/RandomGridPage.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -33,6 +34,18 @@ class RandomGridPage extends Component {
     this.updateParameters = this.updateParameters.bind(this);
   }
 
+  componentDidUpdate() {
+    // get rid of extra p5js buttons
+    let playbuttons = document.getElementById('playbuttonRandom');
+    let nextbuttons = document.getElementById('nextbuttonRandom');
+    if (playbuttons.children.length > 1) {
+      playbuttons.children[0].parentNode.removeChild(playbuttons.children[0]);
+    }
+    if (nextbuttons.children.length > 1) {
+      nextbuttons.children[0].parentNode.removeChild(nextbuttons.children[0]);
+    }
+  }
+
   generateGrid() {
     // generate new grid
     let { cols, rows, alivePercentage } = this.state;
@@ -66,10 +79,14 @@ class RandomGridPage extends Component {
 
     return (
       <div className="random-page">
-        <div>
-          <Accordion defaultActiveKey="0">
+        <div className="accordion-container">
+          <Accordion defaultActiveKey="">
             <Card>
-              <Accordion.Toggle as={Card.Header} eventKey="0">
+              <Accordion.Toggle
+                as={Card.Header}
+                eventKey="0"
+                style={{ cursor: 'pointer' }}
+              >
                 Click Here to Toggle Page Explanation
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="0">
@@ -137,41 +154,39 @@ class RandomGridPage extends Component {
             </Card>
           </Accordion>
         </div>
-        <div className="customization-container">
-          <GridCustomization
-            parentTab={'RANDOM'}
-            submitFunction={this.updateParameters}
-          />
-        </div>
-        <div className="generate-grid-container">
-          <Button onClick={this.generateGrid}>Create Automaton</Button>
+        <div className="load-page-buttons">
+          <div className="customization-container">
+            <GridCustomization
+              parentTab={'RANDOM'}
+              loadGrid={true}
+              submitFunction={this.updateParameters}
+            />
+          </div>
+          <div className="generate-grid-container">
+            <Button onClick={this.generateGrid}>Create Automaton</Button>
+          </div>
+          <div className="save-rle-container">
+            <SavedRLEModal {...this.state} loadGrid={displayGrid} />
+          </div>
         </div>
         {displayGrid && (
           <div className="sketch-container">
             <CellularAutomatonSketch
               {...this.state}
+              parentTab="RANDOM"
               key={this.state.refreshVal}
               refLoc={this.renderRef}
             />
           </div>
         )}
-        {displayGrid && (
-          <div className="reset-button-container">
-            <Button onClick={this.resetAutomata}>Reset</Button>
-          </div>
-        )}
-        {displayGrid && (
-          <div className="save-rle-container">
-            <SavedRLEModal {...this.state} />
-          </div>
-        )}
+        <div className="playback-container">
+          <div className="playback-button" id="playbuttonRandom" />
+          <div className="playback-button" id="nextbuttonRandom" />
+          {displayGrid && <Button onClick={this.resetAutomata}>Reset</Button>}
+        </div>
       </div>
     );
   }
 }
 
 export default RandomGridPage;
-
-// TODO
-// styling
-// add text explaining page

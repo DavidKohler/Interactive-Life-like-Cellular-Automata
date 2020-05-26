@@ -15,6 +15,7 @@ class CellularAutomatonSketch extends Component {
       cols,
       framerate,
       grid,
+      parentTab,
       rows,
       surviveRule,
     } = this.props;
@@ -46,7 +47,11 @@ class CellularAutomatonSketch extends Component {
         playButton.style('line-height', '1.5');
         playButton.style('border-radius', '.25rem');
 
-        playButton.parent('playbutton');
+        if (parentTab === 'LOAD') {
+          playButton.parent('playbutton');
+        } else {
+          playButton.parent('playbuttonRandom');
+        }
 
         nextButton = p.createButton('Next');
         nextButton.mousePressed(toggleNext);
@@ -60,7 +65,11 @@ class CellularAutomatonSketch extends Component {
         nextButton.style('line-height', '1.5');
         nextButton.style('border-radius', '.25rem');
 
-        nextButton.parent('nextbutton');
+        if (parentTab === 'LOAD') {
+          nextButton.parent('nextbutton');
+        } else {
+          nextButton.parent('nextbuttonRandom');
+        }
 
         p.noLoop();
       };
