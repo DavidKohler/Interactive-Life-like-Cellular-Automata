@@ -5,6 +5,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { ChromePicker } from 'react-color';
 import Drawer from '@material-ui/core/Drawer';
+import HelpIcon from '@material-ui/icons/Help';
 import Slider from 'rc-slider';
 import { SliderHandle } from '../sliders/sliderHandle';
 import React, { Component } from 'react';
@@ -259,6 +260,15 @@ class GridCustomization extends Component {
                 <div className="birth-button-toolbar-container">
                   <div className="rule-header">
                     {`Born Rule: B${this.state.birthRule.map(String).join('')}`}
+                    <div className="help-icon">
+                      <a
+                        href="https://www.conwaylife.com/wiki/Cellular_automaton#Well-known_life-like_cellular_automata"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <HelpIcon />
+                      </a>
+                    </div>
                   </div>
                   <ButtonGroup className="mr-2" aria-label="born group">
                     {birthRulePressed.map((val, ind) => {

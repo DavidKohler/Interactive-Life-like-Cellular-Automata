@@ -113,11 +113,13 @@ class LoadRLEPage extends Component {
                   <br />
                   <br />
                   The <b>Load RLE</b> button opens a drawer that will allow the
-                  user to load in an automaton in RLE format from a file. The
-                  user loads their RLE file with the .rle file extension from
-                  their computer by clicking on the <b>Choose File</b> button.
-                  The user must hit <b>Submit</b> to load their automaton and
-                  save any changes
+                  user to load in an automaton. The user may choose{' '}
+                  <b>Upload File</b> from the dropdown to upload an RLE file
+                  with the .rle file extension from their computer by then
+                  clicking on the <b>Choose File</b> button. Otherwise, the
+                  dropdown also contains a list of several somewhat notable
+                  cellular automata that come ready to load. The user must hit{' '}
+                  <b>Submit</b> to load their automaton and save any changes
                   <br />
                   <br />
                   The <b>Customize</b> button opens a drawer that will allow the
