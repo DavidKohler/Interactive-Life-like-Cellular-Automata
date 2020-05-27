@@ -165,6 +165,7 @@ class LoadRLEDrawer extends Component {
                 ))}
                 <div className="load-file-button">
                   <Button
+                    disabled={this.state.loadedContents === ''}
                     variant={
                       this.state.loadFileError === true ? 'danger' : 'primary'
                     }
