@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/Lifelike-Cellular-Automata/static/css/main.f2073bbb.chunk.css",
-    "main.js": "/Lifelike-Cellular-Automata/static/js/main.32c891d7.chunk.js",
-    "main.js.map": "/Lifelike-Cellular-Automata/static/js/main.32c891d7.chunk.js.map",
+    "main.css": "/Lifelike-Cellular-Automata/static/css/main.f5c75fe8.chunk.css",
+    "main.js": "/Lifelike-Cellular-Automata/static/js/main.b6eecb4d.chunk.js",
+    "main.js.map": "/Lifelike-Cellular-Automata/static/js/main.b6eecb4d.chunk.js.map",
     "runtime-main.js": "/Lifelike-Cellular-Automata/static/js/runtime-main.26bdddae.js",
     "runtime-main.js.map": "/Lifelike-Cellular-Automata/static/js/runtime-main.26bdddae.js.map",
     "static/css/2.3b27066a.chunk.css": "/Lifelike-Cellular-Automata/static/css/2.3b27066a.chunk.css",
-    "static/js/2.ec905b07.chunk.js": "/Lifelike-Cellular-Automata/static/js/2.ec905b07.chunk.js",
-    "static/js/2.ec905b07.chunk.js.map": "/Lifelike-Cellular-Automata/static/js/2.ec905b07.chunk.js.map",
+    "static/js/2.9010ad2c.chunk.js": "/Lifelike-Cellular-Automata/static/js/2.9010ad2c.chunk.js",
+    "static/js/2.9010ad2c.chunk.js.map": "/Lifelike-Cellular-Automata/static/js/2.9010ad2c.chunk.js.map",
     "index.html": "/Lifelike-Cellular-Automata/index.html",
-    "precache-manifest.67b978b6da8e70819c2faa4c97bf48bd.js": "/Lifelike-Cellular-Automata/precache-manifest.67b978b6da8e70819c2faa4c97bf48bd.js",
+    "precache-manifest.0ab5f954ad6e051c5cd3383e452c380e.js": "/Lifelike-Cellular-Automata/precache-manifest.0ab5f954ad6e051c5cd3383e452c380e.js",
     "service-worker.js": "/Lifelike-Cellular-Automata/service-worker.js",
     "static/css/2.3b27066a.chunk.css.map": "/Lifelike-Cellular-Automata/static/css/2.3b27066a.chunk.css.map",
-    "static/css/main.f2073bbb.chunk.css.map": "/Lifelike-Cellular-Automata/static/css/main.f2073bbb.chunk.css.map",
-    "static/js/2.ec905b07.chunk.js.LICENSE.txt": "/Lifelike-Cellular-Automata/static/js/2.ec905b07.chunk.js.LICENSE.txt",
+    "static/css/main.f5c75fe8.chunk.css.map": "/Lifelike-Cellular-Automata/static/css/main.f5c75fe8.chunk.css.map",
+    "static/js/2.9010ad2c.chunk.js.LICENSE.txt": "/Lifelike-Cellular-Automata/static/js/2.9010ad2c.chunk.js.LICENSE.txt",
     "static/media/gliderGif.gif": "/Lifelike-Cellular-Automata/static/media/gliderGif.b0a1b9ac.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.26bdddae.js",
     "static/css/2.3b27066a.chunk.css",
-    "static/js/2.ec905b07.chunk.js",
-    "static/css/main.f2073bbb.chunk.css",
-    "static/js/main.32c891d7.chunk.js"
+    "static/js/2.9010ad2c.chunk.js",
+    "static/css/main.f5c75fe8.chunk.css",
+    "static/js/main.b6eecb4d.chunk.js"
   ]
 }
