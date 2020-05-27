@@ -12,3 +12,7 @@
   padding-top: 20px;
   font-weight: 600;
 }
+
+.MuiPaper-root {
+  min-width: 400px !important;
+}

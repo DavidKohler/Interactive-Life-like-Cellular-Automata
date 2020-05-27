@@ -1,6 +1,8 @@
 import '../css/LoadRLEDrawer.css';
 import Button from 'react-bootstrap/Button';
 import Drawer from '@material-ui/core/Drawer';
+import Dropdown from 'react-bootstrap/Dropdown';
+import exampleRLEs from '../assets/exampleRLEs';
 import { RLEtoGrid } from '../logic/rleLogic';
 import React, { Component } from 'react';
 
@@ -12,18 +14,23 @@ class LoadRLEDrawer extends Component {
   constructor() {
     super();
     this.state = {
+      dropdownUploadFile: false,
       loadDrawer: false,
       loadedContents: '',
       loadedFileName: '',
       loadFileError: false,
     };
+    this.handleDropdown = this.handleDropdown.bind(this);
     this.handleFileSubmit = this.handleFileSubmit.bind(this);
     this.toggleLoadDrawer = this.toggleLoadDrawer.bind(this);
   }
 
   componentDidUpdate() {
     // set listener for file upload when drawer is open
-    if (this.state.loadDrawer === true) {
+    if (
+      this.state.loadDrawer === true &&
+      this.state.dropdownUploadFile === true
+    ) {
       setTimeout(() => {
         document
           .getElementById('file-input')
@@ -31,6 +38,24 @@ class LoadRLEDrawer extends Component {
       }, 0);
     }
   }
+
+  handleDropdown = (e) => {
+    // handle select on dropdown
+    console.log(e);
+    if (e === 'upload') {
+      this.setState({
+        dropdownUploadFile: true,
+        loadedContents: '',
+        loadedFileName: 'Upload File',
+      });
+    } else {
+      this.setState({
+        dropdownUploadFile: false,
+        loadedFileName: e,
+        loadedContents: exampleRLEs[e],
+      });
+    }
+  };
 
   handleFileSubmit = () => {
     // handle click on submit button, activate parent submit function
@@ -57,6 +82,7 @@ class LoadRLEDrawer extends Component {
 
   readSingleFile = (e) => {
     // read RLE file from upload
+    console.log(e);
     let file = e.target.files[0];
     if (!file) {
       return;
@@ -97,13 +123,42 @@ class LoadRLEDrawer extends Component {
             anchor={'right'}
             onClose={this.toggleLoadDrawer(false)}
             open={this.state.loadDrawer}
+            style={{ 'min-width': 400 }}
           >
             <div className="drawer-container">
+              <Dropdown onSelect={(evt) => this.handleDropdown(evt)}>
+                <Dropdown.Toggle variant="success" id="load-file-dropdown">
+                  {this.state.loadedFileName !== ''
+                    ? this.state.loadedFileName
+                    : 'Select File'}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item eventKey="upload">Upload File</Dropdown.Item>
+                  {Object.keys(exampleRLEs).map((patternName) => (
+                    <Dropdown.Item eventKey={`${patternName}`}>
+                      {patternName}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+              {this.state.dropdownUploadFile === true && (
+                <div>
+                  <input type="file" id="file-input" accept=".rle" />
+                  <p>
+                    Only <b>.rle</b> files allowed
+                  </p>
+                </div>
+              )}
               <div>
-                <input type="file" id="file-input" accept=".rle" />
                 <p>
-                  Only <b>.rle</b> files allowed
+                  <b>Note:</b> This site uses a finite boundary, so some
+                  patterns may
                 </p>
+                <p>
+                  benefit from increasing the grid size after loading them in
+                </p>
+                <br />
                 <p>Contents of the file:</p>
                 {this.state.loadedContents.split('\n').map((item, i) => (
                   <p key={i}>{item}</p>

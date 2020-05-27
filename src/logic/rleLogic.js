@@ -176,7 +176,7 @@ function encodeGrid(grid, top, bot, minCol, maxCol) {
 
 function RLEtoGrid(RLEstring) {
   // given and RLE file (string), convert to 2d array for grid
-  let RLElines = RLEstring.split('\n');
+  let RLElines = RLEstring.toLowerCase().split('\n');
   let gridString = '';
   let xvalue, yvalue, rulestring;
   for (let i = 0; i < RLElines.length; i++) {
@@ -261,7 +261,7 @@ function RLEtoGrid(RLEstring) {
     birthRule = uniq(
       rulestring
         .split('/')[0]
-        .split('B')[1]
+        .split('b')[1]
         .split('')
         .map((e) => Number(e))
         .filter((e) => e >= 0)
@@ -274,7 +274,7 @@ function RLEtoGrid(RLEstring) {
     surviveRule = uniq(
       rulestring
         .split('/')[1]
-        .split('S')[1]
+        .split('s')[1]
         .split('')
         .map((e) => Number(e))
         .filter((e) => e >= 0)
